@@ -394,9 +394,8 @@ Time frame: 15 minutes
 | SAP on MS Platform blog   | <https://blogs.msdn.microsoft.com/saponsqlserver/>  |
 | World Record SAP Sales and Distribution Standard Application Benchmark for SAP cloud deployments released using Azure IaaS VMs   | <https://blogs.msdn.microsoft.com/saponsqlserver/2015/10/05/world-record-sap-sales-and-distribution-standard-application-benchmark-for-sap-cloud-deployments-released-using-azure-iaas-vms/>  |
 | SAP on Azure -- SAP Community Wiki    | <https://wiki.scn.sap.com/wiki/display/VIRTUALIZATION/SAP+on+Microsoft+Azure>  |
-| Cloud Benchmark   | [http://www.sap.com/solution/benchmark/appbm/cloud.html\#](http://www.sap.com/solution/benchmark/appbm/cloud.html)
-  SAP Note 1928533 (Supported Products and Azure VM types)                                                                         <http://launchpad.support.sap.com/#/notes/1928533>
-  |
+| Cloud Benchmark   | [http://www.sap.com/solution/benchmark/appbm/cloud.html\#](http://www.sap.com/solution/benchmark/appbm/cloud.html) |
+| SAP Note 1928533 (Supported Products and Azure VM types) | <http://launchpad.support.sap.com/#/notes/1928533>  |
 
 
 # SAP on Azure whiteboard design session trainer guide
