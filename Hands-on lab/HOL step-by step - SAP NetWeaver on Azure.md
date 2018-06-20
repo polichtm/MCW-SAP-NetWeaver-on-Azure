@@ -276,31 +276,31 @@ In this task, you will configure Azure Virtual Network and Active Directory host
 
         -   Data: **10.0.1.6** - this IP address must match the IP address that will be assigned to the front end of the s03-lb-ascs internal load balancer (that will be deployed in the next task of this exercise)
 
-            ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image2.png)
+            ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image2.png)
 
     -   Name: **s03-ascs-ers0**
 
         -   Data: **10.0.1.8** - this IP address must match the IP address that will be assigned to s03-ascs-0 Azure VM (that will be deployed in the next task of this exercise)
 
-            ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image3.png)
+            ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image3.png)
 
     -   Name: **s03-ascs-ers1**
 
         -   Data: **10.0.1.9** - this IP address must match the IP address that will be assigned to s03-ascs-1 Azure VM (that will be deployed in the next task of this exercise)
 
-            ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image4.png)
+            ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image4.png)
 
     -   Name: **s03-di-v0**
 
         -   Data: **10.0.1.28** - this IP address must match the IP address that will be assigned to the SAP Primary Application Server s0-di-0
 
-> ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image5.png)
+> ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image5.png)
 
 -   Name: **s03-di-v1**
 
     -   Data: **10.0.1.29** - this IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-1
 
-> ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image6.png)
+> ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image6.png)
 
 12. From a Windows PowerShell prompt, run:
 
@@ -310,7 +310,7 @@ In this task, you will configure Azure Virtual Network and Active Directory host
 
 13. Create an organizational unit named **s03** directly in the root of the domain.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image7.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image7.png)
 
 14. In the Active Directory Administrative Center, create the following user accounts:
 
@@ -412,7 +412,7 @@ In this task, you will deploy the scale-out file server (SOFS) cluster that will
 
 2.  On the **Use Managed Disks to Create a Storage Spaces Direct (S2D) Scale-Out File Server (SOFS) Cluster with Windows Server 2016** page, click **Deploy to Azure**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image8.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image8.png)
 
 3.  The Web browser window should automatically get redirected to the Azure portal and display the **Custom deployment** blade.
 
@@ -472,15 +472,15 @@ In this task, you will deploy the scale-out file server (SOFS) cluster that will
 
 5.  Enable the checkbox labeled **I agree to the terms and conditions stated above**, and click **Purchase**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
 
 6.  Wait for the deployment to complete. This might take about 25 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s2d-RG resource group blade in the Azure portal.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image10.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image10.png)
 
 7.  Switch to the RDP session to adPDC and, within the Remote Desktop session, switch to the Active Directory Administrative Center. Note that the Computers container contains five additional computer accounts. Two of them represent two notes of the Storage Spaces Direct cluster and the remaining three are failover cluster virtual network name accounts. You will rely on the **sapglobalhost** and its **sapmnt** share when installing ASCS components.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image11.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image11.png)
 
 ### Task 4: Deploy SAP NetWeaver application and database tier VMs 
 
@@ -526,25 +526,25 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 9.  On the **SAP NetWeaver 3-tier compatible template using a Marketplace image - MD** page, click **Deploy to Azure**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image12.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image12.png)
 
 10. The Web browser window should automatically get redirected to the Azure portal and display the **SAP NW 3-tier (managed disk)** blade.
 
 11. Click **Edit template**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image13.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image13.png)
 
 12. On the **Edit template** blade, expand the **Variables** node, and scroll down to the **vmSizes** subnode.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
 
 13. In the editor window, navigate to the **HA** subsection of the **Demo** section, and modify the values of **dbserversize, ascsserversize**, and **diserversize** keys per the following screenshot.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image15.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15.png)
 
 14. Click **Save** to save your changes.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image16.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image16.png)
 
 15. Back on the **SAP NW 3-tier compatible Marketplace image** blade, specify the following settings:
 
@@ -578,33 +578,33 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
         $subnet.Id 
     ```
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image17.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image17.png)
 
 16. Enable the checkbox labeled **I agree to the terms and conditions stated above**, and click **Purchase**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
 
 17. Wait for the deployment to complete. This might take about 25 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s03-RG resource group blade in the Azure portal.
 
     > Note: Disregard any custom script extension errors generated by the template deployment
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image18.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image18.png)
 
 18. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, click **Health probes**, and in the list of probes, click **lb00ProbePortxSCS**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image19.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image19.png)
 
 19. Change the value of **Port** from **62000** to **3900**, and click **Save**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image20.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image20.png)
 
 20. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, click **Health probes**, and in the list of probes, click **lb00ProbePortDB**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image21.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image21.png)
 
 21. Change the value of **Port** from **62503** to **59999**, and click **Save**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image22.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image22.png)
 
 ### Task 5: Configure IP addresses of Azure VMs and internal load balancers
 
@@ -824,51 +824,51 @@ Account for the fact you will be using the virtual names, and configure the foll
 
 1.  Start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
 2.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>SAP Systems-\>Application Server ABAP-\>Distributed System-\>ASCS/SCS Instance**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
 
 3.  On the **Parameter Settings** page, click **Custom** and then click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
 4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**)
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image26.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image26.png)
 
 5.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, set **SAP System ID (SAPSID)** to **S03**, accept the default setting for the **Destination Drive**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image27.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image27.png)
 
 6.  On the **DNS Domain Name** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image28.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image28.png)
 
 7.  On the **Master Password** page, in the **Password for All Users** and **Confirm** text boxes, type **demo\@pass123** and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image29.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image29.png)
 
 8.  On the **Windows Domain** page, accept the default settings and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image30.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image30.png)
 
 9.  On the **Windows Domain \> Organizational Units** page, set **OU Path** to **S03**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image31.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image31.png)
 
 10. On the **Software Package Browser** page, point to **SAP\\Kernel\_51050826\_10\\DATA\_UNITS\\K\_745\_U\_WINDOWS\_X86\_64**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image32.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image32.png)
 
 11. Click **Next** again once the location of the software packages has been identified.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image33.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image33.png)
 
 12. On the **Prerequisites Checker Results** page, identify the missing prerequisites.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image34.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image34.png)
 
 13. In order to satisfy the prerequisites and allow for the use of virtual names in the ASCS layer, you will run a Windows PowerShell script that adjusts the paging file configuration and creates several Windows registry entries. On s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator and run the following:
 
@@ -912,47 +912,47 @@ Account for the fact you will be using the virtual names, and configure the foll
 
 15. On the **Prerequisites Checker Results** page, click **Next**. When prompted whether to repeat the checks, click **Yes**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image35.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image35.png)
 
 16. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image36.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image36.png)
 
 17. On the **Operating System Users** page, type **demo\@pass123** as the password, and click **Next**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
 
 18. On the **ASCS Instance** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image38.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image38.png)
 
 19. On the **ABAP Message Server Ports** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image39.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image39.png)
 
 20. On the **Additional Components to be Included in the ASCS Instance** page, select the checkbox **Install SAP Web Dispatcher integrated**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image40.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image40.png)
 
 21. On the **SAP Web Dispatcher Parameters** page, set the Encryption Mode to **Never**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image41.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image41.png)
 
 22. On the **ICM User Management for the SAP Web Dispatcher** page, set the password of webadm to **demo\@pass123**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image42.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image42.png)
 
 23. On the **Parameter Summary** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image43.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image43.png)
 
 24. Monitor progress of installation on the **Task Progress** page.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image44.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image44.png)
 
 25. Wait until the installation completes. This might take about 5 minutes. Once the installation completes, click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image45.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image45.png)
 
 ### Task 3: Install the SAP ASCS components on s03-ascs-1
 
@@ -982,87 +982,87 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
 1.  Start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
 2.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>SAP Systems-\>Application Server ABAP-\>Distributed System-\>ASCS/SCS Instance**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image46.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image46.png)
 
 3.  On the **Parameter Settings** page, click **Custom** and then click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image47.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image47.png)
 
 4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**)
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image48.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image48.png)
 
 5.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, set **SAP System ID (SAPSID)** to **S03**, accept the default setting for the **Destination Drive**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
 6.  On the **DNS Domain Name** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image50.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image50.png)
 
 7.  On the **Master Password** page, in the **Password for All Users** and **Confirm** text boxes, type **demo\@pass123** and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image51.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image51.png)
 
 8.  On the **Windows Domain** page, accept the default settings and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image52.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image52.png)
 
 9.  On the **Windows Domain \> Organizational Units** page, set **OU Path** to **S03**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
 
 10. On the **Software Package Browser** page, point to **SAP\\Kernel\_51050826\_10\\DATA\_UNITS\\K\_745\_U\_WINDOWS\_X86\_64**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image54.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image54.png)
 
 11. Click **Next** again once the location of the software packages has been identified.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image55.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image55.png)
 
 12. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image56.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image56.png)
 
 13. On the **Operating System Users** page, type **demo\@pass123** as the password, and click **Next**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image57.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image57.png)
 
 14. On the **ASCS Instance** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image58.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image58.png)
 
 15. On the **ABAP Message Server Ports** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image59.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image59.png)
 
 16. On the **Additional Components to be Included in the ASCS Instance** page, select the checkbox **Install SAP Web Dispatcher integrated**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image60.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image60.png)
 
 17. On the **SAP Web Dispatcher Parameters** page, set the Encryption Mode to **Never**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
 
 18. On the **ICM User Management for the SAP Web Dispatcher** page, set the password of webadm to **demo\@pass123**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image62.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image62.png)
 
 19. On the **Parameter Summary** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image63.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image63.png)
 
 20. Monitor progress of installation on the **Task Progress** page.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image64.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image64.png)
 
 21. Wait until the installation completes. This might take about 5 minutes. Once the installation completes, click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image65.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image65.png)
 
 ### Task 4: Configure the SAP NetWeaver cluster with SOFS-based file share
 
@@ -1070,23 +1070,23 @@ In this task, you will configure the ASCS cluster with the sapmnt share hosted o
 
 1.  From the RDP session to s03-ascs-1, start **SAP Management Console**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
 
 2.  From the SAP Management Console, right click the **s03-ascs-1 0** node and click **Stop**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image67.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image67.png)
 
 3.  In the **SAP Instance Shutdown** dialog box, accept the default options and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image68.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image68.png)
 
 4.  When prompted to authenticate, in the **Password** text box, type **demo\@pass123** and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image69.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image69.png)
 
 5.  Use Server Manager on s03-ascs-0 to stop the ASCS Windows service SAPS03\_00 on s03-ascs-1.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image70.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image70.png)
 
 6.  Switch to the RDP session to s03-ascs-0 and repeat the steps 2-5.
 
@@ -1250,7 +1250,7 @@ In this task, you will configure the ASCS cluster with the sapmnt share hosted o
 
 19. From s03-ascs-0, start Failover Cluster Manager and verify that the s03-ascs-v0 resource is online
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image71.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image71.png)
 
 20. Configure the SAP service on s03-ascs-0 by running from the Command Prompt on each node of the ASCS cluster the following:
 
@@ -1260,11 +1260,11 @@ In this task, you will configure the ASCS cluster with the sapmnt share hosted o
 
 21. This will open the **SAP Service Install/Uninstall** dialog box. Make sure that the parameters are correct, set the **Startup Type** option to **Manual**, and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image72.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image72.png)
 
 22. Ensure that you get the confirmation that the service was successfully installed and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image73.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image73.png)
 
 23. Repeat the steps 20-22 on s03-ascs-1.
 
@@ -1303,35 +1303,35 @@ In this task, you will configure the ASCS cluster with the sapmnt share hosted o
 
 26. On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Additional SAP System Instances-\>Enqueue Replication Server Instance**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image74.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image74.png)
 
 27. On the **General SAP System Parameters** page, accept the default settings and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image75.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image75.png)
 
 28. On the **Operating System Users** page, provide the password **demo\@pass123** for the **CONTOSO\\s03adm** and **CONTOSO\\SAPServiceS03** accounts and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image76.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image76.png)
 
 29. On the **Software Package Browser** page, set the **PackagePath** to the location of the **SAPHostAgent\_721** files and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image77.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image77.png)
 
 30. On the **Software Package Browser** page, verify that the status of the missing package changes to available and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image78.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image78.png)
 
 31. On the **Enqueue Replication Server Instance** page, accept the default settings and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image79.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image79.png)
 
 32. On the **Enqueue Replication Server Instance** page, set the name of the ERS instance to **s03-ascs-ers0**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image80.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image80.png)
 
 33. On the **Parameter Summary** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image81.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image81.png)
 
 34. Wait for the installation to complete. This should take only a few minutes.
 
@@ -1339,11 +1339,11 @@ In this task, you will configure the ASCS cluster with the sapmnt share hosted o
 
 26. Verify the Failover Cluster is operational by viewing the **SAP S03** role in the **Failover Cluster Manager** console.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image82.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image82.png)
 
 27. On s03-ascs-0, in the SAP Management Console, verify the SAP deployment is operational.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image83.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image83.png)
 
 ### Summary
 
@@ -1476,7 +1476,7 @@ Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings,
 
 14. Start installation of SQL Server 2016 by clicking **New SQL Server stand-alone installation or add features to an existing installation** in **SQL Server Installation Center**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image84.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image84.png)
 
 15. On the Product Key page, accept the default, and click **Next**.
 
@@ -1498,21 +1498,21 @@ Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings,
 
         Leave all other settings at their defaults, and click **Next**.
 
-        ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image85.png)
+        ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image85.png)
 
 22. On the **Instance Configuration** page, leave the default settings in place, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image86.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image86.png)
 
 23. In the **Service Accounts** tab on the **Server Configuration** page, set the account for the SQL Server and SQL Server Agent services to **contoso\\s03-db-0-sqlsvc** with **demo\@pass123** password.
 
 24. Switch to the **Collation** tab, and click **Customize**. In the **Customize the SQL Server 2016 Database Engine Collation** window, in the **SQL collation, used for backward compatibility**, click **SQL\_Latin1\_General\_CP850\_BIN2**, and click **OK**. Back on the **Server Configuration** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image87.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image87.png)
 
 25. On the **Database Engine Configuration** page, ensure the **Windows authentication mode** option is selected, and click **Add Current User**. Next, click **Add** in the **Select Users, Computers, Service Accounts, and Groups** dialog box, type **s03-db-0\\Administrators**, and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image88.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image88.png)
 
 26. Back on the **Database Engine Configuration** page, click **Data Directories**, and specify the following settings:
 
@@ -1524,7 +1524,7 @@ Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings,
 
     -   Backup directory: **M:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Backup**
 
-        ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image89.png)
+        ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image89.png)
 
 27. Back on the **Database Engine Configuration** page, click **TempDB**, and specify the following settings:
 
@@ -1532,17 +1532,17 @@ Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings,
 
     -   Log directory: **L:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Data**
 
-        ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image90.png)
+        ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image90.png)
 
 28. Back on the **Database Engine Configuration** page, click **Next**.
 
 29. On the **Ready to Install** page, click **Install**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image91.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image91.png)
 
 30. On the **Complete** page, click **Close**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image92.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image92.png)
 
 31. On s03-db-0, start Internet Explorer, browse to <https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms>, and download/install the current production release of the SQL Server Management Studio with the default settings.
 
@@ -1584,99 +1584,99 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 1.  Start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
 2.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>SAP Systems-\>Application Server ABAP-\>High Availability System-\>Database Instance**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image93.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image93.png)
 
 3.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**)
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image94.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image94.png)
 
 4.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\s03-ascs-v0\\sapmnt\\S03\\SYS\\profile**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image95.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image95.png)
 
 5.  On the **Master Password** page, set the password to **demo\@pass123**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image96.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image96.png)
 
 6.  On the **Windows Domain** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image97.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image97.png)
 
 7.  On the **Windows Domain \> Organizational Units** page, set **OU Path** to **S03**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image98.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image98.png)
 
 8.  On the **MS SQL Server Database Connection** page, ensure that **Database instance** is set to **S03-DB-0**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image99.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image99.png)
 
 9.  On the **MS SQL Server Database Connection** page, acknowledge the message stating that a new database will be created, and click **Next**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image100.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image100.png)
 
 10. On the **Software Package Browser** page, point to **SAP\\Kernel\_51050826\_10\\DATA\_UNITS\\K\_745\_U\_WINDOWS\_X86\_64** and click **Next**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image101.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image101.png)
 
 11. On the **Software Package Browser** page, point to **SAP\\SAPDBEXE**, and click **Next**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image102.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image102.png)
 
 12. Click **Next** again once the location of the software packages has been identified.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image103.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image103.png)
 
 13. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image104.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image104.png)
 
 14. On the **Operating System Users** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image105.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image105.png)
 
 15. On the **Media Browser** page, set the **Package Location** entry to the file system path of the **nw75\_osindep\_51050829\_3\\data\_units\\exp1** folder, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image106.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image106.png)
 
 16. On the **MS SQL Server Database Schema** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image107.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image107.png)
 
 17. On the **MS SQL Server Data Files** page, select the option **4 for small systems**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image108.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image108.png)
 
 18. On the **MS SQL Server Database Files** page, change the path of the log file to **L:\\S03LOG1**, accept all other default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image109.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image109.png)
 
 19. On the **SQL Server Memory Configuration** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image110.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image110.png)
 
 20. On the **Declustering/Depooling Option** page, accept the default setting, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image111.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image111.png)
 
 21. On the **SAP System Database Import** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image112.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image112.png)
 
 22. On the **Parameter Summary** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image113.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image113.png)
 
 23. Monitor progress of installation on the **Task Progress** page.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image114.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image114.png)
 
 24. Wait until the installation completes. This might take about 60 minutes. Once the installation completes, click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image115.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image115.png)
 
 ### Task 5: Implement Always-On Availability Group
 
@@ -1764,23 +1764,23 @@ Bring the Always-On Availability Group clustered role online.
 
 5.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image116.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image116.png)
 
 6.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, click **Advanced**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image117.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image117.png)
 
 7.  In the **Advanced Security Settings for Computers** window, click **Add**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image118.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image118.png)
 
 8.  In the **Permission Entry for Computers** window, click **Select Principal**. In the **Select User, Service Account or Group**, click **Object Types**, enable the checkbox next to the **Computers** entry, and click **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-db-cl0** in the **Enter the object name to select**, and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image119.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119.png)
 
 9.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, click **This object and all descendant objects**. In the **Permissions** list, click **Create Computer objects** and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image120.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image120.png)
 
 10. Back in the **Advanced Security for Computers** window, click **OK**.
 
@@ -1798,113 +1798,113 @@ Bring the Always-On Availability Group clustered role online.
 
 12. On s03-db-0, from the Start menu, start **SQL Server Configuration Manager**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image121.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image121.png)
 
 13. In **SQL Server Configuration Manager**, display the **Properties** window of the **SQL Server (MSSQLSERVER)** service, switch to the **Always-On High Availability** tab, and enable the checkbox labeled **Enable Always-On Availability Groups**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image122.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image122.png)
 
 14. When prompted, click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image123.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image123.png)
 
 15. Restart the **SQL Server (MSSQLSERVER)** service.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image124.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image124.png)
 
 16. Repeat steps 6-8 on **s03-db-1**.
 
 17. On s03-db-0, create a new share **C:\\Backup** named **Backup**. On the share level and on the ReFS level, grant Read/Write permissions to CONTOSO\\s03-db-0-sqlsvc account, and Read permissions to the CONTOSO\\s03-db-1-sqlsvc account.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image125.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image125.png)
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image126.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image126.png)
 
 18. On s03-db-0, from the Start menu, start **SQL Server Management Studio**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image127.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image127.png)
 
 19. In SQL Server Management Studio, connect to **S03-DB-0**, and use **Windows Authentication** to authenticate.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image128.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image128.png)
 
 20. From **SQL Server Management Studio** on s03-db-0, start **New Availability Group Wizard**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image129.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image129.png)
 
 21. On the **Introduction** page of the **New Availability Group** wizard, click **Next**.
 
 22. On the **Specify an availability group name** page, in the **Availability group name** text box, type **s03-db-ag0**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image130.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image130.png)
 
 23. On the **Select user database for availability group** page, select the **S03** check box, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image131.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image131.png)
 
 24. On the **Specify Replicas** page, click **Add Replica.** In the **Connect to Server** dialog box **\>** **Server name** text box, type **S03-DB-1**, and click **Connect**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image132.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image132.png)
 
 25. On the **Specify Replicas** page, enable automatic failover and synchronous commit.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image133.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image133.png)
 
 26. Click **Endpoints** tab, review the database mirroring endpoints, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image134.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image134.png)
 
 27. On the **Select Initial Data Synchronization** page, ensure the **Full** option is selected. In the **Specify a shared network location accessible by all replicas** textbox, type **\\\\S03-DB-0\\Backup**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image135.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image135.png)
 
 28. On the **Validation** page, ensure that all checks completed successfully. Disregard the **Checking the listener configuration** warning, and click **Next**
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image136.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image136.png)
 
 29. On the **Summary** page, click **Finish**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image137.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image137.png)
 
 30. On the **Results** page, click **Close**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image138.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image138.png)
 
 31. On s03-db-0, start **Failover Cluster Manager,** click the **Networks** node, and note the network name (**Cluster Network 1**).
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image139.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image139.png)
 
 32. In the **Failover Cluster Manager** console, navigate to the **Roles** node, and right-click **s03-db-ag**. In the right-click menu, click **Add Resource** followed by **Client Access Point**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image140.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image140.png)
 
 33. On the **Client Access Point** page of the **New Resource Wizard**, in the **Name** textbox, type **s03-db-agl0**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image141.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image141.png)
 
 34. On the **Confirmation** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image142.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image142.png)
 
 35. On the **Summary** page, click **Finish**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image143.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image143.png)
 
 36. In the Failover Cluster Manager console, display the **Properties** dialog box of the IP address resource of the availability group listener resource.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image144.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image144.png)
 
 37. In the **IP Address: Address on Cluster Network 1 Properties** dialog box, select the **Static IP Address** option, set the **Address to 10.0.1.16** (to match the IP address assigned to the s03-lb-db load balancer), and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image145.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image145.png)
 
 38. If necessary, back in the **Failover Cluster Manager** console, take the **s03-db-ag0** resource offline.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image146.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image146.png)
 
 39. Display the properties of the **s03-db-ag0** resource. In the **s03-db-ag0 Properties** dialog box, switch to the **Dependencies** tab, and add a dependency on **Name: s03-db-agl0**. Click **OK** when completed.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image147.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image147.png)
 
 40. From the Windows PowerShell ISE session, run the following:
 
@@ -1924,29 +1924,29 @@ Bring the Always-On Availability Group clustered role online.
 
 42. Switch to **SQL Server Management Studio,** navigate to the **s03-db-agl0** listener, and display its **Properties**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image148.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image148.png)
 
 43. In the **Availability Group Listener Properties -- s03-db-agl0** dialog box, set **Port** to **1433**, and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image149.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image149.png)
 
 44. In the Failover Cluster Manager, bring the Always-On Availability Group clustered role **s03-db-ag0** online.
 
 45. In the SQL Server Management Studio, right-click on the **Always-On High Availability** folder, and click **Show Dashboard**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image150.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image150.png)
 
 46. On Dashboard, click the **s03-db-ag0** link.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image151.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image151.png)
 
 47. Verify that Always-On Availability Group s03-db-ag0 is in healthy state.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image152.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image152.png)
 
 48. On s03-db-0, from SQL Server Management Studio, open the **New Query** window targeting the **master** database:
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image153.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image153.png)
 
 49. In the New Query window, paste the following T-SQL script (provided in <https://support.microsoft.com/en-in/help/918992/how-to-transfer-logins-and-passwords-between-instances-of-sql-server>).
 
@@ -2090,7 +2090,7 @@ Bring the Always-On Availability Group clustered role online.
 
 50. Execute the script, and ensure that it completed successfully:
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image154.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image154.png)
 
 51. Open another **New Query** window and, from that window, run the following:
 
@@ -2100,37 +2100,37 @@ Bring the Always-On Availability Group clustered role online.
 
 52. Ensure that the stored procedure completed successfully:
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image155.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image155.png)
 
 53. Copy the resulting T-SQL script into Clipboard.
 
 54. From the SQL Server Management Studio, connect to s03-db-1.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image156.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image156.png)
 
 55. From the SQL Server Management Studio, open the **New Query** window targeting the **master** database of S03-DB-1.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image157.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image157.png)
 
 56. In the New Query window, paste the content of Clipboard. Remove all lines except for those that reference the **s03**, **CONTOSO\\s03-adm**, and **CONTOSO\\SAPService03** logins and execute the resulting T-SQL script.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image158.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image158.png)
 
 57. In the SQL Server Management Studio, expand the **Server Roles** folder, right-click **sysadmin**, and click **Properties**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image159.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image159.png)
 
 58. In the **Server Role Properties -- sysadmin** window, click **Add**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image160.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image160.png)
 
 59. In the **Select Server Login or Role** dialog box, click **Browse**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image161.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image161.png)
 
 60. In the **Browse for Objects** dialog box, select the three logins you created earlier, and click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image162.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image162.png)
 
 61. Click **OK** twice to finalize the change.
 
@@ -2187,23 +2187,23 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
 3.  Within the RDP session to s03-id-0 VM, start installation of Microsoft ODBC Driver for SQL Server (available from <https://www.microsoft.com/en-us/download/confirmation.aspx?id=53339>).
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image163.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image163.png)
 
 4.  On the **License Agreement** page, click **I accept the terms in the license agreement**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image164.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image164.png)
 
 5.  On the **Feature Selection** page, select all features, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image165.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image165.png)
 
 6.  On the **Ready to install the Program** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image166.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image166.png)
 
 7.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, click **Finish**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
 
 8.  Repeat steps from 5-9 on **s03-di-1**
 
@@ -2247,51 +2247,51 @@ Account for the fact you are using the virtual names and configure the following
 
 1.  From a Remote Desktop session to s03-di-0, start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
 2.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>SAP Systems-\>Application Server ABAP-\>High Availability System-\>Primary Application Server instance**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image168.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image168.png)
 
 3.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**).
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image169.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image169.png)
 
 4.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\s03-ascs-v0\\sapmnt\\S03\\SYS\\profile**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image170.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image170.png)
 
 5.  On the **Master Password** page, set the password to **demo\@pass123**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image171.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image171.png)
 
 6.  On the **Windows Domain** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image172.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image172.png)
 
 7.  On the **MS SQL Server Database Connection** page, ensure that **Database instance** is set to **S03-DB-AGL0**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image173.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image173.png)
 
 8.  On the **Existing MS SQL Server Database** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image174.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image174.png)
 
 9.  On the **Software Package Browser** page, point to **SAP\\Kernel\_51050826\_10\\DATA\_UNITS\\K\_745\_U\_WINDOWS\_X86\_64**, and click **Next**.
 
-    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTMLa7cbb291.PNG](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image175.png)
+    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTMLa7cbb291.PNG](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image175.png)
 
 10. On the **Software Package Browser** page, point to **SAP\\SAPDBEXE**, and click **Next**.
 
-    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTMLa7cf5868.PNG](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image176.png)
+    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTMLa7cf5868.PNG](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image176.png)
 
 11. Click **Next** again once the location of the software packages has been identified.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image177.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image177.png)
 
 12. On the **Prerequisites Checker Results** page, identify the missing prerequisites.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image178.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image178.png)
 
 13. In order to satisfy the prerequisites, and allow for the use of virtual names in the Application layer, you will run a Windows PowerShell script that adjusts the paging file configuration and creates several Windows registry entries. On s03-di-0 VM, start a Windows PowerShell ISE session as Administrator and run the following:
 
@@ -2335,63 +2335,63 @@ Account for the fact you are using the virtual names and configure the following
 
 15. On the **Prerequisites Checker Results** page, click **Next**. When prompted whether to repeat the checks, click **Yes**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image179.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image179.png)
 
 16. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image180.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image180.png)
 
 17. On the **Operating System Users** page, type **demo\@pass123** as the password, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image181.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image181.png)
 
 18. On the **Primary Application Server Instance** page, set **PAS Instance Host Name** to **s03-di-v0**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image182.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image182.png)
 
 19. On the **ABAP Message Server Ports and Transport Host** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image183.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image183.png)
 
 20. On the **SLD Destination for the SAP System OS Level** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image184.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image184.png)
 
 21. On the **Message Server Access Control List** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image185.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image185.png)
 
 22. On the **Media Browser** page, set the **Package Location** entry to the file system path of the **nw75\_osindep\_51050829\_3\\data\_units\\exp1** folder, and click **Next**.
 
-    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTMLa84346a1.PNG](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image186.png)
+    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTMLa84346a1.PNG](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image186.png)
 
 23. On the **SAP System DDIC Users** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image187.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image187.png)
 
 24. On the **Secure Storage Key Generation** page, enable the **Default Key** option, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image188.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image188.png)
 
 25. On the **Parameter Summary** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image189.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image189.png)
 
 26. Monitor progress of installation on the **Task Progress** page.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image190.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image190.png)
 
 27. Wait until the installation completes. This might take about 30 minutes. Once the installation completes, click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image191.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image191.png)
 
 28. On s03-di-0, start **SAP Management Console**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
 
 29. In the SAP Management Console, verify the SAP deployment is operational.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image192.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image192.png)
 
 ### Task 3: Install the SAP Additional Application Server (AAS) layer
 
@@ -2415,83 +2415,83 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 1.  From a Remote Desktop session to s03-di-1, start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
 2.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>SAP Systems-\>Application Server ABAP-\>High Availability System-\>Additional Application Server instance**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image193.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image193.png)
 
 3.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**)
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image194.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image194.png)
 
 4.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\s03-ascs-v0\\sapmnt\\S03\\SYS\\profile** and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image195.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image195.png)
 
 5.  On the **Master Password** page, set the password to **demo\@pass123**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image196.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image196.png)
 
 6.  On the **Windows Domain** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image197.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image197.png)
 
 7.  On the **MS SQL Server Database Connection** page, ensure that **Database instance** is set to **S03-DB-AGL0**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image198.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image198.png)
 
 8.  On the **Existing MS SQL Server Database** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image199.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image199.png)
 
 9.  On the **Software Package Browser** page, point to **SAP\\Kernel\_51050826\_10\\DATA\_UNITS\\K\_745\_U\_WINDOWS\_X86\_64**, and click **Next**.
 
-    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTML305fc51.PNG](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image200.png)
+    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTML305fc51.PNG](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image200.png)
 
 10. On the **Software Package Browser** page, point to **SAP\\SAPDBEXE**, and click **Next**.
 
-    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTML307ceb0.PNG](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image201.png)
+    ![C:\\Users\\Admin\\AppData\\Local\\Temp\\SNAGHTML307ceb0.PNG](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image201.png)
 
 11. Click **Next** again once the location of the software packages has been identified.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image202.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image202.png)
 
 12. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image203.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image203.png)
 
 13. On the **Operating System Users** page, type **demo\@pass123** as the password, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image204.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image204.png)
 
 14. On the **Additional Application Server Instance** page, set **AAS Instance Host Name** to **s03-di-v1**, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image205.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image205.png)
 
 15. On the **Message Server Access Control List** page, accept the default settings, and click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image206.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image206.png)
 
 16. On the **Parameter Summary** page, click **Next**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image207.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image207.png)
 
 17. Monitor progress of installation on the **Task Progress** page.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image208.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image208.png)
 
 18. Wait until the installation completes. This might take about 10 minutes. Once the installation completes, click **OK**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image209.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image209.png)
 
 19. On s03-di-1, start **SAP Management Console**.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
 
 20. In the SAP Management Console, verify the SAP deployment is operational.
 
-    ![](images\Hands-onlabstep-bystep-SAPonAzureimages/media/image210.png)
+    ![](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image210.png)
 
 ### Task 4: Install the SAP Enhanced Monitoring Extension for SAP
 

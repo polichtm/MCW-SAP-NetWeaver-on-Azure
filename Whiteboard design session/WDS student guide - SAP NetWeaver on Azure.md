@@ -92,7 +92,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 **Existing Contoso SAP environment**
 
-![](images\Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image2.png)
+![](images/Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image2.png)
 
 
 ### Customer needs 
@@ -137,7 +137,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 ### Infographic for common scenarios
 
-![A graphic depicting common tools and services used in this session. Depicted are Azure Infrastructure as a Service and SAP on Azure.](images\Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image3.png "Infographic for common scenarios")
+![A graphic depicting common tools and services used in this session. Depicted are Azure Infrastructure as a Service and SAP on Azure.](images/Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image3.png "Infographic for common scenarios")
 
 ## Step 2: Design a proof of concept solution
 
@@ -159,7 +159,7 @@ Directions: With all participants at your table, respond to the following questi
 
 Using the features of Azure and the requirements from the customer, design the application infrastructure and network for A Datum SAP deployment in Azure. Consider such factors as cost of ownership of entire SAP landscape as well as availability and disaster recovery capabilities for the production environment.
 
-![](images\Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image4.png)
+![](images/Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image4.png)
 
 Make sure that your design covers the following items:
 
@@ -225,9 +225,9 @@ Make sure that your design covers the following items:
 
 -   Consider cost impact of leveraging Azure VM reserved instances (RI) and Azure Hybrid Benefit (AHUB)
 
-![A diagram mapping customer requirements to the needed sizing in Azure.](images\Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image5.png "How to size SAP on Azure VMs")
+![A diagram mapping customer requirements to the needed sizing in Azure.](images/Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image5.png "How to size SAP on Azure VMs")
 
-![A diagram depicting several areas to complete to make a cross region resilient deployment.](images\Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image6.png "How to build high availability across regions")
+![A diagram depicting several areas to complete to make a cross region resilient deployment.](images/Whiteboarddesignsessionstudentguide-SAPonAzureimages/media/image6.png "How to build high availability across regions")
 
 **Prepare**
 
