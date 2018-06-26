@@ -29,8 +29,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [SAP on Azure hands-on lab unguided](#sap-on-azure-hands-on-lab-unguided)
     - [Abstract and learning objectives](#abstract-and-learning-objectives)
     - [Overview](#overview)
-    - [Solution Architecture](#solution-architecture)
-    - [Help References](#help-references)
+    - [Solution architecture](#solution-architecture)
+    - [Help references](#help-references)
     - [Exercise 1: Deploy the SAP on Azure infrastructure components](#exercise-1-deploy-the-sap-on-azure-infrastructure-components)
         - [Overview](#overview-1)
         - [Tasks to Complete:](#tasks-to-complete)
@@ -74,7 +74,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Summary](#summary-3)
     - [Lab Summary](#lab-summary)
     - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Delete Resources](#task-1-delete-resources)
+        - [Task 1: Delete resources](#task-1-delete-resources)
 
 <!-- /TOC -->
 
@@ -99,7 +99,7 @@ Contoso has asked you to develop a process of provisioning a highly available, W
 
 
 
-## Solution Architecture
+## Solution architecture
 
 From the architectural standpoint, the deployment will consist of the following layers:
 
@@ -131,7 +131,7 @@ From the architectural standpoint, the deployment will consist of the following 
 
 To facilitate high-availability on the platform level, each pair of Azure virtual machines (VMs) in each layer will belong to the same managed availability set.
 
-## Help References
+## Help references
 
 |    |            |
 |----------|:-------------:|
@@ -732,7 +732,7 @@ In this lab, you stepped through a process of provisioning a highly available, W
 
 Duration: 20 Minutes
 
-### Task 1: Delete Resources
+### Task 1: Delete resources
 
 1.  Now that the HOL is complete, go ahead and delete all of the Resource Groups created for this HOL. You will no longer need those resources, and it will be beneficial to clean up your Azure Subscription.
 
