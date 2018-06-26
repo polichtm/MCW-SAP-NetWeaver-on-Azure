@@ -28,7 +28,7 @@
 
 ## Before the hands-on lab
 
-Time frame: 30 minutes
+Timeframe: 30 minutes
 
 Review the relevant Microsoft documentation.
 
