@@ -32,7 +32,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [SAP on Azure hands-on lab step-by-step](#sap-on-azure-hands-on-lab-step-by-step)
     - [Abstract and learning objectives](#abstract-and-learning-objectives)
     - [Overview](#overview)
-    - [Solution Architecture](#solution-architecture)
+    - [Solution architecture](#solution-architecture)
     - [Exercise 1: Deploy the SAP on Azure infrastructure components](#exercise-1-deploy-the-sap-on-azure-infrastructure-components)
         - [Task 1: Deploy Active Directory domain controller VMs](#task-1-deploy-active-directory-domain-controller-vms)
         - [Task 2: Prepare the Azure Virtual Network and Active Directory hosted on Azure VMs for deployment of SAP NetWeaver application and database tier VMs](#task-2-prepare-the-azure-virtual-network-and-active-directory-hosted-on-azure-vms-for-deployment-of-sap-netweaver-application-and-database-tier-vms)
@@ -89,7 +89,7 @@ Attendees will be better able to deploy SAP on Azure infrastructure components a
 
 Contoso has asked you to develop a process of provisioning a highly available, Windows Server 2016-based SAP NetWeaver deployment on Azure, with SAP Advanced Business Application Programming (ABAP) stack and SQL Server 2016 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you will implement an instance of a failover cluster. The ASCS component will leverage a Storage Spaces Direct (S2D) cluster, providing support for highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you will implement an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum, introduced in Windows Server 2016 Failover Clustering. All Azure VMs will be using managed disks. To streamline deployment, you will take advantage of Azure Resource Manager templates and Windows PowerShell scripts.
 
-## Solution Architecture
+## Solution architecture
 
 From the architectural standpoint, the deployment will consist of the following layers:
 
