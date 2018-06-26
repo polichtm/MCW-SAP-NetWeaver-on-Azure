@@ -65,9 +65,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 3: Install the SAP Additional Application Server (AAS) layer](#task-3-install-the-sap-additional-application-server-aas-layer)
         - [Task 4: Install the SAP Enhanced Monitoring Extension for SAP](#task-4-install-the-sap-enhanced-monitoring-extension-for-sap)
         - [Summary](#summary-3)
-    - [Lab Summary](#lab-summary)
+    - [Lab summary](#lab-summary)
     - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Delete Resources](#task-1-delete-resources)
+        - [Task 1: Delete resources](#task-1-delete-resources)
 
 <!-- /TOC -->
 
@@ -2494,7 +2494,7 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
 
 In this exercise, you configured the SAP NetWeaver application servers. You started by installing Microsoft ODBC Driver for SQL Server on the s03-di-0 and s03-di-1 Azure VMs. Next, you used SAP Software Provisioning Manager to install the Primary Application Server (PAS) instance on s03-di-0 and followed with the installation of an Additional Application Server (AAS) instance on s03-di-1.
 
-## Lab Summary
+## Lab summary
 
 In this lab, you stepped through a process of provisioning a highly available, Windows Server 2016-based SAP NetWeaver deployment on Azure, with SAP ABAP stack and SQL Server 2016 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you implemented an instance of a Failover Cluster that leveraged a Storage Spaces Direct (S2D) cluster, hosting highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you implemented an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum introduced in Windows Server 2016 Failover Clustering. To provide resiliency of the SAP application server instances, you deployed the Primary Application Server (PAS) and an Additional Application Server (AAS) in the same availability set.
 
@@ -2503,7 +2503,7 @@ In this lab, you stepped through a process of provisioning a highly available, W
 
 Duration: 20 Minutes
 
-### Task 1: Delete Resources
+### Task 1: Delete resources
 
 1.  Now that the HOL is complete, go ahead and delete all of the Resource Groups created for this HOL. You will no longer need those resources, and it will be beneficial to clean up your Azure Subscription.
 
