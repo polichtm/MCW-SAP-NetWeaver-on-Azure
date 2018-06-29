@@ -255,7 +255,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 -   Do I have to pay for resources when they are stopped?
 
--   For my dev environment, can I automate scheduled daily shutdown?
+-   Can I automate the shutdown at periodic times of day?
 
 ### Infographic for common scenarios
 
@@ -439,8 +439,6 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
     -   Have the customer team provide one objection for the Microsoft team to respond to
 
     -   The presentation and objections should be no longer than 10 minutes
-
-<!-- -->
 
 -   Have participants on the customer team give feedback to the Microsoft team
 

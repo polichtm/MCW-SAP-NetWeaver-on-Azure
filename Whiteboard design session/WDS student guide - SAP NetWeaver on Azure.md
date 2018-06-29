@@ -134,7 +134,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 -   Do I have to pay for resources when they are stopped?
 
--   For my dev environment, can I automate scheduled daily shutdown?
+-   Can I automate the shutdown at periodic times of day?
 
 ### Infographic for common scenarios
 
