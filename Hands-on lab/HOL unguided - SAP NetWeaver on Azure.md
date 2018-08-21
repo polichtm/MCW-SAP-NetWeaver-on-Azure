@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 SAP Netweaver on Azure
@@ -444,7 +444,7 @@ In this task, you will configure the ASCS cluster with the sapmnt share hosted o
 
 -   You have installed the HA ASCS component on the s03-ascs-0 and s03-ascs-1 VMs
 
-    ![](images/Hands-onlabunguided-SAPonAzureimages/media/image2.png)
+    ![Screenshot of the SAP Management Console. Under SAP Systems, S03 is selected.](images/Hands-onlabunguided-SAPonAzureimages/media/image2.png)
 
 ### Summary
 
@@ -631,7 +631,7 @@ In this task, you will modify the SAP default profile in order to ensure that th
 
 -   You have implemented Always-On Availability Group on s3-db0 and s03-db-1 VMs
 
-    ![](images/Hands-onlabunguided-SAPonAzureimages/media/image3.png)
+    ![Screenshot of the s03-db-ag0 tab.](images/Hands-onlabunguided-SAPonAzureimages/media/image3.png)
 
 ### Summary
 
@@ -717,7 +717,7 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
 
 -   You have installed the SAP PAS on s03-di-0 and SAP AAS on s03-di-1
 
-    ![](images/Hands-onlabunguided-SAPonAzureimages/media/image4.png)
+    ![Screenshot of the SAP Management Console. Under SAP Systems, S03 is selected.](images/Hands-onlabunguided-SAPonAzureimages/media/image4.png)
 
 ### Summary
 

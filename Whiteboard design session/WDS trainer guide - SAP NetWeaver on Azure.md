@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 SAP NetWeaver on Azure
@@ -215,7 +215,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 **Existing Contoso SAP environment**
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image2.png)
+![A Customer environment diagram has a box with Test/Dev, Production, SAN storage, Tape devices, End users, and Legacy systems. A callout with a list of technical requirements points to Production. An arrow labeled Azure Migration points from the box to to a cloud with Dev/Test, DR and Production on Azure. Questions on the bottom are Compute/storage sizing, High availability and DR, and Cloud migration.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image2.png)
 
 ### Customer needs 
 
@@ -259,7 +259,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 ### Infographic for common scenarios
 
-![A graphic depicting common tools and services used in this session. Depicted are Azure Infrastructure as a Service and SAP on Azure.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image3.png "Infographic for common scenarios")
+![A graphic depicting common tools and services used in this session for Azure Infrastructure as a Service and SAP on Azure.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image3.png "Infographic for common scenarios")
 
 ## Step 2: Design a proof of concept solution
 
@@ -282,7 +282,7 @@ Directions: With all participants at your table, respond to the following questi
 
 Using the features of Azure and the requirements from the customer, design the application infrastructure and network for A Datum SAP deployment in Azure. Consider such factors as cost of ownership of entire SAP landscape as well as availability and disaster recovery capabilities for the production environment.
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image4.png)
+![Benefits of Microsoft Cloud Platform. Three empty current state boxes point to three empty future state boxes.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image4.png)
 
 Make sure that your design covers the following items:
 
@@ -348,9 +348,9 @@ Make sure that your design covers the following items:
 
 -   Consider cost impact of leveraging Azure VM reserved instances (RI) and Azure Hybrid Benefit (AHUB)
 
-![A diagram mapping customer requirements to the needed sizing in Azure.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image5.png "How to size SAP on Azure VMs")
+![A table of customer requirements and sizing for Azure has rows labeled SOFS, ASCS, Application, and Database. Customer requirement columns are SAPS needed, IOPS needed, and Current DB Volume. Nine sizing for Azure columns include items such as Azure VM type, number of vms and whether they are active, and SAPS provided. The Sizing for Azure columns have question marks.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image5.png "How to size SAP on Azure VMs")
 
-![A diagram depicting several areas to complete to make a cross region resilient deployment.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image6.png "How to build high availability across regions")
+![A diagram of Subnet business suite, NetWeaver with HA and DR has two Azure Datacenters - East US 2, and West US 2. East US 2 includes a GW Subnet, subnet #1 - AP Prod, and Subnet #2 - DB Prod. West US 2 has GW subnet, subnet #4  - AP DR, and subnet #5 - DB DR, and Subnet #6 management. An arrow points from East US 2 subnet 2 to West US 2 subnet 5. Both datacenters are connected via ExpressRoute to a building icon.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image6.png "How to build high availability across regions")
 
 **Prepare**
 
@@ -478,7 +478,7 @@ Have the table attendees reconvene with the larger session group to hear a subje
 
 *Requirements Recap*
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image7.png)
+![A requirements table lists sixteen steps to produce a design.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image7.png)
 
 *High-level architecture*
 
@@ -500,19 +500,19 @@ For best performance, we choose the alternate site in the same geo - different d
 
 *Preferred solution diagram*
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
+![Screenshot of the complete solution diagram.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
 
 *Sizing Compute and Storage*
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image9.png)
+![A table of customer requirements and sizing for Azure has rows labeled SOFS, ASCS, Application, and Database. Customer requirement columns are SAPS needed, IOPS needed, and Current DB Volume. Nine sizing for Azure columns include items such as Azure VM type, number of vms and whether they are active, and SAPS provided. Unlike the previous table, solution information displays for some sizing for Azure cells.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image9.png)
 
 *Preferred solution cost*
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image10.png)
+![A list of cost estimate assumptions details both included and not included cost estimate assumptions.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image10.png)
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image11.png)
+![Screenshot of a detailed Microsoft Azure Estimate table, with service type, custom name, region, description, and estimated cost.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image11.png)
 
-![](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image12.png)
+![Screenshot of a more detailed preferred solution cost table. At the bottom is a Microsoft Excel Worksheet icon.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image12.png)
 
 *Network*
 
