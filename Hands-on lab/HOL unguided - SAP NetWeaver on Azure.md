@@ -83,15 +83,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives 
 
-Deploy and configure SAP on Azure infrastructure and SAP NetWeaver deployment running on Azure infrastructure, including SAP NetWeaver ASCS and SAP NetWeaver database servers.
+In this hands-on lab you will setup and configure SAP NetWeaver on Azure infrastructure as a service component. You will setup identity management, Scale-Out File Server (SOFS), NetWeaver application and database tiers and configure them all in a domain. You will then setup high-availability by configuring failover clustering for the SAP ASCS servers. Finally, you will configure the database tier with Always-On Availability Groups and configure the NetWeaver application servers for redundancy and enhanced monitoring.
 
-Attendees will be better able to deploy SAP on Azure infrastructure components in addition to the following tasks:
-
--   Configure SAP NetWeaver ASCS servers
-
--   Configure SAP NetWeaver database servers
-
--   Configure SAP NetWeaver application servers
+At the end of the hands-on-lab, you will be better able to deploy SAP on Azure infrastructure components, configure SAP NetWeaver ASCS servers, configure SAP NetWeaver database servers, and configure SAP NetWeaver Application servers.
 
 ## Overview
 
