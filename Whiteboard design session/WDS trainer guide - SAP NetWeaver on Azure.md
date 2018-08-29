@@ -171,15 +171,9 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives 
 
-Deploy and configure SAP on Azure infrastructure and SAP NetWeaver deployment running on Azure infrastructure, including SAP NetWeaver ASCS and SAP NetWeaver database servers. Key takeaways are the Azure infrastructure solution components and the way they are put together to run SAP applications as well as the Solution architecture references.
+In this whiteboard design session, you will learn how to deploy SAP on Azure infrastructure components as well as perform an SAP on Azure need assessment, take part in an SAP on Azure architecture design discussion, and respond to an RFI/RFP for SAP on Cloud opportunity.
 
-Attendees will be better able to deploy SAP on Azure infrastructure components as well as the following tasks:
-
--   Perform a SAP on Azure need assessment
-
--   Take part in SAP on Azure Architecture Design Discussion
-
--   Respond to RFI/RFP for SAP on Cloud opportunity
+At the end of this whiteboard design session, you will be better able to architect for SAP running on Azure infrastructure as a service components and understand proper configuration of SAP NetWeaver ASCS, database and application servers in Azure.
 
 ## Step 1: Review the customer case study 
 
