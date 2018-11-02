@@ -21,7 +21,7 @@
 
     -   Azure PowerShell (AzureRM module version 5.7.0 or newer)
 
--   Access to SAP Software Provisioning Manager (SWPM) version SPS21 or newer (requires an SAP Online Service System account)
+-   Access to SAP Software Provisioning Manager (SWPM) version SPS24 or newer (requires an SAP Online Service System account)
 
 -   Access to NTCLUST.SAR including the current SAP cluster resource DLL (requires an SAP Online Service System account)
 
@@ -36,8 +36,8 @@ Review the relevant Microsoft documentation.
 
 ### Task 1: Review the relevant Microsoft documentation 
 
-1.  Review to the documentation regarding highly available deployments of SAP NetWeaver on Azure at <https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/sap/sap-high-availability-architecture-scenarios>
+1.  Review to the documentation regarding highly available architecture and scenarios of SAP NetWeaver on Azure at <https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/sap/sap-high-availability-architecture-scenarios>
 
-2.  Review to the documentation regarding Azure PowerShell at <https://docs.microsoft.com/en-us/powershell/azure/get-started-azureps?view=azurermps-5.7.0>
+2.  Review to the documentation regarding Azure PowerShell at <https://docs.microsoft.com/en-us/powershell/azure/get-started-azureps?view=azurermps-6.10.0>
 
 You should follow all steps provided *before* attending the hands-on lab.
