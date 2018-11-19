@@ -5,11 +5,11 @@ SAP NetWeaver on Azure
 </div>
 
 <div class="MCWHeader2">
- Whiteboard design session trainer guide
+Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-March 2018
+October 2018
 </div>
 
 
