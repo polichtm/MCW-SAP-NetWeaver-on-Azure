@@ -123,6 +123,7 @@ In this exercise, you will deploy Azure infrastructure prerequisites for impleme
 ### Task 1: Deploy Active Directory domain controller VMs
 
 In this task, you will deploy two Azure VMs hosting Active Directory domain controllers of the domain contoso.com by using an Azure Resource Manager QuickStart template from GitHub available at <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>. You will use the following settings during deployment:
+
     -   Resource group name: **s03-RG**
     -   Admin Username: **demouser**
     -   Admin Password: **demo\@pass123**
