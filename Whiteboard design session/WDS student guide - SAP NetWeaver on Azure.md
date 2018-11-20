@@ -1,7 +1,7 @@
 ![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
-SAP Netweaver on Azure
+SAP NetWeaver on Azure
 </div>
 
 <div class="MCWHeader2">
