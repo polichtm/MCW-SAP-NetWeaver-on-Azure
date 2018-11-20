@@ -156,7 +156,7 @@ Directions:  With all participants at your table, answer the following questions
 
 Directions: With all participants at your table, respond to the following questions on a flip chart:
 
-### *Architecting a multi-tier SAP solution*
+*Architecting a multi-tier SAP solution*
 
 Using the features of Azure and the requirements from the customer, design the application infrastructure and network for A Datum SAP deployment in Azure. Consider such factors as cost of ownership of entire SAP landscape as well as availability and disaster recovery capabilities for the production environment.
 
@@ -164,7 +164,7 @@ Using the features of Azure and the requirements from the customer, design the a
 
 Make sure that your design covers the following items:
 
-### *High-level architecture*
+*High-level architecture*
 
 **Task:** Identifying the target Azure region(s) and the number of tiers.
 
@@ -174,13 +174,13 @@ Make sure that your design covers the following items:
 
 -   Ensure that high-availability and disaster recovery requirements are satisfied.
 
-### *Architecting network connectivity*
+*Architecting network connectivity*
 
 **Task:** Design a hybrid network (at a high-level) that will allow you to meet all the customer requirements and support your design for moving Contoso SAP landscape to Azure.
 
 -   Design virtual networking in Azure and suggest the hybrid connectivity configuration between Contoso on-premises environment and Azure.
 
-### *Architecting (ASCS) components*
+*Architecting (ASCS) components*
 
 **Task:** Design a highly available and geo-redundant solution for hosting the (A)SCS components of the SAP production environment.
 
@@ -192,7 +192,7 @@ Make sure that your design covers the following items:
 
 -   Describe the disaster recovery approach.
 
-### *Architecting application components*
+*Architecting application components*
 
 **Task:** Design a scalable, highly available, and geo-redundant solution for hosting the SAP application components of the SAP production environment.
 
@@ -204,7 +204,7 @@ Make sure that your design covers the following items:
 
 -   Describe the disaster recovery approach.
 
-### *Architecting database components*
+*Architecting database components*
 
 **Task:** Design a resilient and scalable SQL Server backend configured to span geographically distributed datacenters.
 
@@ -216,7 +216,7 @@ Make sure that your design covers the following items:
 
 -   Describe the disaster recovery approach.
 
-### *Determining estimated cost of the solution*
+*Determining estimated cost of the solution*
 
 **Task:** Based on the proposed design, determine the estimated cost of the entire solution.
 
