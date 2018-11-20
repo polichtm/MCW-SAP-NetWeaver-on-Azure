@@ -124,10 +124,13 @@ In this exercise, you will deploy Azure infrastructure prerequisites for impleme
 
 In this task, you will deploy two Azure VMs hosting Active Directory domain controllers of the domain contoso.com by using an Azure Resource Manager QuickStart template from GitHub available at <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>. You will use the following settings during deployment:
 
-   - Resource group name: **s03-RG**
-   - Admin Username: **demouser**
-   - Admin Password: **demo\@pass123**
-   - Domain Name: **contoso.com**
+-   Resource group name: **s03-RG**
+
+-   Admin Username: **demouser**
+
+-   Admin Password: **demo\@pass123**
+
+-   Domain Name: **contoso.com**
 
 1.  From the lab computer, start a Web browser, and navigate to the Azure portal at <https://portal.azure.com>.
 
@@ -269,9 +272,9 @@ In this task, you will configure Azure Virtual Network and Active Directory host
 
         -   User UPN logon: <s03-su@contoso.com>
 
-        -   User SamAccountName: contoso\\s03-su
+        -   User SamAccountName: **contoso\\s03-su**
 
-        -   Password: demo\@pass123
+        -   Password: **demo\@pass123**
 
         -   Password options:
 
@@ -287,9 +290,9 @@ In this task, you will configure Azure Virtual Network and Active Directory host
 
         -   User UPN logon: [s03-db-0-sqlsvc\@contoso.com](mailto:s03-su@contoso.com)
 
-        -   User SamAccountName: contoso\\s03-db-0-sqlsvc
+        -   User SamAccountName: **contoso\\s03-db-0-sqlsvc**
 
-        -   Password: demo\@pass123
+        -   Password: **demo\@pass123**
 
         -   Password options:
 
@@ -299,9 +302,9 @@ In this task, you will configure Azure Virtual Network and Active Directory host
 
         -   User UPN logon: [s03-db-1-sqlsvc\@contoso.com](mailto:%20s03-db-1-sqlsvc@contoso.com)
 
-        -   User SamAccountName: contoso\\s03-db-1-sqlsvc
+        -   User SamAccountName: **contoso\\s03-db-1-sqlsvc**
 
-        -   Password: demo\@pass123
+        -   Password: **demo\@pass123**
 
         -   Password options:
 
@@ -359,7 +362,7 @@ In this task, you will deploy the scale-out file server (SOFS) cluster that will
 
 -   \_artifacts Location Sas Token: **Leave the default value**.
 
-1.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/robotechredmond/301-storage-spaces-direct-md>.
+1.  From the lab computer, start another instance of the Web browser, and navigate to: <https://github.com/robotechredmond/301-storage-spaces-direct-md>.
 
 2.  On the **Use Managed Disks to Create a Storage Spaces Direct (S2D) Scale-Out File Server (SOFS) Cluster with Windows Server 2016** page, select **Deploy to Azure**.
 
@@ -435,7 +438,7 @@ In this task, you will deploy the scale-out file server (SOFS) cluster that will
 
 ### Task 4: Deploy SAP NetWeaver application and database tier VMs 
 
-In this task, you will deploy additional Azure VMs that will be hosting your SAP implementation by using an Azure Resource Manager QuickStart template from GitHub available at <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md> . You will use the following settings during deployment:
+In this task, you will deploy additional Azure VMs that will be hosting your SAP implementation by using an Azure Resource Manager QuickStart template from GitHub available at <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md>. You will use the following settings during deployment:
 
 -   Resource group: **s03-RG**
 
@@ -467,7 +470,7 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   New Or Existing Subnet: **existing**
 
--   Subnet Id: *id of the **sapSubnet***
+-   Subnet Id: **Id of the sapSubnet**
 
 -   Health Probe port of s03-lb-ascs load balancer: **3900**
 
@@ -517,7 +520,7 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     -   Admin Password: **demo\@pass123**
 
-    -   Subnet Id: *Run the following four commands from the Windows PowerShell prompt to identify the value to enter here (when prompted to sign in after typing the first command, type in the credentials you used to authenticate to your Azure subscription). See example below.*
+    -   Subnet Id: **Run the following four commands from the Windows PowerShell prompt to identify the value to enter here (when prompted to sign in after typing the first command, type in the credentials you used to authenticate to your Azure subscription). See example below.**
 
     ```
         Add-AzureRmAccount
@@ -1421,7 +1424,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     ![The MS SQL Server > Required SAP Notes page displays steps that must be performed after installation.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image109.png)
 
-**Note:** While you must implement the SAP Notes referenced in this step in a production environment, their installation will not be included in this lab for the sake of simplicity. 
+>**Note:** While you must implement the SAP Notes referenced in this step in a production environment, their installation will not be included in this lab for the sake of simplicity. 
 
 32. On the **Parameter Summary** page, select **Next**.
 
