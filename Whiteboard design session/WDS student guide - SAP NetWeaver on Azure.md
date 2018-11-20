@@ -35,14 +35,14 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Customer objections](#customer-objections)
         - [Infographic for common scenarios](#infographic-for-common-scenarios)
     - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-        - [*Architecting network connectivity*](#architecting-network-connectivity)
-        - [*Architecting (ASCS) components*](#architecting-ascs-components)
-        - [*Architecting application components*](#architecting-application-components)
-        - [*Architecting database components*](#architecting-database-components)
-        - [*Determining estimated cost of the solution*](#determining-estimated-cost-of-the-solution)
+        - [Architecting network connectivity](#architecting-network-connectivity)
+        - [Architecting (ASCS) components](#architecting-ascs-components)
+        - [Architecting application components](#architecting-application-components)
+        - [Architecting database components](#architecting-database-components)
+        - [Determining estimated cost of the solution](#determining-estimated-cost-of-the-solution)
     - [Step 3: Present the solution](#step-3-present-the-solution)
     - [Wrap-up](#wrap-up)
-        - [Additional references](#additional-references)
+    - [Additional references](#additional-references)
 
 <!-- /TOC -->
 
@@ -56,17 +56,19 @@ At the end of this whiteboard design session, you will be better able to archite
 
 ## Step 1: Review the customer case study 
 
-**Outcome** 
+**Outcome**
 
-Analyze your customer’s needs.
+Analyze your customer's needs.
 
-Timeframe: 15 minutes 
+Timeframe: 15 minutes
 
-Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips. 
+Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
-1.  Meet your table participants and trainer 
-2.  Read all of the directions for steps 1–3 in the student guide 
-3.  As a table team, review the following customer case study
+1.  Meet your table participants and trainer.
+
+2.  Read all of the directions for steps 1-3 in the student guide.
+
+3.  As a table team, review the following customer case study.
 
 ### Customer situation
 
@@ -92,31 +94,31 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 ### Customer needs 
 
--   Reduce time to deploy new business processes to have competitive customer offers
+-   Reduce time to deploy new business processes to have competitive customer offers.
 
--   Reduce time required to provision development and test environments
+-   Reduce time required to provision development and test environments.
 
--   Lower costs incurred by the development, test, and production environments
+-   Lower costs incurred by the development, test, and production environments.
 
--   Identify an estimated monthly infrastructure cost for operating your solution
+-   Identify an estimated monthly infrastructure cost for operating your solution.
 
 ### Technical requirements
 
--   SAP ERP/ECC 6.0 NetWeaver is the application tier
+-   SAP ERP/ECC 6.0 NetWeaver is the application tier.
 
--   SQL Server 2014 is the data tier
+-   SQL Server 2014 is the data tier.
 
--   Application tier on the production system requires total of 30,000 SAPS
+-   Application tier on the production system requires total of 30,000 SAPS.
 
--   Database tier on the production system requires total of 15,000 SAPS
+-   Database tier on the production system requires total of 15,000 SAPS.
 
--   Database tier on the production system needs 10,000 IOPS
+-   Database tier on the production system needs 10,000 IOPS.
 
--   The size of database files on the production system is 750GB, with the expected growth to 1TB
+-   The size of database files on the production system is 750GB, with the expected growth to 1TB.
 
 -   RPO=15 min, RTO=6 hours
 
--   Transaction log backups every 15 minutes, full daily backups retained for 1 month, monthly backups retained for 1 year
+-   Transaction log backups every 15 minutes, full daily backups retained for 1 month, monthly backups retained for 1 year.
 
 ### Customer objections 
 
@@ -136,22 +138,25 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 ## Step 2: Design a proof of concept solution
 
-**Outcome** 
-Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format. 
+**Outcome**
+
+Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
 Timeframe: 60 minutes
 
 **Business needs**
 
-Directions: With all participants at your table, answer the following questions and list the answers on a flip chart. 
+Directions:  With all participants at your table, answer the following questions and list the answers on a flip chart:
 
-1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers? 
+1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
+
 2.  What customer business needs do you need to address with your solution?
 
-**Design** 
-Directions: With all participants at your table, respond to the following questions on a flip chart.
+**Design**
 
-***Architecting a multi-tier SAP solution***
+Directions: With all participants at your table, respond to the following questions on a flip chart:
+
+### *Architecting a multi-tier SAP solution*
 
 Using the features of Azure and the requirements from the customer, design the application infrastructure and network for A Datum SAP deployment in Azure. Consider such factors as cost of ownership of entire SAP landscape as well as availability and disaster recovery capabilities for the production environment.
 
@@ -159,67 +164,67 @@ Using the features of Azure and the requirements from the customer, design the a
 
 Make sure that your design covers the following items:
 
-***High-level architecture***
+### *High-level architecture*
 
 **Task:** Identifying the target Azure region(s) and the number of tiers.
 
--   Identify the optimal choices for Azure region(s) where the solution should be deployed
+-   Identify the optimal choices for Azure region(s) where the solution should be deployed.
 
--   Choose between the 2-tier and 3-tier architecture
+-   Choose between the 2-tier and 3-tier architecture.
 
--   Ensure that high-availability and disaster recovery requirements are satisfied
+-   Ensure that high-availability and disaster recovery requirements are satisfied.
 
 ### *Architecting network connectivity*
 
 **Task:** Design a hybrid network (at a high-level) that will allow you to meet all the customer requirements and support your design for moving Contoso SAP landscape to Azure.
 
--   Design virtual networking in Azure and suggest the hybrid connectivity configuration between Contoso on-premises environment and Azure
+-   Design virtual networking in Azure and suggest the hybrid connectivity configuration between Contoso on-premises environment and Azure.
 
 ### *Architecting (ASCS) components*
 
 **Task:** Design a highly available and geo-redundant solution for hosting the (A)SCS components of the SAP production environment.
 
--   Design the architecture that will provide high availability and disaster recovery capabilities for the (A)SCS components of the SAP production environment
+-   Design the architecture that will provide high availability and disaster recovery capabilities for the (A)SCS components of the SAP production environment.
 
--   Provide the sizing information for your design
+-   Provide the sizing information for your design.
 
--   Describe what technologies you will use to implement high availability
+-   Describe what technologies you will use to implement high availability.
 
--   Describe the disaster recovery approach
+-   Describe the disaster recovery approach.
 
 ### *Architecting application components*
 
 **Task:** Design a scalable, highly available, and geo-redundant solution for hosting the SAP application components of the SAP production environment.
 
--   Design the architecture that will provide high availability and disaster recovery capabilities for the application components of the SAP production environment
+-   Design the architecture that will provide high availability and disaster recovery capabilities for the application components of the SAP production environment.
 
--   Provide the sizing information for your design
+-   Provide the sizing information for your design.
 
--   Describe what technologies you will use to implement high availability
+-   Describe what technologies you will use to implement high availability.
 
--   Describe the disaster recovery approach
+-   Describe the disaster recovery approach.
 
 ### *Architecting database components*
 
 **Task:** Design a resilient and scalable SQL Server backend configured to span geographically distributed datacenters.
 
--   Design the architecture that will provide high availability and disaster recovery capabilities for the database components of the SAP production environment
+-   Design the architecture that will provide high availability and disaster recovery capabilities for the database components of the SAP production environment.
 
--   Provide the sizing information for your design
+-   Provide the sizing information for your design.
 
--   Describe what technologies you will use to implement high availability
+-   Describe what technologies you will use to implement high availability.
 
--   Describe the disaster recovery approach
+-   Describe the disaster recovery approach.
 
 ### *Determining estimated cost of the solution*
 
 **Task:** Based on the proposed design, determine the estimated cost of the entire solution.
 
--   Provide the pricing of the IaaS components of your solution
+-   Provide the pricing of the IaaS components of your solution.
 
--   Exclude cost of hybrid connectivity, licensing, and support
+-   Exclude cost of hybrid connectivity, licensing, and support.
 
--   Consider cost impact of leveraging Azure VM reserved instances (RI) and Azure Hybrid Benefit (AHUB)
+-   Consider cost impact of leveraging Azure VM reserved instances (RI) and Azure Hybrid Benefit (AHUB).
 
 ![A table of customer requirements and sizing for Azure has rows labeled SOFS, ASCS, Application, and Database. Customer requirement columns are SAPS needed, IOPS needed, and Current DB Volume. Nine sizing for Azure columns include items such as Azure VM type, number of vms and whether they are active, and SAPS provided. The Sizing for Azure columns have question marks.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image5.png "How to size SAP on Azure VMs")
 
@@ -227,39 +232,45 @@ Make sure that your design covers the following items:
 
 **Prepare**
 
-Directions: With all participants at your table: 
+Directions: With all participants at your table:
 
-1.  Identify any customer needs that are not addressed with the proposed solution
-2.  Identify the benefits of your solution 
-3.  Determine how you will respond to the customer’s objections 
+1.  Identify any customer needs that are not addressed with the proposed solution.
 
-Prepare a 15-minute chalk-talk style presentation to the customer. 
+2.  Identify the benefits of your solution.
+
+3.  Determine how you will respond to the customer's objections.
+
+Prepare a 15-minute chalk-talk style presentation to the customer.
 
 ## Step 3: Present the solution
 
 **Outcome**
- 
+
 Present a solution to the target customer audience in a 15-minute chalk-talk format.
 
 Timeframe: 30 minutes
 
-**Presentation** 
+**Presentation**
 
 Directions:
 
-1.  Pair with another table
-2.  One table is the Microsoft team and the other table is the customer
-3.  The Microsoft team presents their proposed solution to the customer
-4.  The customer makes one of the objections from the list of objections
-5.  The Microsoft team responds to the objection
-6.  The customer team gives feedback to the Microsoft team 
-7.  Tables switch roles and repeat Steps 2–6
+1.  Pair with another table.
 
+2.  One table is the Microsoft team and the other table is the customer.
 
+3.  The Microsoft team presents their proposed solution to the customer.
+
+4.  The customer makes one of the objections from the list of objections.
+
+5.  The Microsoft team responds to the objection.
+
+6.  The customer team gives feedback to the Microsoft team.
+
+7.  Tables switch roles and repeat Steps 2-6.
 
 ##  Wrap-up 
 
-Time frame: 15 minutes
+Timeframe: 15 minutes
 
 Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
