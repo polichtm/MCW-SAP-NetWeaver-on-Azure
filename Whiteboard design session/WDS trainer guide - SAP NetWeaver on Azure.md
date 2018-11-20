@@ -5,11 +5,11 @@ SAP NetWeaver on Azure
 </div>
 
 <div class="MCWHeader2">
- Whiteboard design session trainer guide
+Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-March 2018
+October 2018
 </div>
 
 
@@ -40,14 +40,14 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Customer objections](#customer-objections)
         - [Infographic for common scenarios](#infographic-for-common-scenarios)
     - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution)
-        - [*Architecting network connectivity*](#architecting-network-connectivity)
-        - [*Architecting (ASCS) components*](#architecting-ascs-components)
-        - [*Architecting application components*](#architecting-application-components)
-        - [*Architecting database components*](#architecting-database-components)
-        - [*Determining estimated cost of the solution*](#determining-estimated-cost-of-the-solution)
+        - [Architecting network connectivity](#architecting-network-connectivity)
+        - [Architecting (ASCS) components](#architecting-ascs-components)
+        - [Architecting application components](#architecting-application-components)
+        - [Architecting database components](#architecting-database-components)
+        - [Determining estimated cost of the solution](#determining-estimated-cost-of-the-solution)
     - [Step 3: Present the solution](#step-3-present-the-solution)
     - [Wrap-up](#wrap-up)
-        - [Additional references](#additional-references)
+    - [Additional references](#additional-references)
 - [SAP on Azure whiteboard design session trainer guide](#sap-on-azure-whiteboard-design-session-trainer-guide)
     - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study-1)
     - [Step 2: Design a proof of concept solution](#step-2-design-a-proof-of-concept-solution-1)
@@ -68,25 +68,25 @@ Thank you for taking time to support the whiteboard design sessions as a trainer
 
 An amazing trainer:
 
--   Creates a safe environment in which learning can take place
+-   Creates a safe environment in which learning can take place.
 
--   Stimulates the participant's thinking
+-   Stimulates the participant's thinking.
 
--   Involves the participant in the learning process
+-   Involves the participant in the learning process.
 
--   Manages the learning process (on time, on topic, and adjusting to benefit participants)
+-   Manages the learning process (on time, on topic, and adjusting to benefit participants).
 
--   Ensures individual participant accountability
+-   Ensures individual participant accountability.
 
--   Ties it all together for the participant
+-   Ties it all together for the participant.
 
--   Provides insight and experience to the learning process
+-   Provides insight and experience to the learning process.
 
--   Effectively leads the whiteboard design session discussion
+-   Effectively leads the whiteboard design session discussion.
 
--   Monitors quality and appropriateness of participant deliverables
+-   Monitors quality and appropriateness of participant deliverables.
 
--   Effectively leads the feedback process
+-   Effectively leads the feedback process.
 
 ## Whiteboard design session flow 
 
@@ -94,7 +94,9 @@ Each whiteboard design session uses the following flow:
 
 **Step 1: Review the customer case study (15 minutes)**
 
-Outcome: Analyze your customer's needs
+**Outcome**
+
+Analyze your customer's needs.
 
 -   Customer's background, situation, needs and technical requirements
 
@@ -104,19 +106,23 @@ Outcome: Analyze your customer's needs
 
 **Step 2: Design a proof of concept solution (60 minutes)**
 
-Outcome: Design a solutions and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
+**Outcome**
 
--   Determine your target customer audience
+Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
--   Determine customer's business needs to address your solution
+-   Determine your target customer audience.
 
--   Design and diagram your solution
+-   Determine customer's business needs to address your solution.
 
--   Prepare to present your solution
+-   Design and diagram your solution.
+
+-   Prepare to present your solution.
 
 **Step 3: Present the solution (30 minutes)**
 
-Outcome: Present solution to your customer
+**Outcome**
+
+Present solution to your customer:
 
 -   Present solution
 
@@ -126,21 +132,21 @@ Outcome: Present solution to your customer
 
 **Wrap-up (15 minutes)**
 
-Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
+-   Review preferred solution
 
 ## Before the whiteboard design session: How to prepare
 
 Before conducting your first whiteboard design session:
 
--   Read the Student guide (including the case study) and Trainer guide
+-   Read the Student guide (including the case study) and Trainer guide.
 
--   Become familiar with all key points and activities
+-   Become familiar with all key points and activities.
 
--   Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions
+-   Plan the point you want to stress, which questions you want to drive, transitions, and be ready to answer questions.
 
--   Prior to the whiteboard design session, discuss the case study to pick up more ideas
+-   Prior to the whiteboard design session, discuss the case study to pick up more ideas.
 
--   Make notes for later
+-   Make notes for later.
 
 ## During the whiteboard design session: Tips for an effective whiteboard design session
 
@@ -150,12 +156,11 @@ Before conducting your first whiteboard design session:
 
 When participants are doing activities, you can **look ahead to refresh your memory**.
 
--   **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing
+-   **Adjust activity and whiteboard design session pace** as needed to allow time for presenting, feedback, and sharing.
 
 -   **Add examples, points, and stories** from your own experience. Think about stories you can share that help you make your points clearly and effectively.
 
 -   **Consider creating a "parking lot"** to record issues or questions raised that are outside the scope of the whiteboard design session or can be answered later. Decide how you will address these issues, so you can acknowledge them without being derailed by them.
-
 
 ***Have fun**! Encourage participants to have fun and share!*
 
@@ -163,9 +168,9 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 **Ask questions** and get them to share to fully involve your group in the learning process.
 
-**Ask first**, whenever possible. Before launching into a topic, learn your audience's opinions about it and experiences with it. Asking first enables you to assess their level of knowledge and experience and leaves them more open to what you are presenting.
+**Ask first**, whenever possible. Before launching into a topic, learn your audience's opinions about it and experiences with it. Asking first enables you to assess their level of knowledge and experience, and leaves them more open to what you are presenting.
 
-**Wait for responses**. If you ask a question such as, "What is your experience with (fill in the blank)?" then wait. Do not be afraid of a little silence. If you leap into the silence, your participants will feel you are not serious about involving them and will become passive. Give participants a chance to think, and if no one answers, patiently ask again. You will usually get a response.
+**Wait for responses**. If you ask a question such as, "What's your experience with (fill in the blank)?" then wait. Do not be afraid of a little silence. If you leap into the silence, your participants will feel you are not serious about involving them and will become passive. Give participants a chance to think, and if no one answers, patiently ask again. You will usually get a response.
 
 #  SAP on Azure whiteboard design session student guide
 
@@ -177,17 +182,19 @@ At the end of this whiteboard design session, you will be better able to archite
 
 ## Step 1: Review the customer case study 
 
-**Outcome** 
+**Outcome**
 
-Analyze your customer’s needs.
+Analyze your customer's needs.
 
-Timeframe: 15 minutes 
+Timeframe: 15 minutes
 
-Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips. 
+Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
-1.  Meet your table participants and trainer 
-2.  Read all of the directions for steps 1–3 in the student guide 
-3.  As a table team, review the following customer case study
+1.  Meet your table participants and trainer.
+
+2.  Read all of the directions for steps 1-3 in the student guide.
+
+3.  As a table team, review the following customer case study.
 
 ### Customer situation
 
@@ -213,31 +220,31 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 ### Customer needs 
 
--   Reduce time to deploy new business processes to have competitive customer offers
+-   Reduce time to deploy new business processes to have competitive customer offers.
 
--   Reduce time required to provision development and test environments
+-   Reduce time required to provision development and test environments.
 
--   Lower costs incurred by the development, test, and production environments
+-   Lower costs incurred by the development, test, and production environments.
 
--   Identify an estimated monthly infrastructure cost for operating your solution
+-   Identify an estimated monthly infrastructure cost for operating your solution.
 
 ### Technical requirements
 
--   SAP ERP/ECC 6.0 NetWeaver is the application tier
+-   SAP ERP/ECC 6.0 NetWeaver is the application tier.
 
--   SQL Server 2014 is the data tier
+-   SQL Server 2014 is the data tier.
 
--   Application tier on the production system requires total of 30,000 SAPS
+-   Application tier on the production system requires total of 30,000 SAPS.
 
--   Database tier on the production system requires total of 15,000 SAPS
+-   Database tier on the production system requires total of 15,000 SAPS.
 
--   Database tier on the production system needs 10,000 IOPS
+-   Database tier on the production system needs 10,000 IOPS.
 
--   The size of database files on the production system is 750GB, with the expected growth to 1TB
+-   The size of database files on the production system is 750GB, with the expected growth to 1TB.
 
 -   RPO=15 min, RTO=6 hours
 
--   Transaction log backups every 15 minutes, full daily backups retained for 1 month, monthly backups retained for 1 year
+-   Transaction log backups every 15 minutes, full daily backups retained for 1 month, monthly backups retained for 1 year.
 
 ### Customer objections 
 
@@ -257,22 +264,25 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
 ## Step 2: Design a proof of concept solution
 
-**Outcome** 
-Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format. 
+**Outcome**
+
+Design a solution and prepare to present the solution to the target customer audience in a 15-minute chalk-talk format.
 
 Timeframe: 60 minutes
 
 **Business needs**
 
-Directions: With all participants at your table, answer the following questions and list the answers on a flip chart. 
+Directions:  With all participants at your table, answer the following questions and list the answers on a flip chart:
 
-1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers? 
+1.  Who should you present this solution to? Who is your target customer audience? Who are the decision makers?
+
 2.  What customer business needs do you need to address with your solution?
 
-**Design** 
-Directions: With all participants at your table, respond to the following questions on a flip chart.
+**Design**
 
-***Architecting a multi-tier SAP solution***
+Directions: With all participants at your table, respond to the following questions on a flip chart:
+
+*Architecting a multi-tier SAP solution*
 
 Using the features of Azure and the requirements from the customer, design the application infrastructure and network for A Datum SAP deployment in Azure. Consider such factors as cost of ownership of entire SAP landscape as well as availability and disaster recovery capabilities for the production environment.
 
@@ -280,67 +290,67 @@ Using the features of Azure and the requirements from the customer, design the a
 
 Make sure that your design covers the following items:
 
-***High-level architecture***
+*High-level architecture*
 
 **Task:** Identifying the target Azure region(s) and the number of tiers.
 
--   Identify the optimal choices for Azure region(s) where the solution should be deployed
+-   Identify the optimal choices for Azure region(s) where the solution should be deployed.
 
--   Choose between the 2-tier and 3-tier architecture
+-   Choose between the 2-tier and 3-tier architecture.
 
--   Ensure that high-availability and disaster recovery requirements are satisfied
+-   Ensure that high-availability and disaster recovery requirements are satisfied.
 
-### *Architecting network connectivity*
+*Architecting network connectivity*
 
 **Task:** Design a hybrid network (at a high-level) that will allow you to meet all the customer requirements and support your design for moving Contoso SAP landscape to Azure.
 
--   Design virtual networking in Azure and suggest the hybrid connectivity configuration between Contoso on-premises environment and Azure
+-   Design virtual networking in Azure and suggest the hybrid connectivity configuration between Contoso on-premises environment and Azure.
 
-### *Architecting (ASCS) components*
+*Architecting (ASCS) components*
 
 **Task:** Design a highly available and geo-redundant solution for hosting the (A)SCS components of the SAP production environment.
 
--   Design the architecture that will provide high availability and disaster recovery capabilities for the (A)SCS components of the SAP production environment
+-   Design the architecture that will provide high availability and disaster recovery capabilities for the (A)SCS components of the SAP production environment.
 
--   Provide the sizing information for your design
+-   Provide the sizing information for your design.
 
--   Describe what technologies you will use to implement high availability
+-   Describe what technologies you will use to implement high availability.
 
--   Describe the disaster recovery approach
+-   Describe the disaster recovery approach.
 
-### *Architecting application components*
+*Architecting application components*
 
 **Task:** Design a scalable, highly available, and geo-redundant solution for hosting the SAP application components of the SAP production environment.
 
--   Design the architecture that will provide high availability and disaster recovery capabilities for the application components of the SAP production environment
+-   Design the architecture that will provide high availability and disaster recovery capabilities for the application components of the SAP production environment.
 
--   Provide the sizing information for your design
+-   Provide the sizing information for your design.
 
--   Describe what technologies you will use to implement high availability
+-   Describe what technologies you will use to implement high availability.
 
--   Describe the disaster recovery approach
+-   Describe the disaster recovery approach.
 
-### *Architecting database components*
+*Architecting database components*
 
 **Task:** Design a resilient and scalable SQL Server backend configured to span geographically distributed datacenters.
 
--   Design the architecture that will provide high availability and disaster recovery capabilities for the database components of the SAP production environment
+-   Design the architecture that will provide high availability and disaster recovery capabilities for the database components of the SAP production environment.
 
--   Provide the sizing information for your design
+-   Provide the sizing information for your design.
 
--   Describe what technologies you will use to implement high availability
+-   Describe what technologies you will use to implement high availability.
 
--   Describe the disaster recovery approach
+-   Describe the disaster recovery approach.
 
-### *Determining estimated cost of the solution*
+*Determining estimated cost of the solution*
 
 **Task:** Based on the proposed design, determine the estimated cost of the entire solution.
 
--   Provide the pricing of the IaaS components of your solution
+-   Provide the pricing of the IaaS components of your solution.
 
--   Exclude cost of hybrid connectivity, licensing, and support
+-   Exclude cost of hybrid connectivity, licensing, and support.
 
--   Consider cost impact of leveraging Azure VM reserved instances (RI) and Azure Hybrid Benefit (AHUB)
+-   Consider cost impact of leveraging Azure VM reserved instances (RI) and Azure Hybrid Benefit (AHUB).
 
 ![A table of customer requirements and sizing for Azure has rows labeled SOFS, ASCS, Application, and Database. Customer requirement columns are SAPS needed, IOPS needed, and Current DB Volume. Nine sizing for Azure columns include items such as Azure VM type, number of vms and whether they are active, and SAPS provided. The Sizing for Azure columns have question marks.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image5.png "How to size SAP on Azure VMs")
 
@@ -348,35 +358,41 @@ Make sure that your design covers the following items:
 
 **Prepare**
 
-Directions: With all participants at your table: 
+Directions: With all participants at your table:
 
-1.  Identify any customer needs that are not addressed with the proposed solution
-2.  Identify the benefits of your solution 
-3.  Determine how you will respond to the customer’s objections 
+1.  Identify any customer needs that are not addressed with the proposed solution.
 
-Prepare a 15-minute chalk-talk style presentation to the customer. 
+2.  Identify the benefits of your solution.
+
+3.  Determine how you will respond to the customer's objections.
+
+Prepare a 15-minute chalk-talk style presentation to the customer.
 
 ## Step 3: Present the solution
 
 **Outcome**
- 
+
 Present a solution to the target customer audience in a 15-minute chalk-talk format.
 
 Timeframe: 30 minutes
 
-**Presentation** 
+**Presentation**
 
 Directions:
 
-1.  Pair with another table
-2.  One table is the Microsoft team and the other table is the customer
-3.  The Microsoft team presents their proposed solution to the customer
-4.  The customer makes one of the objections from the list of objections
-5.  The Microsoft team responds to the objection
+1.  Pair with another table.
+
+2.  One table is the Microsoft team and the other table is the customer.
+
+3.  The Microsoft team presents their proposed solution to the customer.
+
+4.  The customer makes one of the objections from the list of objections.
+
+5.  The Microsoft team responds to the objection.
+
 6.  The customer team gives feedback to the Microsoft team.
-7.  Tables switch roles and repeat Steps 2–6
 
-
+7.  Tables switch roles and repeat Steps 2-6.
 
 ##  Wrap-up 
 
@@ -402,47 +418,43 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Step 1: Review the customer case study
 
--   Check in with your table participants to introduce yourself as the trainer
+-   Check in with your table participants to introduce yourself as the trainer.
 
 -   Ask, "What questions do you have about the customer case study?"
 
--   Briefly review the steps and timeframes of the whiteboard design session
+-   Briefly review the steps and timeframes of the whiteboard design session.
 
--   Ready, set, go! Let the table participants begin
+-   Ready, set, go! Let the table participants begin.
 
 ## Step 2: Design a proof of concept solution
 
--   Check in with your tables to ensure that they are transitioning from step to step on time
+-   Check in with your tables to ensure that they are transitioning from step to step on time.
 
--   Provide some feedback on their responses to the business needs and design
+-   Provide some feedback on their responses to the business needs and design.
 
-    -   Try asking questions first that will lead the participants to discover the answers on their own
+    -   Try asking questions first that will lead the participants to discover the answers on their own.
 
--   Provide feedback for their responses to the customer's objections
+-   Provide feedback for their responses to the customer's objections.
 
-    -   Try asking questions first that will lead the participants to discover the answers on their own
+    -   Try asking questions first that will lead the participants to discover the answers on their own.
 
 ## Step 3: Present the solution
 
--   Determine which table will be paired with your table before Step 3 begins
+-   Determine which table will be paired with your table before Step 3 begins.
 
--   For the first round, assign one table as the Microsoft team and the other table as the customer
+-   For the first round, assign one table as the presenting team and the other table as the customer.
 
--   Have the Microsoft team present their solution to the customer team
+-   Have the presenting team present their solution to the customer team.
 
-    -   Have the customer team provide one objection for the Microsoft team to respond to
+    -   Have the customer team provide one objection for the presenting team to respond to.
 
-    -   The presentation and objections should be no longer than 10 minutes
+    -   The presentation, objections, and feedback should take no longer than 15 minutes.
 
--   Have participants on the customer team give feedback to the Microsoft team
-
-    -   The feedback should be no longer than 5 minutes
-
-    -   If needed, the trainer may also provide feedback
+    -   If needed, the trainer may also provide feedback.
 
 ## Wrap-up
 
--   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution
+-   Have the table participants reconvene with the larger session group to hear the facilitator/SME share the following preferred solution.
 
 ##  Preferred target audience
 
@@ -462,7 +474,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 -   Central IT (VP of IT Operations)
 
-    -   Reports into CIO and responsible for operating datacenter
+    -   Reports to CIO and responsible for operating datacenter
 
     -   Concerned about shadow IT created issues: security/compliance, server sprawl, and lack of control
 
@@ -480,11 +492,11 @@ The preferred solution for this design involves moving the SAP environment from 
 
 **Task:** Identifying the target Azure region(s) and the number of tiers:
 
--   Identify the optimal choices for the Azure region(s) where the solution should be deployed
+-   Identify the optimal choices for the Azure region(s) where the solution should be deployed.
 
--   Choose between the 2-tier and 3-tier approach
+-   Choose between the 2-tier and 3-tier approach.
 
--   Ensure that high-availability and disaster recovery requirements are satisfied
+-   Ensure that high-availability and disaster recovery requirements are satisfied.
 
 **Answer:** By deploying Azure VMs in two regions (with US East 2 as the primary region and US West 2 as the secondary), we are able to address the Disaster Recovery needs of the customer. From the availability standpoint, one of the first decisions you will need to make is whether you will implement a two-tier or three-tier architecture. The 3-tier architecture consists of the presentation tier, the application tier, and the database tier. In the two-tier architecture, the application and database tiers are combined together, running on the same operating system instance.
 
@@ -508,7 +520,7 @@ For best performance, we choose the alternate site in the same geo - different d
 
 ![Screenshot of a more detailed preferred solution cost table. At the bottom is a Microsoft Excel Worksheet icon.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image12.png)
 
-*Network*
+*Architecting network connectivity*
 
 **Task:** Design a hybrid network (at a high-level) that will allow you to meet all the customer requirements and support your design for moving Contoso SAP landscape to Azure:
 
@@ -516,7 +528,7 @@ For best performance, we choose the alternate site in the same geo - different d
 
 **Answer:** Use ExpressRoute between the corporate headquarters and two Azure regions that will host the SAP deployment. For development or training scenarios, it might be sufficient to use a site-to-site Virtual Private Network (VPN). You can use the online Azure Speed Test to determine the latency you should expect when establishing a site-to-site VPN connection. However, Site-to-Site VPN connections are, at best, limited to 1.25 Gbps and introduce double digit millisecond latencies. For production SAP workloads hosted in Azure, you should consider using ExpressRoute. This allows for establishing a private connection to Azure, providing up to 10 Gbps of bandwidth and lowering latency to a couple of milliseconds.
 
-*(A)SCS Components*
+*Architecting (ASCS) components*
 
 **Task:** Design a scalable and highly available solution.
 
@@ -524,7 +536,7 @@ For best performance, we choose the alternate site in the same geo - different d
 
 By deploying Azure VMs hosting the (A)SCS in two regions, we are able to meet the disaster recovery needs of the customer. We schedule a task to copy the primary instance of ASCS' \\sapmnt to a corresponding share on a DR Azure VM once per day. As part of failover, we change the IP of the ASCS virtual instance name to the IP of the Azure VM. We run sapinst.exe with the SAPINST\_USE\_HOSTNAME parameter set to the virtual instance name (stand-alone ASCS system in a distributed deployment).
 
-*Application Components*
+*Architecting application components*
 
 **Task:** Design a scalable and highly available solution.
 
@@ -534,7 +546,7 @@ The application server does not contain any business data and does not need to b
 
 Consider using ASR for replication from on-premises to Azure and between Azure regions (note that failback between Azure regions is currently unsupported).
 
-*Database Components*
+*Architecting database components*
 
 **Task:** Design a resilient and scalable SQL Server backend configured to span geographically distributed datacenters.
 
@@ -578,7 +590,7 @@ Failover between Azure SQL VMs from the primary to the secondary Azure region is
 
 ## Customer quote (to be read back to the attendees at the end)
 
-*"Azure has introduced new opportunities in regard to quickly provisioning development and user acceptance testing environments for our various SAP workloads. It also provided high availability and disaster recovery capabilities for our production environment at a very reasonable price."*
+"Azure has introduced new opportunities in regard to quickly provisioning development and user acceptance testing environments for our various SAP workloads. It also provided high availability and disaster recovery capabilities for our production environment at a very reasonable price."
 
 ---Andrew Cross, CIO, Contoso Group
 

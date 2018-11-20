@@ -1,4 +1,4 @@
-![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+﻿![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 SAP Netweaver on Azure
@@ -9,7 +9,7 @@ Hands-on lab unguided
 </div>
 
 <div class="MCWHeader3">
-March 2018
+October 2018
 </div>
 
 
@@ -49,7 +49,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 1: Set up Failover Clustering on the ASCS VMs](#task-1-set-up-failover-clustering-on-the-ascs-vms)
         - [Task 2: Install the SAP ASCS components on s03-ascs-0](#task-2-install-the-sap-ascs-components-on-s03-ascs-0)
         - [Task 3: Install the SAP ASCS components on s03-ascs-1](#task-3-install-the-sap-ascs-components-on-s03-ascs-1)
-        - [Task 4: Configure the SAP NetWeaver cluster with SOFS-based file share](#task-4-configure-the-sap-netweaver-cluster-with-sofs-based-file-share)
         - [Exit criteria](#exit-criteria-1)
         - [Summary](#summary-1)
     - [Exercise 3: Configure SAP NetWeaver database servers](#exercise-3-configure-sap-netweaver-database-servers)
@@ -57,7 +56,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Tasks to complete:](#tasks-to-complete-1)
         - [Task 1: Configure storage of the SAP database layer](#task-1-configure-storage-of-the-sap-database-layer)
         - [Task 2: Grant elevated user rights to the SQL Server service account](#task-2-grant-elevated-user-rights-to-the-sql-server-service-account)
-        - [Task 3: Install SQL Server 2016 with the SQL\_Latin1\_General\_CP850\_BIN2 collation](#task-3-install-sql-server-2016-with-the-sql\_latin1\_general\_cp850\_bin2-collation)
+        - [Task 3: Install SQL Server 2017 with the SQL\_Latin1\_General\_CP850\_BIN2 collation](#task-3-install-sql-server-2017-with-the-sql\_latin1\_general\_cp850\_bin2-collation)
         - [Task 4: Install the SAP database layer](#task-4-install-the-sap-database-layer)
         - [Task 5: Implement Always-On Availability Group](#task-5-implement-always-on-availability-group)
         - [Task 6: Modify the SAP Default Profile](#task-6-modify-the-sap-default-profile)
@@ -89,9 +88,7 @@ At the end of the hands-on-lab, you will be better able to deploy SAP on Azure i
 
 ## Overview
 
-Contoso has asked you to develop a process of provisioning a highly available, Windows Server 2016-based SAP NetWeaver deployment on Azure, with SAP Advanced Business Application Programming (ABAP) stack and SQL Server 2016 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you will implement an instance of a failover cluster. The ASCS component will leverage a Storage Spaces Direct (S2D) cluster, providing support for highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you will implement an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum, introduced in Windows Server 2016 Failover Clustering. All Azure VMs will be using managed disks. To streamline deployment, you will take advantage of the Azure Resource Manager templates and Windows PowerShell scripts.
-
-
+Contoso has asked you to develop a process of provisioning a highly available, Windows Server 2016-based SAP NetWeaver deployment on Azure, with SAP Advanced Business Application Programming (ABAP) stack and SQL Server 2017 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you will implement an instance of a failover cluster. The ASCS component will leverage a Storage Spaces Direct (S2D) cluster, providing support for highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you will implement an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum, introduced in Windows Server 2016 Failover Clustering. All Azure VMs will be using managed disks. To streamline deployment, you will take advantage of the Azure Resource Manager templates and Windows PowerShell scripts.
 
 ## Solution architecture
 
@@ -117,7 +114,7 @@ From the architectural standpoint, the deployment will consist of the following 
 
     -   Additional Application Server (AAS)
 
--   SAP Database layer -- two servers hosting separate instances of SQL Server 2016 configured as nodes of a SQL Server Always-On Availability Group cluster
+-   SAP Database layer -- two servers hosting separate instances of SQL Server 2017 configured as nodes of a SQL Server Always-On Availability Group cluster
 
     -   Failover Clustering will rely on Cloud Witness-based quorum
 
@@ -135,10 +132,9 @@ To facilitate high-availability on the platform level, each pair of Azure virtua
 | Configure Always-On Availability Group in Azure VM manually  |  <https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-tutorial>  |
 
 
-
 ## Exercise 1: Deploy the SAP on Azure infrastructure components 
 
-Duration: 40 minutes
+Duration: 130 minutes
 
 ### Overview
 
@@ -152,7 +148,7 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
 -   Resource group name: **s03-RG**
 
--   virtualNetworkName: **s03-vnet**
+-   virtualNetworkName: **adVNET**
 
 -   Virtual Network Address Range: **10.0.0.0/16**
 
@@ -164,9 +160,9 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
 -   Ad BDC Nic IP Address: **10.0.0.5**
 
--   Ad PDCVM Name: **s03-ad-0**
+-   Ad PDCVM Name: **adPDC**
 
--   Ad BDCVM Name: **s03-ad-1**
+-   Ad BDCVM Name: **adBDC**
 
 -   Admin Username: **demouser**
 
@@ -190,27 +186,29 @@ In this task, you will configure Azure Virtual Network and Active Directory host
 
     -   Create the following DNS Host (A) records:
 
-        -   **s03-ascs-v0 10.0.1.6** (this IP address must match the IP address that will be assigned to the front end of the ASCS-layer internal load balancer)
+        -   **s03-ascs-v0 10.0.1.6** (This IP address must match the IP address that will be assigned to the front end of the ASCS-layer internal load balancer.)
 
-        -   **s03-ascs-ers0 10.0.1.8** (this IP address must match the IP address that will be assigned to the first Azure VM of the ASCS-layer)
+        -   **s03-ascs-ers0 10.0.1.8** (This IP address must match the IP address that will be assigned to the first Azure VM of the ASCS-layer.)
 
-        -   **s03-ascs-ers1 10.0.1.9** (this IP address must match the IP address that will be assigned to the second Azure VM of the ASCS-layer)
+        -   **s03-ascs-ers1 10.0.1.9** (This IP address must match the IP address that will be assigned to the second Azure VM of the ASCS-layer.)
 
-        -   **s03-di-v0 10.0.1.28** (this IP address must match the IP address that will be assigned to the SAP Primary Application Server s0-di-0)
+        -   **s03-di-v0 10.0.1.28** (This IP address must match the IP address that will be assigned to the SAP Primary Application Server s0-di-0.)
 
-        -   **s03-di-v1 10.0.1.29** (this IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-1)
+        -   **s03-di-v1 10.0.1.29** (This IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-1.)
+
+    -   Enable non-secure updates.
 
 -   In the contoso.com Active Directory:
 
-    -   Create an organizational unit in the root of the contoso.com domain named **S03** that will host SAP-specific users and groups
+    -   Create an organizational unit in the root of the contoso.com domain named **S03** that will host SAP-specific users and groups.
 
     -   Create the following user accounts with non-expiring password set to **demo\@pass123** that will be used to facilitate the SAP implementation:
 
-        -   **s03-su**: member of contoso\\Domain Admins and contoso\\Administrators. You will use this account to perform all operating system level configuration tasks, including installation of all SAP components
+        -   **s03-su**: member of contoso\\Domain Admins and contoso\\Administrators. You will use this account to perform all operating system level configuration tasks, including installation of all SAP components.
 
-        -   **s03-db-0-sqlsvc**: you will use this account to configure SQL Server 2016 services on the first SQL Server VM
+        -   **s03-db-0-sqlsvc**: you will use this account to configure SQL Server 2017 services on the first SQL Server VM.
 
-        -   **s03-db-1-sqlsvc**: you will use this account to configure SQL Server 2016 services on the second SQL Server VM
+        -   **s03-db-1-sqlsvc**: you will use this account to configure SQL Server 2017 services on the second SQL Server VM.
 
 ### Task 3: Deploy the Scale-Out File Server (SOFS) cluster
 
@@ -224,7 +222,7 @@ In this task, you will deploy the scale-out file server (SOFS) cluster that will
 
 -   Enable Accelerated Networking: **true**
 
-> Note: Accelerated networking is supported on Azure VM sizes with 2 or more vCPUs
+> **Note**: Accelerated networking is supported on Azure VM sizes with 2 or more vCPUs
 
 -   Image Sku: **2016-Datacenter-Server-Core**
 
@@ -260,9 +258,9 @@ In this task, you will deploy the scale-out file server (SOFS) cluster that will
 
 -   Scheduled Antimalware Time: **120**
 
--   \_artifacts Location: accept the default value
+-   \_artifacts Location: Accept the default value.
 
--   \_artifacts Location Sas Token: leave the default value
+-   \_artifacts Location Sas Token: Leave the default value.
 
 ### Task 4: Deploy SAP NetWeaver application and database tier VMs 
 
@@ -298,19 +296,19 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   New Or Existing Subnet: **existing**
 
--   Subnet Id: *id of the **sapSubnet***
+-   Subnet Id: **Id of the sapSubnet***
 
 -   Health Probe port of s03-lb-ascs load balancer: **3900**
 
 -   Health Probe port of s03-lb-db load balancer: **59999**
 
-> Note: Disregard any custom script extension errors generated by the template deployment.
+> **Note**: Disregard any custom script extension errors generated during the template deployment.
 
 ### Task 5: Configure IP addresses of Azure VMs and internal load balancers
 
 In this exercise, you will configure Public and Private IP addressing for the Azure VMs and internal load balancers deployed in the previous task by using an Azure Resource Manager template. You will assign to each VM a designated, static Private IP address and a dynamic Public IP address. You will also assign a designated, static Private IP address to each load balancer.
 
-> Note: At this point, each of the Azure VMs we have deployed in the previous task has a dynamically assigned Private IP address and no Public IP address. The lack of Public IP addresses is the result of using the SAP NW 3-tier compatible Marketplace image template, which is intended to work this way when deploying it into an existing Azure Virtual Network. When operating in a production environment, you should connect to VMs via their Private IP address (e.g. by leveraging an existing Site-to-Site VPN or ExpressRoute from an on-premises location). You will add a Public IP to each VM in order to simplify the setup process. We will also assign a designated static Private IP address to each VM and each internal load balancer in order to be able to reference specific IP addresses throughout this lab.
+> **Note**: At this point, each of the Azure VMs we have deployed in the previous task has a dynamically assigned Private IP address and no Public IP address. The lack of Public IP addresses is the result of using the SAP NW 3-tier compatible Marketplace image template, which is intended to work this way when deploying it into an existing Azure Virtual Network. When operating in a production environment, you should connect to VMs via their Private IP address (e.g. by leveraging an existing Site-to-Site VPN or ExpressRoute from an on-premises location). You will add a Public IP to each VM in order to simplify the setup process. We will also assign a designated static Private IP address to each VM and each internal load balancer in order to be able to reference specific IP addresses throughout this lab.
 
 Configure the private IP addresses of VMs and load balancers in the following manner:
 
@@ -332,23 +330,23 @@ Configure the private IP addresses of VMs and load balancers in the following ma
 
 ### Task 6: Join SAP NetWeaver application and database VMs to the domain
 
-In this task, you will join all of the Windows Server 2016 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
+In this task, you will join all of the Windows Server 2017 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
 
 ### Task 7: Configure User Account Control on application and the database VMs
 
 In this task, you will disable User Account Control on the Windows Server 2016 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
 
-> Note: This is a temporary measure. You should re-enable User Account Control once you complete the setup.
+> **Note**: This is a temporary measure. You should re-enable User Account Control once you complete the setup.
 
 ### Exit criteria
 
--   You have deployed the ARM template <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>
+-   You have deployed the ARM template <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>.
 
--   You have deployed the ARM template <https://github.com/robotechredmond/301-storage-spaces-direct-md> into the same virtual network as the first template
+-   You have deployed the ARM template <https://github.com/robotechredmond/301-storage-spaces-direct-md> into the same virtual network as the first template.
 
--   You have deployed the ARM template <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image> into the same virtual network as the first template
+-   You have deployed the ARM template <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image> into the same virtual network as the first template.
 
--   You have joined all VMs to the contoso.com Active Directory domain
+-   You have joined all VMs to the contoso.com Active Directory domain.
 
 ### Summary
 
@@ -366,31 +364,43 @@ In this exercise, you will configure the Azure VMs that constitute the SAP ASCS 
 
 ### Task 1: Set up Failover Clustering on the ASCS VMs
 
-In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. Next, implement a Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.7** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was auto-provisioned in the previous exercise when you deployed Storage Spaces Direct (S2D) cluster.
+In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. Next, implement a Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.7** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was auto-provisioned in the previous exercise when you deployed Storage Spaces Direct (S2D) cluster. Finally, grant permissions to the **s03-ascs-cl0** cluster computer acount to create computer objects in the **Computers** container.
 
 ### Task 2: Install the SAP ASCS components on s03-ascs-0
 
-In this task, you will use SAP Software Provisioning Manager to carry out the distributed installation of ASCS components on the first node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
+In this task, you will use SAP Software Provisioning Manager to carry out the distributed installation of ASCS components on the first node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters (accept the default values for any parameters not listed below):
 
--   Drive for Local Instances: **U:**
+-   Destination Drive for Local Instances: **U:**
+
+-   Cluster Share Usage: **File Share**
 
 -   SAP System ID (SAPSID): **S03**
 
+-   Network Name (SAP Virtual Instance Host): **s03-ascs-v0**
+
+-   File Share Host Name: **SAPGLOBALHOST**
+
 -   DNS Domain Name for SAP Systems: **contoso.com**
 
--   SAP System User Domain: **Domain of Current User**
+-   Windows Domain: **Domain of Current User**
 
 -   OU Path: **S03**
 
 -   Windows Domain for SAP Host Agent: **Local Domain**
 
--   ABAP Message Server Ports: **3600**
+-   ASCS Instance Number: **00**
 
--   Internal ABAP Message Server Ports: **3900**
+-   ABAP Message Server Port: **3600**
 
--   Install SAP Web Dispatcher integrated: **Yes**
+-   Internal ABAP Message Server Port: **3900**
+
+-   Install an SAP Web Dispatcher integrated in the ASCS instance: **Yes**
+
+-   Install a Gateway integrated in the ASCS instance: **Yes**
 
 -   Set SAP Web Dispatcher Encryption Mode: **Never**
+
+-   Enqueue Replication Server Instance Host: **s03-ascs-ers0**
 
 -   Set all passwords to **demo\@pass123**
 
@@ -408,35 +418,17 @@ Account for the fact you will be using the virtual names, and configure the foll
 
 In this task, you will use SAP Software Provisioning Manager to carry out the distributed installation of ASCS components on the second node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
 
--   Drive for Local Instances: **U:**
+-   Cluster Group: **SAP S03**
 
--   SAP System ID (SAPSID): **S03**
+-   Destination Drive for Local Instances: **U:**
 
--   DNS Domain Name for SAP Systems: **contoso.com**
-
--   SAP System User Domain: **Domain of Current User**
-
--   OU Path: **S03**
-
--   Windows Domain for SAP Host Agent: **Local Domain**
-
--   ABAP Message Server Ports: **3600**
-
--   Internal ABAP Message Server Ports: **3900**
-
--   Install SAP Web Dispatcher integrated: **Yes**
-
--   Set SAP Web Dispatcher Encryption Mode: **Never**
+-   Enqueue Replication Server Instance Host: **s03-ascs-ers1**
 
 -   Set all passwords to **demo\@pass123**
 
-### Task 4: Configure the SAP NetWeaver cluster with SOFS-based file share
-
-In this task, you will configure the ASCS cluster with the sapmnt share hosted on the SOFS you installed in the previous exercise. To accomplish this, follow the procedure documented at <https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/sap/sap-high-availability-installation-wsfc-file-share>.
-
 ### Exit criteria
 
--   You have installed the HA ASCS component on the s03-ascs-0 and s03-ascs-1 VMs
+-   You have installed the HA ASCS component on the s03-ascs-0 and s03-ascs-1 VMs.
 
     ![Screenshot of the SAP Management Console. Under SAP Systems, S03 is selected.](images/Hands-onlabunguided-SAPonAzureimages/media/image2.png)
 
@@ -450,7 +442,7 @@ Duration: 120 minutes
 
 ### Overview
 
-In this exercise, you will configure the SAP NetWeaver database servers. You will start by installing a separate, stand-alone instance of SQL Server 2016 on each VM. Next, you will run SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you will implement high-availability by setting both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you will use Cloud Witness to provide the quorum for the Failover Cluster. You will also copy SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you will update the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2016 instance.
+In this exercise, you will configure the SAP NetWeaver database servers. You will start by installing a separate, stand-alone instance of SQL Server 2017 on each VM. Next, you will run SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you will implement high-availability by setting both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you will use Cloud Witness to provide the quorum for the Failover Cluster. You will also copy SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you will update the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2017 instance.
 
 ### Tasks to complete:
 
@@ -470,9 +462,9 @@ These options provide potential performance improvements, as documented in <http
 
 In a production deployment, you should consider using domain-based Group Policy Objects rather than the local Group Policy. This approach is used in this lab strictly for simplicity.
 
-### Task 3: Install SQL Server 2016 with the SQL\_Latin1\_General\_CP850\_BIN2 collation
+### Task 3: Install SQL Server 2017 with the SQL\_Latin1\_General\_CP850\_BIN2 collation
 
-In this task, you will configure operating system on s03-db-0 and s03-db-1 and install SQL Server 2016 Service Pack and Cumulative Update on s03-db-0 and s03-db-1 Azure VMs. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. Start by disabling Windows firewall for the domain profile and mounting the 128 GB data disk as ReFS-formatted L: drive with the disk label **Logs Disk** and the 512 GB data disk as ReFS-formatted M: drive with the disk label **Data Disk**. Perform the installation of SQL Server 2016 on both s03-db-0 and s03-db-1 with the following settings:
+In this task, you will configure operating system on s03-db-0 and s03-db-1 and install SQL Server 2017 Service Pack and Cumulative Update on s03-db-0 and s03-db-1 Azure VMs. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. Start by disabling Windows firewall for the domain profile and mounting the 128 GB data disk as ReFS-formatted L: drive with the disk label **Logs Disk** and the 512 GB data disk as ReFS-formatted M: drive with the disk label **Data Disk**. Perform the installation of SQL Server 2017 on both s03-db-0 and s03-db-1 with the following settings:
 
 -   Use Microsoft Update to check for updates (recommended): **disabled**
 
@@ -522,8 +514,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
     -   **Data directories: M:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Data (note that you will need to create this directory)**
 
-    -   **Log directory: L:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Data\
-        **
+    -   **Log directory: L:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Data\**
 
 On both s03-db-0 and s03-db-1, download and install SQL Server Management Studio with the default settings.
 
@@ -533,7 +524,7 @@ Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings,
 
 In this task, you will install the SAP database instance on s03-db-0 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites and specify the following parameters:
 
--   Profile Directory: **\\\\s03-ascs-v0\\sapmnt\\S03\\SYS\\profile**
+-   Profile Directory: **\\\\SAPGLOBALHOST\\sapmnt\\S03\\SYS\\profile**
 
 -   SAP System User Domain: **Domain of Current User**
 
@@ -543,7 +534,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 -   SAP Host Agent User Domain: **Local Domain**
 
--   MS SQL Server Data Files: **4 for small systems **
+-   MS SQL Server Data Files: **4 for small systems**
 
 -   MS SQL Server Database Files:
 
@@ -559,7 +550,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 -   SAP System Database Import:
 
-    -   **Number of Parallel Jobs: 3**
+    -   Number of Parallel Jobs: **3**
 
 -   Set all passwords to **demo\@pass123**
 
@@ -589,13 +580,13 @@ From SQL Server Management Studio on s03-db-0, use the New Availability Group Wi
 
     -   A shared network location accessible by all replicas: [**\\\\S03-DB-0\\Backup**](file://S03-DB-0/Backup)
 
-> Note that majority of customers choose to use Transparent Data Encryption (TDE) when deploying SQL Server databases to Azure. If you use TDE, then you cannot use the Always-On Availability Group wizard. Instead, you have to follow instructions described in <https://blogs.msdn.microsoft.com/saponsqlserver/2017/04/04/more-questions-from-customers-about-sql-server-transparent-data-encryption-tde-azure-key-vault/>. Alternatively, you can enable TDE after establishing the Always On Availability Group, however this is a tedious and slow process. For the purpose of this lab, you will not enable TDE and use the Always-On Availability Group wizard when setting up the Always-On Availability Group.
+> **Note**: The majority of customers choose to use Transparent Data Encryption (TDE) when deploying SQL Server databases to Azure. If you use TDE, then you cannot use the Always-On Availability Group wizard. Instead, you have to follow instructions described in <https://blogs.msdn.microsoft.com/saponsqlserver/2017/04/04/more-questions-from-customers-about-sql-server-transparent-data-encryption-tde-azure-key-vault/>. Alternatively, you can enable TDE after establishing the Always On Availability Group, however this is a tedious and slow process. For the purpose of this lab, you will not enable TDE and use the Always-On Availability Group wizard when setting up the Always-On Availability Group.
 
 In the Failover Cluster Manager, create a new Client Access Point with the following settings:
 
 -   Name: **s03-db-agl0**
 
--   IP address: **10.0.1.16 (static) --** *make sure it matches the IP address assigned to the s03-lb-db load balancer*
+-   IP address: **10.0.1.16 (static)** -- ***Make sure it matches the IP address assigned to the s03-lb-db load balancer.***
 
 Set the dependency of **s03-db-ag0** on **s03-db-agl0**.
 
@@ -617,19 +608,19 @@ Bring the Always-On Availability Group clustered role online.
 
 ### Task 6: Modify the SAP Default Profile
 
-In this task, you will modify the SAP default profile in order to ensure that the application tier communicates with the database tier via the newly created Always-On Availability Group listener. To accomplish this, set the value of the **dbs/mss/server** parameter to the name of the newly created Availability Group listener (**s03-db-agl0**) in the default profile of the S03 SAP system (hosted on the shared disk of the ASCS layer). In order for the change to take effect, restart the VMs that constitute the SAP ASCS layer.
+In this task, you will modify the SAP default profile in order to ensure that the application tier communicates with the database tier via the newly created Always-On Availability Group listener. To accomplish this, set the value of the **dbs/mss/server** parameter to the name of the newly created Availability Group listener (**s03-db-agl0**) in the default profile of the S03 SAP system (hosted on the highly available file share residing on the S2D cluster). In order for the change to take effect, restart the VMs that constitute the SAP ASCS layer.
 
 ### Exit criteria
 
--   You have installed the HA DB component on the s03-db-0 VM
+-   You have installed the HA DB component on the s03-db-0 VM.
 
--   You have implemented Always-On Availability Group on s3-db0 and s03-db-1 VMs
+-   You have implemented Always-On Availability Group on s3-db0 and s03-db-1 VMs.
 
     ![Screenshot of the s03-db-ag0 tab.](images/Hands-onlabunguided-SAPonAzureimages/media/image3.png)
 
 ### Summary
 
-In this exercise, you have configured the SAP NetWeaver database servers. You started by installing a separate, stand-alone instance of SQL Server 2016 on each VM. Next, you ran SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you implemented high-availability by setting both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you used Cloud Witness to provide the quorum for the Failover Cluster. You also copied SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you updated the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2016 instance.
+In this exercise, you have configured the SAP NetWeaver database servers. You started by installing a separate, stand-alone instance of SQL Server 2017 on each VM. Next, you ran SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you implemented high-availability by setting both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you used Cloud Witness to provide the quorum for the Failover Cluster. You also copied SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you updated the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2017 instance.
 
 ## Exercise 4: Configure SAP NetWeaver Application servers
 
@@ -648,6 +639,8 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 ### Task 2: Install the SAP Primary Application Server (PAS) layer
 
 In this task, you will install the SAP PAS of HA deployment of MS SQL Server-based SAP NetWeaver 7.5 HA deployment on s03-di-0 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites and specify the following parameters:
+
+-   Profile Directory: **\\\\SAPGLOBALHOST\\sapmnt\\S03\\SYS\\profile**
 
 -   Drive for Local Instances: **U:**
 
@@ -709,7 +702,7 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
 
 ### Exit criteria
 
--   You have installed the SAP PAS on s03-di-0 and SAP AAS on s03-di-1
+-   You have installed the SAP PAS on s03-di-0 and SAP AAS on s03-di-1.
 
     ![Screenshot of the SAP Management Console. Under SAP Systems, S03 is selected.](images/Hands-onlabunguided-SAPonAzureimages/media/image4.png)
 
@@ -719,7 +712,7 @@ In this exercise, you configured the SAP NetWeaver application servers. You star
 
 ## Lab summary
 
-In this lab, you stepped through a process of provisioning a highly available, Windows Server 2016-based SAP NetWeaver deployment on Azure, with SAP ABAP stack and SQL Server 2016 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you implemented an instance of a Failover Cluster that leveraged a Storage Spaces Direct (S2D) cluster, hosting highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you implemented an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum introduced in Windows Server 2016 Failover Clustering. To provide resiliency of the SAP application server instances, you deployed the Primary Application Server (PAS) and an Additional Application Server (AAS) in the same availability set.
+In this lab, you stepped through a process of provisioning a highly available, Windows Server 2016-based SAP NetWeaver deployment on Azure, with SAP ABAP stack and SQL Server 2017 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you implemented an instance of a Failover Cluster that leveraged a Storage Spaces Direct (S2D) cluster, hosting highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you implemented an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum introduced in Windows Server 2016 Failover Clustering. To provide resiliency of the SAP application server instances, you deployed the Primary Application Server (PAS) and an Additional Application Server (AAS) in the same availability set.
 
 
 ## After the hands-on lab 
