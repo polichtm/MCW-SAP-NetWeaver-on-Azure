@@ -506,7 +506,7 @@ For best performance, we choose the alternate site in the same geo - different d
 
 *Preferred solution diagram*
 
-![Screenshot of the complete solution diagram. A preferred solution diagram that shows ExpressRoute connection represented by a yellow line between the corporate headquarters and two Azure regions that will host the SAP deployment. The primary Azure East US2 region is represented by the upper rectangle and the secondary region Azure West US2 is represented by the lower rectangle.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
+![Screenshot of the complete solution diagram of Subnet business suite, NetWeaver with HA and DR has two Azure Datacenters - East US 2, and West US 2. East US 2 includes a GW Subnet, subnet #1 - AP Prod, and Subnet #2 - DB Prod. West US 2 has GW subnet, subnet #4  - AP DR, and subnet #5 - DB DR, and Subnet #6 management. An arrow points from East US 2 subnet 2 to West US 2 subnet 5. Both datacenters are connected via ExpressRoute to a building icon. Callouts listing copmponents of the solution point to GW subnet, Availability Set SAP ASCS on Subnet #1 - AP prod, Subnet #2 - DB prod, Subnet #3 Mgmt, Log Analytics and Backup, ExpressRoute, Subnet #4 - AP DR, Subnet #5 - DB DR, Subnet #6 Mgmt.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
 
 *Sizing Compute and Storage*
 
