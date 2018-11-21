@@ -506,7 +506,7 @@ For best performance, we choose the alternate site in the same geo - different d
 
 *Preferred solution diagram*
 
-![Screenshot of the complete solution diagram.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
+![Screenshot of the complete solution diagram. A preferred solution diagram that shows ExpressRoute connection represented by a yellow line between the corporate headquarters and two Azure regions that will host the SAP deployment. The primary Azure East US2 region is represented by the upper rectangle and the secondary region Azure West US2 is represented by the lower rectangle.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
 
 *Sizing Compute and Storage*
 
