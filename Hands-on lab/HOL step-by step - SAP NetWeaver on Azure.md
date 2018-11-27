@@ -2284,7 +2284,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 21. On s03-di-1, start **SAP Management Console**
 
-    ![In the SAP Management Console, under SAP Systems, S03 is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
+    ![In the SAP Management Console, under SAP Systems, S03 is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image6.png)
 
 22. In the SAP Management Console, verify the SAP deployment is operational.
 
