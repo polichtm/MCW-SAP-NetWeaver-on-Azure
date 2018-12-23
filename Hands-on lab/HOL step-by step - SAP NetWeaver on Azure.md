@@ -2028,7 +2028,7 @@ Account for the fact you are using the virtual names and configure the following
 
     -   Set DisableStrictNameChecking to 1
 
-1.  From a Remote Desktop session to s03-di-0, start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
+1.  Within the Remote Desktop session to s03-di-0, copy the SAP NetWeaver intallation media to a local drive and then start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![Screenshot of sapinst.exe](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
@@ -2206,7 +2206,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 -   Set all passwords to **demo\@pass123**
 
-1.  From a Remote Desktop session to s03-di-1, start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
+1.  Within the Remote Desktop session to s03-di-1, copy the SAP NetWeaver intallation media to a local drive and then start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![Screenshot of sapinst.exe](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
