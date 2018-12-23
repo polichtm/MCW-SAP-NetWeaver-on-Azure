@@ -1549,7 +1549,7 @@ Bring the Always-On Availability Group clustered role online.
 
 10. Back in the **Advanced Security for Computers** window, select **OK**.
 
-11. From the Windows PowerShell ISE session, run:
+11. From the Remote Desktop session to the s03-db-0 Azure VM, in the Windows PowerShell ISE session, run:
 
 ```
     Invoke-Command -ComputerName 's03-db-1' {
@@ -1561,11 +1561,11 @@ Bring the Always-On Availability Group clustered role online.
     }
 ```
 
-12. On s03-db-0, from the Start menu, start **SQL Server Configuration Manager**.
+12. In the Remote Desktop session to the s03-db-0 Azure VM, from the Start menu, start **SQL Server Configuration Manager**.
 
     ![The SQL Server 2017 Configuration Manager shortcut is selected from the Windows Start menu.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image121.png)
 
-13. In **SQL Server Configuration Manager**, display the **Properties** window of the **SQL Server (MSSQLSERVER)** service, switch to the **Always-On High Availability** tab, and enable the checkbox labeled **Enable Always-On Availability Groups**.
+13. In **SQL Server Configuration Manager**, display the **Properties** window of the **SQL Server (MSSQLSERVER)** service, switch to the **Always-On High Availability** tab, enable the checkbox labeled **Enable Always-On Availability Groups**, and select **OK**.
 
     ![Settings in the SQL Server Configuration Manager window display with the previously mentioned settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image122.png)
 
@@ -1659,7 +1659,7 @@ Bring the Always-On Availability Group clustered role online.
 
     ![The Failover Cluster Manager console displays the Networks node.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image139.png)
 
-37. In the **Failover Cluster Manager** console, navigate to the **Roles** node, and right-click **s03-db-ag**. In the right-click menu, select **Add Resource** followed by **Client Access Point**.
+37. In the **Failover Cluster Manager** console, navigate to the **Roles** node, and right-click **s03-db-ag0**. In the right-click menu, select **Add Resource** followed by **Client Access Point**.
 
     ![The Failover Cluster Manager console displays with the Roles node.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image140.png)
 
@@ -1893,7 +1893,7 @@ Bring the Always-On Availability Group clustered role online.
 
     ![In Object Explorer, in the right-click menu for master, New Query is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image157.png)
 
-61. In the New Query window, paste the content of Clipboard. Remove all lines except for those that reference the **s03**, **CONTOSO\\s03-adm**, and **CONTOSO\\SAPService03** logins and execute the resulting T-SQL script.
+61. In the New Query window, paste the content of Clipboard. Remove all lines except for those that reference the **s03**, **CONTOSO\\s03adm**, and **CONTOSO\\SAPService03** logins and execute the resulting T-SQL script.
 
     ![The New Query window displays with the modified contents.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image158.png)
 
@@ -1919,7 +1919,7 @@ Bring the Always-On Availability Group clustered role online.
 
 In this task, you will modify the SAP default profile in order to ensure the application tier communicates with the database tier via the newly created Always-On Availability Group listener. To accomplish this, set the value of the **dbs/mss/server** parameter to the name of the newly created Availability Group listener (**s03-db-agl0**) in the default profile of the S03 SAP system (hosted on the shared disk of the ASCS layer). In order for the change to take effect, restart the VMs that constitute the SAP ASCS layer.
 
-1.  Within the RDP session to s03-ascs-0 VM, open the file **SAPGLOBALHOST\\sapmnt\\S03\\SYS\\profile\\DEFAULT.PFL** in Notepad.
+1.  Within the RDP session to s03-ascs-0 VM, open the file **\\SAPGLOBALHOST\\sapmnt\\S03\\SYS\\profile\\DEFAULT.PFL** in Notepad.
 
 2.  Change the entry **dbs/mss/server** from:
 
@@ -1982,7 +1982,7 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
     ![Screenshot of the Ready to Install page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image166.png)
 
-7.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, select **Finish**.
+7.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, select **Finish**. If prompted, restart s03-di-0, and, folowing the restart, reconnect via Remote Desktop.
 
     ![Screenshot of the Completing the ODBC Driver page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
 
