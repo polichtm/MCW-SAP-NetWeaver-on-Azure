@@ -9,7 +9,7 @@ Hands-on lab unguided
 </div>
 
 <div class="MCWHeader3">
-October 2018
+December 2018
 </div>
 
 
@@ -121,6 +121,8 @@ From the architectural standpoint, the deployment will consist of the following 
     -   An Azure internal load balancer will provide a front-end IP address of the Always-On Availability Group listener
 
 To facilitate high-availability on the platform level, each pair of Azure virtual machines (VMs) in each layer will belong to the same managed availability set.
+
+![Solution architecture to setup SAP NetWeaver on Azure consisting of Authentication layer (with two Active Directory domain controllers), shared storage (two servers configured as a Storage Spaces Direct cluster), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2017 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabunguided-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
 
 ## Help references
 
@@ -332,7 +334,13 @@ Configure the private IP addresses of VMs and load balancers in the following ma
 
 In this task, you will join all of the Windows Server 2017 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
 
-### Task 7: Configure User Account Control on application and the database VMs
+### Task 7: Set permissions on the \\GLOBALHOST\sapmnt share
+
+In this task, you will grant Full Control share-level permissions on the **GLOBALHOST\sapmnt** share to the **CONTOSO\Domain Admins** group. 
+
+> **Note**: By default, the Full Control permissions are granted only to the CONTOSO\demouser account.
+
+### Task 8: Configure User Account Control on application and the database VMs
 
 In this task, you will disable User Account Control on the Windows Server 2016 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
 
