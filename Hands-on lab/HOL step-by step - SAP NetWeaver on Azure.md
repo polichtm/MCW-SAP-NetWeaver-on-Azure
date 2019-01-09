@@ -731,7 +731,7 @@ In this exercise, you will configure the Azure VMs that constitute the SAP ASCS 
 
 ### Task 1: Set up Failover Clustering on the ASCS VMs
 
-In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. Next, implement a Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.7** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was auto-provisioned in the previous exercise when you deployed Storage Spaces Direct (S2D) cluster. Finally, grant permissions to the **s03-ascs-cl0** cluster computer acount to create computer objects in the **Computers** container.
+In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. Next, implement a Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.7** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was auto-provisioned in the previous exercise when you deployed Storage Spaces Direct (S2D) cluster. Finally, grant permissions to the **s03-ascs-cl0** cluster computer account to create computer objects in the **Computers** container.
 
 1.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
@@ -998,7 +998,7 @@ Account for the fact you will be using the virtual names, and configure the foll
 
     ![The Software Provisioning Manager page displaying the error message regarding the disabled CONTOSO\s03adm account.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image48b.png)
 
-30. On the **Execution of Service has been completed succesfully** page, select **Exit**.
+30. On the **Execution of Service has been completed successfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
@@ -1081,7 +1081,7 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
     ![The Information page displays the completion of the installation of the additional cluster node.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image56.png)
 
-19. On the **Execution of Service has been completed succesfully** page, select **Exit**.
+19. On the **Execution of Service has been completed successfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
@@ -1483,7 +1483,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     ![A message box displays with an installation has completed message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image112.png)
 
-35. On the **Execution of Service has been completed succesfully** page, select **Exit**.
+35. On the **Execution of Service has been completed successfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
@@ -1654,7 +1654,7 @@ Bring the Always-On Availability Group clustered role online.
 
     ![Screenshot of the Back Up Database - S03 window, showing the new backup path and the OK button.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image128d.png)
 
-24. Wait until the backup compltes and close the **Back Up Database - S03** window. 
+24. Wait until the backup completes and close the **Back Up Database - S03** window. 
 
     ![Screenshot of the Back Up Database - S03 window, showing that the backup of the database S03 completed successfully.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image128e.png)
 
@@ -2029,7 +2029,7 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
     ![Screenshot of the Ready to Install page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image166.png)
 
-8.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, select **Finish**. If prompted, restart s03-di-0 and, folowing the restart, reconnect to it via Remote Desktop.
+8.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, select **Finish**. If prompted, restart s03-di-0 and, following the restart, reconnect to it via Remote Desktop.
 
     ![Screenshot of the Completing the ODBC Driver page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
 
@@ -2219,7 +2219,7 @@ Account for the fact you are using the virtual names and configure the following
 
     ![A message box displays with the message that the process has completed.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image181.png)
 
-30. On the **Execution of Service has been completed succesfully** page, select **Exit**.
+30. On the **Execution of Service has been completed successfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
@@ -2325,7 +2325,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
     ![A message box displays with the message that the process has completed.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image184.png)
 
-20. On the **Execution of Service has been completed succesfully** page, select **Exit**.
+20. On the **Execution of Service has been completed successfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
