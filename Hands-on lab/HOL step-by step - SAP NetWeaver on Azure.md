@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-October 2018
+December 2018
 </div>
 
 
@@ -113,6 +113,9 @@ From the architectural standpoint, the deployment will consist of the following 
     -   An Azure internal load balancer will provide a front-end IP address of the Always-On Availability Group listener
 
 To facilitate high-availability on the platform level, each pair of Azure virtual machines (VMs) in each layer will belong to the same managed availability set.
+
+![Solution architecture to setup SAP NetWeaver on Azure consisting of Authentication layer (with two Active Directory domain controllers), shared storage (two servers configured as a Storage Spaces Direct cluster), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2017 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
+
 
 ## Exercise 1: Deploy the SAP on Azure infrastructure components 
 
@@ -607,6 +610,18 @@ Configure the Private IP addresses of VMs and load balancers in the following ma
         $ilbIP = $ilb.FrontendIpConfigurations[0].PrivateIpAddress
     }
 
+    $vmNicNames = @('s03-nic-ascs-0','s03-nic-ascs-1')
+
+    $vmIPAddresses = @('10.0.1.108','10.0.1.109')
+
+    for ($count=0; $count -le $vmNicNames.Count-1; $count++) {
+        $nic = Get-AzureRmNetworkInterface -ResourceGroupName $rgName -Name $vmNicNames[$count]
+        $nic.IpConfigurations[0].PrivateIpAllocationMethod = 'Static'
+        $nic.IpConfigurations[0].PrivateIpAddress = $vmIPAddresses[$count]
+        Set-AzureRmNetworkInterface -NetworkInterface $nic 
+        $nicIP = $nic.IpConfigurations[0].PrivateIpAddress
+    }
+    
     $vmNicNames = @('s03-nic-di-0','s03-nic-di-1','s03-nic-db-0','s03-nic-db-1','s03-nic-ascs-0','s03-nic-ascs-1')
 
     $vmIPAddresses = @('10.0.1.28','10.0.1.29','10.0.1.18','10.0.1.19','10.0.1.8','10.0.1.9')
@@ -668,15 +683,31 @@ In this task, you will join all of the Windows Server 2016 Azure VMs that will b
 
 3.  Wait until the script completes. This might take a few minutes.
 
-### Task 7: Configure User Account Control on application and the database VMs
+
+### Task 7: Set permissions on the \\GLOBALHOST\sapmnt share
+
+In this task, you will set share-level permissions on the **GLOBALHOST\sapmnt** share.
+
+> **Note**: By default, the Full Control permissions are granted only to the CONTOSO\demouser account. 
+
+1.  From the Remote Desktop session to **adPDC** VM, start **Windows PowerShell ISE** as Administrator. 
+
+2.  In the Script pane, type the following script, and press F5 to execute it:
+
+```
+    $remoteSession = New-CimSession -ComputerName SAPGLOBALHOST
+
+    Grant-SmbShareAccess -Name sapmnt -AccountName 'CONTOSO\Domain Admins' -AccessRight Full -CimSession $remoteSession -Force
+   
+```
+
+### Task 8: Configure User Account Control on application and the database VMs
 
 In this task, you will disable User Account Control on the Windows Server 2016 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
 
 > **Note**: This is a temporary measure. You should re-enable User Account Control once you complete the setup.
 
-1.  From the Remote Desktop session to **adPDC** VM, start **Windows PowerShell ISE** as Administrator. 
-
-2.  In the Script pane, type the following script, and press F5 to execute it:
+1.  From the Remote Desktop session to **adPDC** VM, in the Script pane of the **Windows PowerShell ISE** window, type the following script, and press F5 to execute it:
 
 ```
     $vmNames = @('s03-ascs-0','s03-ascs-1','s03-db-0','s03-db-1','s03-di-0','s03-di-1')
@@ -684,7 +715,7 @@ In this task, you will disable User Account Control on the Windows Server 2016 A
     Invoke-Command $vmNames {Set-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Value 0}
 ```
 
-3.  After the script completes, restart all servers.
+2.  After the script completes, restart all servers.
 
 ### Summary
 
@@ -704,7 +735,9 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
 1.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
-2.  Within the RDP session to s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
+2.  Within the RDP session to s03-ascs-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+
+3.  Within the RDP session to s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
 ```
     $nodes = ('s03-ascs-0','s03-ascs-1')
@@ -716,13 +749,13 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Invoke-Command $nodes {Install-WindowsFeature Failover-Clustering -IncludeAllSubFeature -IncludeManagementTools} 
 ```
 
-3.  From the Windows PowerShell ISE session, run:
+4.  From the Windows PowerShell ISE session, run:
 
 ```
     New-Cluster -Name s03-ascs-cl0 -Node $nodes -NoStorage -StaticAddress 10.0.1.7
 ```
 
-4.  Wait for the new cluster to be created. Then from the same Windows PowerShell ISE session, run:
+5.  Wait for the new cluster to be created. Then from the same Windows PowerShell ISE session, run:
 
 ```
     Install-PackageProvider -Name NuGet -Force
@@ -740,29 +773,29 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
 When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes.
 
-5.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
+6.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
 
-6.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
+7.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
 
     ![Screenshot of the Active Directory Administrative Center displays the previously mentioned path and properties.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image116.png)
 
-7.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, select **Advanced**.
+8.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, select **Advanced**.
 
     ![The Computers window displays with Extensions and the Advanced button selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image117.png)
 
-8.  In the **Advanced Security Settings for Computers** window, select **Add**.
+9.  In the **Advanced Security Settings for Computers** window, select **Add**.
 
     ![The Advanced Security Settings for Computers window Permissions tab displays Permissions entries.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image118.png)
 
-9.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
+10.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
 
-    ![Superimposed over the Permission Entry for Computers window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
+   ![Superimposed over the Permission Entry for Computers window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
 
-10.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
+11.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
 
    ![In the Permission Entry for Computers window, under Permissions, the checkbox is selected for Create Computer objects.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image120.png)
 
-11. Back in the **Advanced Security for Computers** window, select **OK**.
+12. Back in the **Advanced Security for Computers** window, select **OK**.
 
 
 ### Task 2: Install the SAP ASCS components on s03-ascs-0
@@ -813,17 +846,17 @@ Account for the fact you will be using the virtual names, and configure the foll
 
     -   Set DisableStrictNameChecking to 1
 
-1.  Start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
+1.  Within the Remote Desktop session to s03-ascs-0, copy the SAP NetWeaver installation media to the local drive and start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![sapinst.exe screenshot](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
-2.  The installation will automatically launch Internet Explorer and prompt you to sign in. When prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
+2.  The installation will automatically launch Internet Explorer and display a notification regarding a problem with the website's security certificate. This is expected. Click the **Continue to this website (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
 
 3.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>First Cluster Node**, and select **Next**.
 
     ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>First Cluster Node option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
 
-4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account.
+4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, click again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
@@ -927,9 +960,9 @@ Account for the fact you will be using the virtual names, and configure the foll
 
     ![Screenshot of the ASCS Instance page with default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image40.png)
 
-22. On the **ABAP Message Server Ports** page, accept the default settings, and select **Next**.
+22. On the **ABAP Message Server** page, accept the default settings, and select **Next**.
 
-    ![Screenshot of the ABAP Message Server Ports page with ABAP Message Server Ports default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image41.png)
+    ![Screenshot of the ABAP Message Server page with ABAP Message Server Ports default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image41.png)
 
 23. On the **Additional Components to be Included in the ASCS Instance** page, select the checkboxes **Install SAP Web Dispatcher integrated in the ASCS instance** and **Install a Gateway integrated in the ASCS instance**, and then select **Next**.
 
@@ -959,6 +992,12 @@ Account for the fact you will be using the virtual names, and configure the foll
 
     ![The Information page displays the completion of the installation of the first cluster node.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image48.png)
 
+     > **Note**: If you receive an error message regarding the account **CONTOSO\s03adm** being disabled, switch to the Remote Desktop session to **adPDC**, in the **Active Directory Administrative Center**, navigate to the **S03** organizational unit, display the **Properties** window of the **s03adm** account, set its UPN logon to **s03adm@contoso.com** and click **OK** to save the change. Then, on the Software Provisioning Manager page displaying the error message, click **Retry**. 
+
+    ![The s03adm Properties window displays the User UPN logon set to the s03adm@contoso.com value.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image48a.png)
+
+    ![The Software Provisioning Manager page displaying the error message regarding the disabled CONTOSO\s03adm account.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image48b.png)
+
 30. On the **Execution of Service has been completed succesfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
@@ -976,69 +1015,73 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
 -   Set all passwords to **demo\@pass123**
 
-1.  Start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
+1.  Navigate to the **s03-ascs-1** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+
+2.  Within the RDP session to s03-ascs-1 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+
+3.  Within the Remote Desktop session to s03-ascs-1, copy the SAP NetWeaver installation media to a local drive and start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![Screenshot of sapinst.exe](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
-2.  The installation will automatically launch Internet Explorer and prompt you to sign in. When prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
+4.  The installation will automatically launch Internet Explorer and display a notification regarding a problem with the website's security certificate. This is expected. Click the **Continue to this website (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
 
-3.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Cluster Node**, and select **Next**.
+5.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Cluster Node**, and select **Next**.
 
     ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Cluster Node option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
 
-4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account.
+6.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, click again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-5.  On the **Cluster Group** page, ensure that **SAP S03** appears in the **Cluster Group** drop-down list, select **U:** in the **Destination Drive for Local Instances**, and select **Next**.
+7.  On the **Cluster Group** page, ensure that **SAP S03** appears in the **Cluster Group** drop-down list and that **U:** appears in the **Destination Drive for Local Instances** drop-down list, and select **Next**.
 
     ![On the Cluster Group page, SAP S03 appears in the Cluster Group drop-down list and U: drive appears in the Destination Drive for Local Instances drop down list.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image50.png)
 
-6. On the **Operating System Users** page, set the passwords to **demo\@pass123**, and select **Next**.
+8. On the **Operating System Users** page, set the passwords to **demo\@pass123**, and select **Next**.
 
     ![The Operating System User page displays the SAP System Administrator and SAP System Service User password fields.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image51.png)
 
-7. On the **ABAP Message Server** page, leave the default settings in place and select **Next**.
+9. On the **ABAP Message Server** page, leave the default settings in place and select **Next**.
 
-    ![The ABAP Message Server page displays the empty Messsage Server Port field.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image52.png)
+    ![The ABAP Message Server page displays the empty Messsage Server port field.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image52.png)
 
-8.  On the **General SAP System Parameters** page, accept the default value of **Unicode** of **SAP System Code Page** and select **Next**.
+10.  On the **General SAP System Parameters** page, accept the default value of **Unicode** of **SAP System Code Page** and select **Next**.
 
-    ![The Software Provisioning Manager window displays the SAP System Code Page options.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image26.png)
+   ![The Software Provisioning Manager window displays the SAP System Code Page options.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image26.png)
 
-9. On the **Enqueue Replication Server Instance** page, set the name of the ERS instance to **s03-ascs-ers1**, and select **Next**.
+11. On the **Enqueue Replication Server Instance** page, set the name of the ERS instance to **s03-ascs-ers1**, and select **Next**.
 
     ![Screenshot of the Enqueue Replication Server Instance page with ERS Instance Host field set to the previously defined value.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
 
-10. On the **Activate Instance Changes** page, accept the default values and select **Next**.
+12. On the **Activate Instance Changes** page, accept the default values and select **Next**.
 
     ![Screenshot of the Activate Instance Changes page with the default values.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image54.png)
 
-11. On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, and select **Next**.
+13. On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, and select **Next**.
 
     ![The Software Package Browser page has the Search Location field empty. The detected package table lists SAPHOSTAGENT.SAR with the Available status. The Individual Package Location column contains the package location.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
 
-12. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and select **Next**.
+14. On the **Windows Domain for SAP Host Agent** page, accept the default settings, and select **Next**.
 
     ![The Windows Domain for SAP Host Agent page displays with SAP Host Agent User fields set to default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image38.png)
 
-13. On the **SAP Host Agent Operating System Users** page, set the passwords to **demo\@pass123**, and select **Next**.
+15. On the **SAP Host Agent Operating System Users** page, set the passwords to **demo\@pass123**, and select **Next**.
 
     ![The SAP Host Agent Operating System User page displays the SAP System Administrator password fields.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image39.png)
 
-14. On the **Parameter Summary** page, select **Next**.
+16. On the **Parameter Summary** page, select **Next**.
 
     ![The Parameters Summary page displays with all Parameters List check boxes cleared.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image55.png)
 
-15. Monitor progress of installation.
+17. Monitor progress of installation.
 
     ![Screenshot of the installation progress page showing Process is in running state and Bringing cluster group 'SAP S03' online message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image47.png)
 
-16. Wait until the installation completes. This might take about 5 minutes. Once the installation completes, select **OK**.
+18. Wait until the installation completes. This might take about 5 minutes. Once the installation completes, select **OK**.
 
     ![The Information page displays the completion of the installation of the additional cluster node.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image56.png)
 
-17. On the **Execution of Service has been completed succesfully** page, select **Exit**.
+19. On the **Execution of Service has been completed succesfully** page, select **Exit**.
 
     ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
@@ -1080,25 +1123,27 @@ In a production deployment, you should consider using domain-based Group Policy 
 
 1.  Navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
-2.  Within the RDP session to s03-db-0 VM, start Group Policy Editor from the Tools menu in Server Manager.
+2.  Within the RDP session to s03-ascs-1 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
-3.  In the left pane of the Group Policy Editor console, expand **Local Computer Policy -\> Computer Configuration -\> Windows Settings -\> Security Settings -\> Local Policies**, and then select **User Rights Assignment**.
+3.  Within the RDP session to s03-db-0 VM, start Group Policy Editor from the Tools menu in Server Manager.
 
-4.  In the right pane, double-click **Perform volume maintenance tasks**.
+4.  In the left pane of the Local Security Policy console, expand the **Local Policies** node, and then select **User Rights Assignment**.
 
-5.  In the **Perform volume maintenance tasks Properties** window, select **Add User or Group**.
+5.  In the right pane, double-click **Perform volume maintenance tasks**.
 
-6.  In the **Select Users or Groups** dialog box, type **CONTOSO\\s03-db-0-sqlsvc** and select **OK** twice.
+6.  In the **Perform volume maintenance tasks Properties** window, select **Add User or Group**.
 
-7.  Back in the Group Policy Editor console, in the right pane, double-click **Lock pages in memory**.
+7.  In the **Select Users or Groups** dialog box, type **CONTOSO\\s03-db-0-sqlsvc** and select **OK** twice.
 
-8.  In the **Lock pages in memory Properties** window, select **Add User or Group**.
+8.  Back in the Group Policy Editor console, in the right pane, double-click **Lock pages in memory**.
 
-9.  In the **Select Users or Groups** dialog box, type **CONTOSO\\s03-db-0-sqlsvc** and select **OK** twice.
+9.  In the **Lock pages in memory Properties** window, select **Add User or Group**.
 
-10. Restart **s03-db-0**.
+10.  In the **Select Users or Groups** dialog box, type **CONTOSO\\s03-db-0-sqlsvc** and select **OK** twice.
 
-11. Repeat steps 1-10 on s03-db-1, but this time assign both user rights to **CONTOSO\\s03-db-1-sqlsvc**.
+11. Restart **s03-db-0**.
+
+12. Repeat steps 1-10 on s03-db-1, but this time assign both user rights to **CONTOSO\\s03-db-1-sqlsvc**.
 
 ### Task 3: Install SQL Server 2017 with the SQL\_Latin1\_General\_CP850\_BIN2 collation
 
@@ -1160,7 +1205,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
 1. Navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
-2. Within the RDP session to s03-db-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
+2. Within the Remote Desktop session to s03-db-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
 ```
     Set-NetFirewallProfile -Profile Domain -Enabled False
@@ -1170,7 +1215,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
     Get-Disk -Number 3 | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -DriveLetter 'M' -UseMaximumSize | Format-Volume -FileSystem ReFS -NewFileSystemLabel 'Data Disk' -Confirm:$false
 ```
 
-3. Start installation of SQL Server 2017 by selecting **New SQL Server stand-alone installation or add features to an existing installation** in **SQL Server Installation Center**.
+3. Within the Remote Desktop session to s03-db-0 VM, copy the SQL Server 2017 installation media to a local drive and start its installation by selecting **New SQL Server stand-alone installation or add features to an existing installation** in **SQL Server Installation Center**.
 
     ![Screenshot of the SQL Server Installation Center with the previously mentioned Installation option selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image84.png)
 
@@ -1232,7 +1277,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
 16. Wait for the installation to complete and, on the **Complete** page, select **Close**.
 
-17. On s03-db-0, start Internet Explorer, browse to <https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms>, and download/install the current production release of the SQL Server Management Studio with the default settings.
+17. On s03-db-0, start Internet Explorer, browse to <L:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\Data>, and download/install the current production release of the SQL Server Management Studio with the default settings.
 
 18. Repeat steps 1-17 on s03-db-1, but in step 9, use the **contoso\\s03-db-1-sqlsvc** account, and in step 11, use **s03-db-1\\Administrators**.
 
@@ -1270,17 +1315,17 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 -   Set all passwords to **demo\@pass123**
 
-1.  Start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder in the source media.
+1.  Within the Remote Desktop session to s03-db-0, copy the SAP NetWeaver installation media to a local drive on s03-db-0 and start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![Screenshot of sapinst.exe](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
-2.  The installation will automatically launch Internet Explorer and prompt you to sign in. When prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
+2.  The installation will automatically launch Internet Explorer and display a notification regarding a problem with the website's security certificate. This is expected. Click the **Continue to this website (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
 
 3.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Database Instance**, and select **Next**.
 
     ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Database Instance option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
 
-4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account.
+4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, click again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
@@ -1288,9 +1333,9 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     ![The Software Provisioning Manager window displays the Profile Directory text box set to \\SAPGLOBALHOST\sapmnt\S03\SYS\profile.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image92.png)
 
-6. On the **ABAP Message Server Ports** page, accept the default settings, and select **Next**.
+6. On the **ABAP Message Server** page, accept the default settings, and select **Next**.
 
-    ![Screenshot of the ABAP Message Server Ports page with ABAP Message Server Ports default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image41.png)
+    ![Screenshot of the ABAP Message Server page with ABAP Message Server ports default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image41.png)
 
 7.  On the **Master Password** page, set the password to **demo\@pass123**, and select **Next**.
 
@@ -1493,7 +1538,7 @@ In the SQL Server Management Studio, set the port of the **s03-db-agl0** listene
 
 Bring the Always-On Availability Group clustered role online.
 
-1.  Within the RDP session to s03-db-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
+1.  Within the Remote Desktop session to s03-db-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
 ```
     $nodes = ('s03-db-0','s03-db-1')
@@ -1523,7 +1568,7 @@ Bring the Always-On Availability Group clustered role online.
     Set-ClusterQuorum -CloudWitness -AccountName $cwStorageAccountName -AccessKey $cwStorageAccountKey
 ```
 
-    When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes
+   When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes
 
 4.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
 
@@ -1561,7 +1606,7 @@ Bring the Always-On Availability Group clustered role online.
     }
 ```
 
-12. In the Remote Desktop session to the s03-db-0 Azure VM, from the Start menu, start **SQL Server Configuration Manager**.
+12. In the remote Desktop Session to the s03-db-0 Azure VM, from the Start menu, start **SQL Server Configuration Manager**.
 
     ![The SQL Server 2017 Configuration Manager shortcut is selected from the Windows Start menu.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image121.png)
 
@@ -1953,7 +1998,9 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
 1.  In the Azure portal, navigate to the **s03-di-0** VM blade, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
-2.  Within the RDP session to s03-di-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
+2.  Within the RDP session to s03-di-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+
+3.  Within the RDP session to s03-di-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
 ```
     $nodes = @('s03-di-0','s03-di-1')
@@ -1966,27 +2013,27 @@ In this task, you will configure the Azure VMs in the Application layer by mount
     }
 ```
 
-3.  Within the RDP session to s03-id-0 VM, start installation of Microsoft ODBC Driver for SQL Server (available from <https://www.microsoft.com/en-us/download/confirmation.aspx?id=53339>).
+4.  Within the RDP session to s03-id-0 VM, start installation of Microsoft ODBC Driver for SQL Server (available from <https://www.microsoft.com/en-us/download/confirmation.aspx?id=53339>).
 
     ![The Welcome to the Installation Wizard page displays.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image163.png)
 
-4.  On the **License Agreement** page, select **I accept the terms in the license agreement**, and select **Next**.
+5.  On the **License Agreement** page, select **I accept the terms in the license agreement**, and select **Next**.
 
     ![Screenshot of the License Agreement page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image164.png)
 
-5.  On the **Feature Selection** page, select all features, and select **Next**.
+6.  On the **Feature Selection** page, select all features, and select **Next**.
 
     ![Screenshot of the Feature Selection page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image165.png)
 
-6.  On the **Ready to install the Program** page, select **Next**.
+7.  On the **Ready to install the Program** page, select **Next**.
 
     ![Screenshot of the Ready to Install page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image166.png)
 
-7.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, select **Finish**. If prompted, restart s03-di-0, and, folowing the restart, reconnect via Remote Desktop.
+8.  On the **Completing the ODBC Driver 13 for SQL Server Installation** page, select **Finish**. If prompted, restart s03-di-0 and, folowing the restart, reconnect to it via Remote Desktop.
 
     ![Screenshot of the Completing the ODBC Driver page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
 
-8.  Repeat steps from 3-7 on **s03-di-1**.
+9.  Repeat steps from 3-7 on **s03-di-1**.
 
 ### Task 2: Install the SAP Primary Application Server (PAS) layer
 
@@ -2028,21 +2075,21 @@ Account for the fact you are using the virtual names and configure the following
 
     -   Set DisableStrictNameChecking to 1
 
-1.  Within the Remote Desktop session to s03-di-0, copy the SAP NetWeaver intallation media to a local drive and then start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
+1.  Within the Remote Desktop session to s03-di-0, copy the SAP NetWeaver installation media to a local drive and start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![Screenshot of sapinst.exe](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
-2.  The installation will automatically launch Internet Explorer and prompt you to sign in. When prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise of this lab.
+2.  The installation will automatically launch Internet Explorer and display a notification regarding a problem with the website's security certificate. This is expected. Click the **Continue to this website (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
 
 3.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Primary Application Server Instance**, and select **Next**.
 
     ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Primary Application Server Instance option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
 
-4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account.
+4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, click again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-5.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\SAPGLOBALHOST\\sapmnt\\S03\\SYS\\profile**, in the **Destination Drive** drop down list, select **U:**, and click **Next**.
+5.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\SAPGLOBALHOST\\sapmnt\\S03\\SYS\\profile**, ensure that **U:** appears in the **Destination Drive** drop down list, and click **Next**.
 
     ![On Step 2, Define Parameters, General SAP System Parameters page, SAP System fields are set to the previously mentioned settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image170.png)
 
@@ -2206,17 +2253,17 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 -   Set all passwords to **demo\@pass123**
 
-1.  Within the Remote Desktop session to s03-di-1, copy the SAP NetWeaver intallation media to a local drive and then start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
+1.  Within the Remote Desktop session to s03-di-1, copy the SAP NetWeaver installation media to a local drive and start SAP Software Provisioning Manager by double-clicking **sapinst.exe** in the **swpm** folder.
 
     ![Screenshot of sapinst.exe](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image23.png)
 
-2.  The installation will automatically launch Internet Explorer and prompt you to sign in. When prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise of this lab.
+2.  The installation will automatically launch Internet Explorer and display a notification regarding a problem with the website's security certificate. This is expected. Click the **Continue to this website (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
 
 3.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Primary Application Server Instance**, and select **Next**.
 
     ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Application Server Instance option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
 
-4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account.
+4.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, click again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
@@ -2284,7 +2331,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 21. On s03-di-1, start **SAP Management Console**
 
-    ![In the SAP Management Console, under SAP Systems, S03 is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image6.png)
+    ![In the SAP Management Console, under SAP Systems, S03 is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
 
 22. In the SAP Management Console, verify the SAP deployment is operational.
 
@@ -2346,13 +2393,5 @@ Duration: 20 Minutes
 
 1.  Now that the HOL is complete, go ahead and delete all of the Resource Groups created for this HOL. You will no longer need those resources, and it will be beneficial to clean up your Azure Subscription.
 
-- A GPO for "Perform Volume Maint. Tasks" for SQL service account.
-
-- A GPO for "Lock pages in memory" for SQL service account.
-
-- step to remove browser
-
-- step to set the ACL on the SoFS sapmnt share (it might be "Everyone" full control)
-
-You should follow all steps provided *after* attending the hands-on lab.
+You should follow all steps provided *after* attending the Hands-on lab.
 
