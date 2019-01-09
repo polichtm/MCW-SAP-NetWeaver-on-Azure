@@ -1047,7 +1047,7 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
 10.  On the **General SAP System Parameters** page, accept the default value of **Unicode** of **SAP System Code Page** and select **Next**.
 
-    ![The Software Provisioning Manager window displays the SAP System Code Page options.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image26.png)
+   ![The Software Provisioning Manager window displays the SAP System Code Page options.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image26.png)
 
 11. On the **Enqueue Replication Server Instance** page, set the name of the ERS instance to **s03-ascs-ers1**, and select **Next**.
 
