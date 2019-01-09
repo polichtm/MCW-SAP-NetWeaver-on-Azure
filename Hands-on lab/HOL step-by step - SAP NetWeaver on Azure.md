@@ -686,7 +686,7 @@ In this task, you will join all of the Windows Server 2016 Azure VMs that will b
 
 ### Task 7: Set permissions on the \\GLOBALHOST\sapmnt share
 
-In this task, you will set share-level permissions on the **GLOBALHOST\sapmnt** share
+In this task, you will set share-level permissions on the **GLOBALHOST\sapmnt** share.
 
 > **Note**: By default, the Full Control permissions are granted only to the CONTOSO\demouser account. 
 
@@ -789,7 +789,7 @@ When prompted, sign in with the Service Administrator account of your Azure subs
 
 10.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
 
-    ![Superimposed over the Permission Entry for Computers window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
+   ![Superimposed over the Permission Entry for Computers window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
 
 11.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
 
@@ -1568,7 +1568,7 @@ Bring the Always-On Availability Group clustered role online.
     Set-ClusterQuorum -CloudWitness -AccountName $cwStorageAccountName -AccessKey $cwStorageAccountKey
 ```
 
-    When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes
+   When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes
 
 4.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
 
@@ -2392,4 +2392,6 @@ Duration: 20 Minutes
 ### Task 1: Delete resources
 
 1.  Now that the HOL is complete, go ahead and delete all of the Resource Groups created for this HOL. You will no longer need those resources, and it will be beneficial to clean up your Azure Subscription.
+
+You should follow all steps provided *after* attending the Hands-on lab.
 
