@@ -603,9 +603,30 @@ Configure the Private IP addresses of VMs and load balancers in the following ma
 
     $rg = Get-AzureRmResourceGroup -Name $rgName
 
-    $lbNames = @('s03-lb-db')
+    $ilbName = 's03-lb-db'
+    $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $ilbName
+    Remove-AzureRmLoadBalancerRuleConfig -LoadBalancer $ilb -Name 'lbsqlclRuleall'
+    Remove-AzureRmLoadBalancerProbeConfig -LoadBalancer $ilb -Name 'probesqlcl'
+    Remove-AzureRmLoadBalancerFrontendIpConfig -LoadBalancer $ilb -Name 'frontendsqlcl'
+    $ilb | Set-AzureRmLoadBalancer
 
-    $lbIPAddresses = @('10.0.1.16')
+    $ilbName = 's03-lb-ascs'
+    $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $ilbName
+    Remove-AzureRmLoadBalancerRuleConfig -LoadBalancer $ilb -Name 'lbaersRuleall'
+    Remove-AzureRmLoadBalancerProbeConfig -LoadBalancer $ilb -Name 'probeaers'
+    Remove-AzureRmLoadBalancerFrontendIpConfig -LoadBalancer $ilb -Name 'frontendaers'
+    $ilb | Set-AzureRmLoadBalancer
+
+    $ilbName = 's03-lb-ascs'
+    $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $ilbName
+    Remove-AzureRmLoadBalancerRuleConfig -LoadBalancer $ilb -Name 'lbascsclRuleall'
+    Remove-AzureRmLoadBalancerProbeConfig -LoadBalancer $ilb -Name 'probeascscl'
+    Remove-AzureRmLoadBalancerFrontendIpConfig -LoadBalancer $ilb -Name 'frontendascscl'
+    $ilb | Set-AzureRmLoadBalancer
+
+    $lbNames = @('s03-lb-ascs','s03-lb-db')
+
+    $lbIPAddresses = @('10.0.1.6','10.0.1.16') 
 
     for ($count=0; $count -le $lbNames.Count-1; $count++) {
         $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $lbNames[$count]
@@ -631,29 +652,14 @@ Configure the Private IP addresses of VMs and load balancers in the following ma
 
     $vmIPAddresses = @('10.0.1.28','10.0.1.29','10.0.1.18','10.0.1.19','10.0.1.8','10.0.1.9')
 
-    $vmPIPNames = @('s03-pip-di-0','s03-pip-di-1','s03-pip-db-0','s03-pip-db-1','s03-pip-ascs-0','s03-pip-ascs-1')
-
     for ($count=0; $count -le $vmNicNames.Count-1; $count++) {
         $nic = Get-AzureRmNetworkInterface -ResourceGroupName $rgName -Name $vmNicNames[$count]
         $nic.IpConfigurations[0].PrivateIpAllocationMethod = 'Static'
         $nic.IpConfigurations[0].PrivateIpAddress = $vmIPAddresses[$count]
-        $pip = New-AzureRmPublicIpAddress -Name $vmPIPNames[$count] -ResourceGroupName $rgName -AllocationMethod Dynamic -Location $rg.Location
-        $nic.IpConfigurations[0].PublicIpAddress = $pip
         Set-AzureRmNetworkInterface -NetworkInterface $nic 
         $nicIP = $nic.IpConfigurations[0].PrivateIpAddress
     }
 
-    $lbNames = @('s03-lb-ascs')
-
-    $lbIPAddresses = @('10.0.1.6')
-
-    for ($count=0; $count -le $lbNames.Count-1; $count++) {
-        $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $lbNames[$count]
-        $ilb.FrontendIpConfigurations[0].PrivateIpAllocationMethod = 'Static'
-        $ilb.FrontendIpConfigurations[0].PrivateIpAddress = $lbIPAddresses[$count]
-        $ilb | Set-AzureRmLoadBalancer
-        $ilbIP = $ilb.FrontendIpConfigurations[0].PrivateIpAddress
-    }
 ```
 
 3.  Wait until the script completes. This may take up to 10 minutes.
