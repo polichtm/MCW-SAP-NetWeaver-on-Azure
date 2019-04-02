@@ -39,17 +39,17 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Requirements
 
--   A Microsoft Azure subscription with at least 36 vCPU available in the Azure region where the lab Azure VMs will reside.
+-   A Microsoft Azure subscription with at least 26 vCPU available in the Azure region where the lab Azure VMs will reside.
 
-    -   DC VMs -- 2 x DS2\_v2: 2 x 2 vCPUs = 4 vCPUs
+    -   DC VMs -- 2 x D2s\_v3: 2 x 2 vCPUs = 4 vCPUs
 
     -   S2D VMs -- 2 x DS3\_v2: 2 x 4 vCPUs = 8 vCPUs
 
-    -   ASCS VMs -- 2 x DS2\_v2: 2 x 2 vCPUs = 4 vCPUs
+    -   ASCS VMs -- 2 x D2s\_v3: 2 x 2 vCPUs = 4 vCPUs
 
-    -   DB VMs -- 2 x DS4\_v2: 2 x 8 vCPUs = 16 vCPUs
+    -   DB VMs -- 2 x D4s\_v3: 2 x 4 vCPUs = 8 vCPUs
 
-    -   APP VMs -- 2 x DS2\_v2: 2 x 2 vCPUs = 4 vCPUs
+    -   APP VMs -- 2 x D2s\_v3: 2 x 2 vCPUs = 4 vCPUs
 
 -   A lab computer running Windows 7 or newer and configured with:
 

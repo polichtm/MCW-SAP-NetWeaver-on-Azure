@@ -447,6 +447,8 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   Sap System Id: **s03**
 
+-   Stack Type: **ABAP**
+
 -   OS Type: **Windows Server 2016 Datacenter**
 
 -   Sap System Size: **Demo**
@@ -455,17 +457,11 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   vmSizes:
 
-    -   dbserversize: **Standard\_DS4\_v2**
+    -   dbserversize: **Standard\_D4s\_v3**
 
-    -   ascsserversize: **Standard\_DS2\_v2**
+    -   ascsserversize: **Standard\_D2s\_v3**
 
-    -   diserversize: **Standard\_DS2\_v2**
-
--   internalStorageTypeASCS: **Premium\_LRS**
-
--   internalStorageTypeDB: **Premium\_LRS**
-
--   internalStorageTypeDI: **Premium\_LRS**
+    -   diserversize: **Standard\_D2s\_v3**
 
 -   Admin Username: **demouser**
 
@@ -473,7 +469,7 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   New Or Existing Subnet: **existing**
 
--   Subnet Id: **Id of the sapSubnet**
+-   Subnet Id: **Id of the sapSubnet***
 
 -   Health Probe port of s03-lb-ascs load balancer: **3900**
 
