@@ -493,9 +493,9 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 5. On the **Edit template** blade, expand the **Variables** node, and scroll down to the **sizes** subnode.
 
-    ![Screenshot of the Edit template blade. Under Variables, vmSizes is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
+    ![Screenshot of the Edit template blade. Under Variables, sizes is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
 
-6. In the editor window, navigate to the **HA** subsection of the **Demo** section, and modify the values of **dbserversize, ascsserversize** and **diserversize** keys per the following screenshot:
+6. In the editor window, navigate to the **HA** subsection of the **Demo** section, scroll down to the **SQL** section, and modify the values of the **dbvmSize** key per the following screenshot:
 
     ![Screenshot of the editor windows with the previously mentioned keys displaying.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15.png)
 
@@ -513,6 +513,8 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     -   Sap System Id: **s03**
 
+    -   Stack Type: **ABAP**
+
     -   OS Type: **Windows Server 2016 Datacenter**
 
     -   Sap System Size: **Demo**
@@ -521,7 +523,9 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     -   Admin Username: **demouser**
 
-    -   Admin Password: **demo\@pass123**
+    -   Authentication Type: **password**
+
+    -   Admin Password or Key: **demo\@pass123**
 
     -   Subnet Id: **Run the following four commands from the Windows PowerShell prompt to identify the value to enter here (when prompted to sign in after typing the first command, type in the credentials you used to authenticate to your Azure subscription). See example below.**
 
@@ -547,7 +551,7 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     ![The s03-RG resource group blade displays in the Azure Portal.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image18.png)
 
-11. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortxSCS**.
+11. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, select **Health probes**, and in the list of probes, select **probeascs**.
 
     ![Screenshot of the Load Balancer blade.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image19.png)
 
@@ -555,11 +559,11 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     ![In the S03-lb-ascs blade, the Port field is set to 3900, and the Save button is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image20.png)
 
-13. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortDB**.
+13. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, select **Health probes**, and in the list of probes, select **probesql**.
 
     ![Screenshot of the Load Balancer blade.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image21.png)
 
-14. Change the value of **Port** from **62503** to **59999**, and select **Save**.
+14. Change the value of **Port** from **62500** to **59999**, and select **Save**.
 
     ![In the S03-lb-db blade, the Port field is set to 59999, and the Save button is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image22.png)
 
