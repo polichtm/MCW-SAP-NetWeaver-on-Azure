@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-December 2018
+April 2019
 </div>
 
 
@@ -479,31 +479,31 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   Health Probe port of s03-lb-db load balancer: **59999**
 
-8.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md>.
+1.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md>.
 
-9.  On the **SAP NetWeaver 3-tier compatible template using a Marketplace image - MD** page, select **Deploy to Azure**.
+2.  On the **SAP NetWeaver 3-tier compatible template using a Marketplace image - MD** page, select **Deploy to Azure**.
 
     ![The Deploy to Azure button is selected on the SAP NetWeaver 3-tier compatible template using a Marketplace image - MD page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image12.png)
 
-10. The Web browser window should automatically get redirected to the Azure portal and display the **SAP NW 3-tier (managed disk)** blade.
+3. The Web browser window should automatically get redirected to the Azure portal and display the **SAP NW 3-tier (managed disk)** blade.
 
-11. Select **Edit template**.
+4. Select **Edit template**.
 
     ![The SAP NW 3-tier (managed disk) blade displays with Edit template selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image13.png)
 
-12. On the **Edit template** blade, expand the **Variables** node, and scroll down to the **vmSizes** subnode.
+5. On the **Edit template** blade, expand the **Variables** node, and scroll down to the **sizes** subnode.
 
     ![Screenshot of the Edit template blade. Under Variables, vmSizes is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
 
-13. In the editor window, navigate to the **HA** subsection of the **Demo** section, and modify the values of **dbserversize, ascsserversize** and **diserversize** keys per the following screenshot:
+6. In the editor window, navigate to the **HA** subsection of the **Demo** section, and modify the values of **dbserversize, ascsserversize** and **diserversize** keys per the following screenshot:
 
     ![Screenshot of the editor windows with the previously mentioned keys displaying.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15.png)
 
-14. Select **Save** to save your changes.
+7. Select **Save** to save your changes.
 
     ![Screenshot of the Save button.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image16.png)
 
-15. Back on the **SAP NW 3-tier compatible Marketplace image** blade, specify the following settings:
+8. Back on the **SAP NW 3-tier compatible Marketplace image** blade, specify the following settings:
 
     -   Subscription: **Your Azure subscription name**.
 
@@ -537,31 +537,32 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     ![Screenshot of the Windows PowerShell window with results from the previous commands displaying.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image17.png)
 
-16. Enable the checkbox labeled **I agree to the terms and conditions stated above**, and select **Purchase**.
+9. Enable the checkbox labeled **I agree to the terms and conditions stated above**, and select **Purchase**.
 
     ![Screenshot of the Terms and Conditions page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
 
-17. Wait for the deployment to complete. This might take about 10 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s03-RG resource group blade in the Azure portal.
+10. Wait for the deployment to complete. This might take about 10 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s03-RG resource group blade in the Azure portal.
 
     > **Note**: Disregard any custom script extension errors generated during the template deployment.
 
     ![The s03-RG resource group blade displays in the Azure Portal.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image18.png)
 
-18. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortxSCS**.
+11. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortxSCS**.
 
     ![Screenshot of the Load Balancer blade.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image19.png)
 
-19. Change the value of **Port** from **62000** to **3900**, and select **Save**.
+12. Change the value of **Port** from **62000** to **3900**, and select **Save**.
 
     ![In the S03-lb-ascs blade, the Port field is set to 3900, and the Save button is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image20.png)
 
-20. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortDB**.
+13. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortDB**.
 
     ![Screenshot of the Load Balancer blade.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image21.png)
 
-21. Change the value of **Port** from **62503** to **59999**, and select **Save**.
+14. Change the value of **Port** from **62503** to **59999**, and select **Save**.
 
     ![In the S03-lb-db blade, the Port field is set to 59999, and the Save button is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image22.png)
+
 
 ### Task 5: Configure IP addresses of Azure VMs and internal load balancers
 
