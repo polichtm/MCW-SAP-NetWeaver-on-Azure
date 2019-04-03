@@ -29,7 +29,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [SAP on Azure hands-on lab step-by-step](#sap-on-azure-hands-on-lab-step-by-step)
+- [SAP NetWeaver on Azure hands-on lab step-by-step](#sap-netweaver-on-azure-hands-on-lab-step-by-step)
     - [Abstract and learning objectives](#abstract-and-learning-objectives)
     - [Overview](#overview)
     - [Solution architecture](#solution-architecture)
@@ -70,7 +70,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# SAP on Azure hands-on lab step-by-step 
+# SAP NetWeaver on Azure hands-on lab step-by-step 
 
 ## Abstract and learning objectives 
 
