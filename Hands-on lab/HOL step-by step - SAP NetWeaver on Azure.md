@@ -740,11 +740,17 @@ In this exercise, you will configure the Azure VMs that constitute the SAP ASCS 
 
 In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. Next, implement a Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.7** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was auto-provisioned in the previous exercise when you deployed Storage Spaces Direct (S2D) cluster. Finally, grant permissions to the **s03-ascs-cl0** cluster computer account to create computer objects in the **Computers** container.
 
-1.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Navigate to the **adPDC** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
-2.  Within the RDP session to s03-ascs-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+2.  Within the RDP session to the **adPDC** Azure VM, start Internet Explorer, browse to the Azure portal at <https://portal.azure.com>.
 
-3.  Within the RDP session to s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
+3.  When prompted, sign in to the Azure subscription you are using in this lab.
+
+4.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+
+5.  Within the RDP session to s03-ascs-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+
+6.  Within the RDP session to s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
 ```
     $nodes = ('s03-ascs-0','s03-ascs-1')
@@ -756,13 +762,13 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Invoke-Command $nodes {Install-WindowsFeature Failover-Clustering -IncludeAllSubFeature -IncludeManagementTools} 
 ```
 
-4.  From the Windows PowerShell ISE session, run:
+7.  From the Windows PowerShell ISE session, run:
 
 ```
     New-Cluster -Name s03-ascs-cl0 -Node $nodes -NoStorage -StaticAddress 10.0.1.7
 ```
 
-5.  Wait for the new cluster to be created. Then from the same Windows PowerShell ISE session, run:
+8.  Wait for the new cluster to be created. Then from the same Windows PowerShell ISE session, run:
 
 ```
     Install-PackageProvider -Name NuGet -Force
@@ -780,29 +786,29 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
 When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes.
 
-6.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
+9.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
 
-7.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
+10.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
 
     ![Screenshot of the Active Directory Administrative Center displays the previously mentioned path and properties.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image116.png)
 
-8.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, select **Advanced**.
+11.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, select **Advanced**.
 
     ![The Computers window displays with Extensions and the Advanced button selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image117.png)
 
-9.  In the **Advanced Security Settings for Computers** window, select **Add**.
+12.  In the **Advanced Security Settings for Computers** window, select **Add**.
 
     ![The Advanced Security Settings for Computers window Permissions tab displays Permissions entries.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image118.png)
 
-10.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
+13.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
 
    ![Superimposed over the Permission Entry for Computers window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
 
-11.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
+14.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
 
    ![In the Permission Entry for Computers window, under Permissions, the checkbox is selected for Create Computer objects.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image120.png)
 
-12. Back in the **Advanced Security for Computers** window, select **OK**.
+15. Back in the **Advanced Security for Computers** window, select **OK**.
 
 
 ### Task 2: Install the SAP ASCS components on s03-ascs-0
@@ -1022,7 +1028,7 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
 -   Set all passwords to **demo\@pass123**
 
-1.  Navigate to the **s03-ascs-1** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the RDP session to **adPDC** Azure VM, navigate to the **s03-ascs-1** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2.  Within the RDP session to s03-ascs-1 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
@@ -1128,7 +1134,7 @@ These options provide potential performance improvements, as documented in <http
 
 In a production deployment, you should consider using domain-based Group Policy Objects rather than local Group Policy. This approach is used in this lab strictly for simplicity.
 
-1.  Navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the RDP session to **adPDC** Azure VM, navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2.  Within the RDP session to s03-ascs-1 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
@@ -1210,7 +1216,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
     -   **Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings, including the default database and the server role**
 
-1. Navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1. Within the RDP session to **adPDC** Azure VM, navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2. Within the Remote Desktop session to s03-db-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
@@ -2003,7 +2009,7 @@ In this exercise, you will configure the SAP NetWeaver application servers. You 
 
 In this task, you will configure the Azure VMs in the Application layer by mounting the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. You will also install on both Microsoft ODBC Driver for SQL Server (available from <https://www.microsoft.com/en-us/download/confirmation.aspx?id=53339> ) to facilitate connectivity to the database tier.
 
-1.  In the Azure portal, navigate to the **s03-di-0** VM blade, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the RDP session to **adPDC** Azure VM, in the Azure portal, navigate to the **s03-di-0** VM blade, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2.  Within the RDP session to s03-di-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
@@ -2040,7 +2046,7 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
     ![Screenshot of the Completing the ODBC Driver page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
 
-9.  Repeat steps from 3-7 on **s03-di-1**.
+9.  Connect via RDP to **s03-di-1** and run the steps 2 and 4-8.
 
 ### Task 2: Install the SAP Primary Application Server (PAS) layer
 
