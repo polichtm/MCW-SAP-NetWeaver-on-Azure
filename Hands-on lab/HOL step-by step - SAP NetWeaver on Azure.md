@@ -21,7 +21,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -137,7 +137,7 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
 1.  From the lab computer, start a Web browser, and navigate to the Azure portal at <https://portal.azure.com>.
 
-2.  When prompted, sign in to the Azure subscription you will be using in this lab.
+2.  When prompted, sign into the Azure subscription you will be using in this lab.
 
 3.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>.
 
@@ -744,7 +744,7 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
 2.  Within the RDP session to the **adPDC** Azure VM, start Internet Explorer, browse to the Azure portal at <https://portal.azure.com>.
 
-3.  When prompted, sign in to the Azure subscription you are using in this lab.
+3.  When prompted, sign into the Azure subscription you are using in this lab.
 
 4.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
