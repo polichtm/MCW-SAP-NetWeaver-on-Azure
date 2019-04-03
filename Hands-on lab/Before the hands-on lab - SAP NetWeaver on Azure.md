@@ -1,4 +1,4 @@
-
+﻿
 ![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
@@ -10,7 +10,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-December 2018
+April 2019
 </div>
 
 
@@ -20,7 +20,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -39,17 +39,17 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Requirements
 
--   A Microsoft Azure subscription with at least 36 vCPU available in the Azure region where the lab Azure VMs will reside.
+-   A Microsoft Azure subscription with at least 26 vCPU available in the Azure region where the lab Azure VMs will reside.
 
-    -   DC VMs -- 2 x DS2\_v2: 2 x 2 vCPUs = 4 vCPUs
+    -   DC VMs -- 2 x D2s\_v3: 2 x 2 vCPUs = 4 vCPUs
 
     -   S2D VMs -- 2 x DS3\_v2: 2 x 4 vCPUs = 8 vCPUs
 
-    -   ASCS VMs -- 2 x DS2\_v2: 2 x 2 vCPUs = 4 vCPUs
+    -   ASCS VMs -- 2 x D2s\_v3: 2 x 2 vCPUs = 4 vCPUs
 
-    -   DB VMs -- 2 x DS4\_v2: 2 x 8 vCPUs = 16 vCPUs
+    -   DB VMs -- 2 x D4s\_v3: 2 x 4 vCPUs = 8 vCPUs
 
-    -   APP VMs -- 2 x DS2\_v2: 2 x 2 vCPUs = 4 vCPUs
+    -   APP VMs -- 2 x D2s\_v3: 2 x 2 vCPUs = 4 vCPUs
 
 -   A lab computer running Windows 7 or newer and configured with:
 

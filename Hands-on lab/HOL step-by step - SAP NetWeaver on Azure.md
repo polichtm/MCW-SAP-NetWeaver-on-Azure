@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-December 2018
+April 2019
 </div>
 
 
@@ -21,7 +21,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -29,7 +29,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- TOC -->
 
-- [SAP on Azure hands-on lab step-by-step](#sap-on-azure-hands-on-lab-step-by-step)
+- [SAP NetWeaver on Azure hands-on lab step-by-step](#sap-netweaver-on-azure-hands-on-lab-step-by-step)
     - [Abstract and learning objectives](#abstract-and-learning-objectives)
     - [Overview](#overview)
     - [Solution architecture](#solution-architecture)
@@ -70,7 +70,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 <!-- /TOC -->
 
-# SAP on Azure hands-on lab step-by-step 
+# SAP NetWeaver on Azure hands-on lab step-by-step 
 
 ## Abstract and learning objectives 
 
@@ -137,7 +137,7 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
 1.  From the lab computer, start a Web browser, and navigate to the Azure portal at <https://portal.azure.com>.
 
-2.  When prompted, sign in to the Azure subscription you will be using in this lab.
+2.  When prompted, sign into the Azure subscription you will be using in this lab.
 
 3.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>.
 
@@ -447,6 +447,8 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   Sap System Id: **s03**
 
+-   Stack Type: **ABAP**
+
 -   OS Type: **Windows Server 2016 Datacenter**
 
 -   Sap System Size: **Demo**
@@ -455,17 +457,11 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   vmSizes:
 
-    -   dbserversize: **Standard\_DS4\_v2**
+    -   dbserversize: **Standard\_D4s\_v3**
 
-    -   ascsserversize: **Standard\_DS2\_v2**
+    -   ascsserversize: **Standard\_D2s\_v3**
 
-    -   diserversize: **Standard\_DS2\_v2**
-
--   internalStorageTypeASCS: **Premium\_LRS**
-
--   internalStorageTypeDB: **Premium\_LRS**
-
--   internalStorageTypeDI: **Premium\_LRS**
+    -   diserversize: **Standard\_D2s\_v3**
 
 -   Admin Username: **demouser**
 
@@ -473,37 +469,37 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
 -   New Or Existing Subnet: **existing**
 
--   Subnet Id: **Id of the sapSubnet**
+-   Subnet Id: **Id of the sapSubnet***
 
 -   Health Probe port of s03-lb-ascs load balancer: **3900**
 
 -   Health Probe port of s03-lb-db load balancer: **59999**
 
-8.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md>.
+1.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md>.
 
-9.  On the **SAP NetWeaver 3-tier compatible template using a Marketplace image - MD** page, select **Deploy to Azure**.
+2.  On the **SAP NetWeaver 3-tier compatible template using a Marketplace image - MD** page, select **Deploy to Azure**.
 
     ![The Deploy to Azure button is selected on the SAP NetWeaver 3-tier compatible template using a Marketplace image - MD page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image12.png)
 
-10. The Web browser window should automatically get redirected to the Azure portal and display the **SAP NW 3-tier (managed disk)** blade.
+3. The Web browser window should automatically get redirected to the Azure portal and display the **SAP NW 3-tier (managed disk)** blade.
 
-11. Select **Edit template**.
+4. Select **Edit template**.
 
     ![The SAP NW 3-tier (managed disk) blade displays with Edit template selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image13.png)
 
-12. On the **Edit template** blade, expand the **Variables** node, and scroll down to the **vmSizes** subnode.
+5. On the **Edit template** blade, expand the **Variables** node, and scroll down to the **sizes** subnode.
 
-    ![Screenshot of the Edit template blade. Under Variables, vmSizes is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
+    ![Screenshot of the Edit template blade. Under Variables, sizes is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
 
-13. In the editor window, navigate to the **HA** subsection of the **Demo** section, and modify the values of **dbserversize, ascsserversize** and **diserversize** keys per the following screenshot:
+6. In the editor window, navigate to the **HA** subsection of the **Demo** section, scroll down to the **SQL** section, and modify the values of the **dbvmSize** key per the following screenshot:
 
     ![Screenshot of the editor windows with the previously mentioned keys displaying.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15.png)
 
-14. Select **Save** to save your changes.
+7. Select **Save** to save your changes.
 
     ![Screenshot of the Save button.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image16.png)
 
-15. Back on the **SAP NW 3-tier compatible Marketplace image** blade, specify the following settings:
+8. Back on the **SAP NW 3-tier compatible Marketplace image** blade, specify the following settings:
 
     -   Subscription: **Your Azure subscription name**.
 
@@ -513,6 +509,8 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     -   Sap System Id: **s03**
 
+    -   Stack Type: **ABAP**
+
     -   OS Type: **Windows Server 2016 Datacenter**
 
     -   Sap System Size: **Demo**
@@ -521,7 +519,9 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     -   Admin Username: **demouser**
 
-    -   Admin Password: **demo\@pass123**
+    -   Authentication Type: **password**
+
+    -   Admin Password or Key: **demo\@pass123**
 
     -   Subnet Id: **Run the following four commands from the Windows PowerShell prompt to identify the value to enter here (when prompted to sign in after typing the first command, type in the credentials you used to authenticate to your Azure subscription). See example below.**
 
@@ -537,31 +537,32 @@ In this task, you will deploy additional Azure VMs that will be hosting your SAP
 
     ![Screenshot of the Windows PowerShell window with results from the previous commands displaying.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image17.png)
 
-16. Enable the checkbox labeled **I agree to the terms and conditions stated above**, and select **Purchase**.
+9. Enable the checkbox labeled **I agree to the terms and conditions stated above**, and select **Purchase**.
 
     ![Screenshot of the Terms and Conditions page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
 
-17. Wait for the deployment to complete. This might take about 10 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s03-RG resource group blade in the Azure portal.
+10. Wait for the deployment to complete. This might take about 10 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s03-RG resource group blade in the Azure portal.
 
     > **Note**: Disregard any custom script extension errors generated during the template deployment.
 
     ![The s03-RG resource group blade displays in the Azure Portal.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image18.png)
 
-18. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortxSCS**.
+11. In the Azure portal, navigate to the internal load balancer **s03-lb-ascs**. On the load balancer blade, select **Health probes**, and in the list of probes, select **probeascs**.
 
     ![Screenshot of the Load Balancer blade.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image19.png)
 
-19. Change the value of **Port** from **62000** to **3900**, and select **Save**.
+12. Change the value of **Port** from **62000** to **3900**, and select **Save**.
 
     ![In the S03-lb-ascs blade, the Port field is set to 3900, and the Save button is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image20.png)
 
-20. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, select **Health probes**, and in the list of probes, select **lb00ProbePortDB**.
+13. In the Azure portal, navigate to the internal load balancer **s03-lb-db**. On the load balancer blade, select **Health probes**, and in the list of probes, select **probesql**.
 
     ![Screenshot of the Load Balancer blade.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image21.png)
 
-21. Change the value of **Port** from **62503** to **59999**, and select **Save**.
+14. Change the value of **Port** from **62500** to **59999**, and select **Save**.
 
     ![In the S03-lb-db blade, the Port field is set to 59999, and the Save button is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image22.png)
+
 
 ### Task 5: Configure IP addresses of Azure VMs and internal load balancers
 
@@ -598,9 +599,30 @@ Configure the Private IP addresses of VMs and load balancers in the following ma
 
     $rg = Get-AzureRmResourceGroup -Name $rgName
 
-    $lbNames = @('s03-lb-db')
+    $ilbName = 's03-lb-db'
+    $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $ilbName
+    Remove-AzureRmLoadBalancerRuleConfig -LoadBalancer $ilb -Name 'lbsqlclRuleall'
+    Remove-AzureRmLoadBalancerProbeConfig -LoadBalancer $ilb -Name 'probesqlcl'
+    Remove-AzureRmLoadBalancerFrontendIpConfig -LoadBalancer $ilb -Name 'frontendsqlcl'
+    $ilb | Set-AzureRmLoadBalancer
 
-    $lbIPAddresses = @('10.0.1.16')
+    $ilbName = 's03-lb-ascs'
+    $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $ilbName
+    Remove-AzureRmLoadBalancerRuleConfig -LoadBalancer $ilb -Name 'lbaersRuleall'
+    Remove-AzureRmLoadBalancerProbeConfig -LoadBalancer $ilb -Name 'probeaers'
+    Remove-AzureRmLoadBalancerFrontendIpConfig -LoadBalancer $ilb -Name 'frontendaers'
+    $ilb | Set-AzureRmLoadBalancer
+
+    $ilbName = 's03-lb-ascs'
+    $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $ilbName
+    Remove-AzureRmLoadBalancerRuleConfig -LoadBalancer $ilb -Name 'lbascsclRuleall'
+    Remove-AzureRmLoadBalancerProbeConfig -LoadBalancer $ilb -Name 'probeascscl'
+    Remove-AzureRmLoadBalancerFrontendIpConfig -LoadBalancer $ilb -Name 'frontendascscl'
+    $ilb | Set-AzureRmLoadBalancer
+
+    $lbNames = @('s03-lb-ascs','s03-lb-db')
+
+    $lbIPAddresses = @('10.0.1.6','10.0.1.16') 
 
     for ($count=0; $count -le $lbNames.Count-1; $count++) {
         $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $lbNames[$count]
@@ -626,29 +648,14 @@ Configure the Private IP addresses of VMs and load balancers in the following ma
 
     $vmIPAddresses = @('10.0.1.28','10.0.1.29','10.0.1.18','10.0.1.19','10.0.1.8','10.0.1.9')
 
-    $vmPIPNames = @('s03-pip-di-0','s03-pip-di-1','s03-pip-db-0','s03-pip-db-1','s03-pip-ascs-0','s03-pip-ascs-1')
-
     for ($count=0; $count -le $vmNicNames.Count-1; $count++) {
         $nic = Get-AzureRmNetworkInterface -ResourceGroupName $rgName -Name $vmNicNames[$count]
         $nic.IpConfigurations[0].PrivateIpAllocationMethod = 'Static'
         $nic.IpConfigurations[0].PrivateIpAddress = $vmIPAddresses[$count]
-        $pip = New-AzureRmPublicIpAddress -Name $vmPIPNames[$count] -ResourceGroupName $rgName -AllocationMethod Dynamic -Location $rg.Location
-        $nic.IpConfigurations[0].PublicIpAddress = $pip
         Set-AzureRmNetworkInterface -NetworkInterface $nic 
         $nicIP = $nic.IpConfigurations[0].PrivateIpAddress
     }
 
-    $lbNames = @('s03-lb-ascs')
-
-    $lbIPAddresses = @('10.0.1.6')
-
-    for ($count=0; $count -le $lbNames.Count-1; $count++) {
-        $ilb = Get-AzureRmLoadBalancer -ResourceGroupName $rgName -Name $lbNames[$count]
-        $ilb.FrontendIpConfigurations[0].PrivateIpAllocationMethod = 'Static'
-        $ilb.FrontendIpConfigurations[0].PrivateIpAddress = $lbIPAddresses[$count]
-        $ilb | Set-AzureRmLoadBalancer
-        $ilbIP = $ilb.FrontendIpConfigurations[0].PrivateIpAddress
-    }
 ```
 
 3.  Wait until the script completes. This may take up to 10 minutes.
@@ -733,11 +740,17 @@ In this exercise, you will configure the Azure VMs that constitute the SAP ASCS 
 
 In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. Next, implement a Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.7** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was auto-provisioned in the previous exercise when you deployed Storage Spaces Direct (S2D) cluster. Finally, grant permissions to the **s03-ascs-cl0** cluster computer account to create computer objects in the **Computers** container.
 
-1.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Navigate to the **adPDC** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
-2.  Within the RDP session to s03-ascs-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+2.  Within the RDP session to the **adPDC** Azure VM, start Internet Explorer, browse to the Azure portal at <https://portal.azure.com>.
 
-3.  Within the RDP session to s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
+3.  When prompted, sign into the Azure subscription you are using in this lab.
+
+4.  Navigate to the **s03-ascs-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+
+5.  Within the RDP session to s03-ascs-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
+
+6.  Within the RDP session to s03-ascs-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
 ```
     $nodes = ('s03-ascs-0','s03-ascs-1')
@@ -749,13 +762,13 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Invoke-Command $nodes {Install-WindowsFeature Failover-Clustering -IncludeAllSubFeature -IncludeManagementTools} 
 ```
 
-4.  From the Windows PowerShell ISE session, run:
+7.  From the Windows PowerShell ISE session, run:
 
 ```
     New-Cluster -Name s03-ascs-cl0 -Node $nodes -NoStorage -StaticAddress 10.0.1.7
 ```
 
-5.  Wait for the new cluster to be created. Then from the same Windows PowerShell ISE session, run:
+8.  Wait for the new cluster to be created. Then from the same Windows PowerShell ISE session, run:
 
 ```
     Install-PackageProvider -Name NuGet -Force
@@ -773,29 +786,29 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
 When prompted, sign in with the Service Administrator account of your Azure subscription (if the sign-in fails, rerun the script). Wait for the configuration of the Cloud Witness quorum completes.
 
-6.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
+9.  From the Remote Desktop session to adPDC, start Active Directory Administrative Center.
 
-7.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
+10.  In the Active Directory Administrative Center, navigate to the Computers container of the contoso.com domain, and display its properties.
 
     ![Screenshot of the Active Directory Administrative Center displays the previously mentioned path and properties.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image116.png)
 
-8.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, select **Advanced**.
+11.  In the **Computers** window, navigate to the **Extensions** section, and on the **Security** tab, select **Advanced**.
 
     ![The Computers window displays with Extensions and the Advanced button selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image117.png)
 
-9.  In the **Advanced Security Settings for Computers** window, select **Add**.
+12.  In the **Advanced Security Settings for Computers** window, select **Add**.
 
     ![The Advanced Security Settings for Computers window Permissions tab displays Permissions entries.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image118.png)
 
-10.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
+13.  In the **Permission Entry for Computers** window, select **Select Principal**. In the **Select User, Service Account or Group** dialog box, select **Object Types**, enable the checkbox next to the **Computers** entry, and select **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and select **OK**.
 
    ![Superimposed over the Permission Entry for Computers window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
 
-11.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
+14.  In the **Permission Entry for Computers** window, ensure that **Allow** appears in the **Type** drop-down list. Next, in the **Applies to** drop-down list, select **This object and all descendant objects**. In the **Permissions** list, select **Create Computer objects** and select **OK**.
 
    ![In the Permission Entry for Computers window, under Permissions, the checkbox is selected for Create Computer objects.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image120.png)
 
-12. Back in the **Advanced Security for Computers** window, select **OK**.
+15. Back in the **Advanced Security for Computers** window, select **OK**.
 
 
 ### Task 2: Install the SAP ASCS components on s03-ascs-0
@@ -1015,7 +1028,7 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
 -   Set all passwords to **demo\@pass123**
 
-1.  Navigate to the **s03-ascs-1** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the RDP session to **adPDC** Azure VM, navigate to the **s03-ascs-1** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2.  Within the RDP session to s03-ascs-1 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
@@ -1121,7 +1134,7 @@ These options provide potential performance improvements, as documented in <http
 
 In a production deployment, you should consider using domain-based Group Policy Objects rather than local Group Policy. This approach is used in this lab strictly for simplicity.
 
-1.  Navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the RDP session to **adPDC** Azure VM, navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2.  Within the RDP session to s03-ascs-1 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
@@ -1203,7 +1216,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
     -   **Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings, including the default database and the server role**
 
-1. Navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1. Within the RDP session to **adPDC** Azure VM, navigate to the **s03-db-0** VM blade in the Azure portal, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2. Within the Remote Desktop session to s03-db-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following:
 
@@ -1996,7 +2009,7 @@ In this exercise, you will configure the SAP NetWeaver application servers. You 
 
 In this task, you will configure the Azure VMs in the Application layer by mounting the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. You will also install on both Microsoft ODBC Driver for SQL Server (available from <https://www.microsoft.com/en-us/download/confirmation.aspx?id=53339> ) to facilitate connectivity to the database tier.
 
-1.  In the Azure portal, navigate to the **s03-di-0** VM blade, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the RDP session to **adPDC** Azure VM, in the Azure portal, navigate to the **s03-di-0** VM blade, and use the **Connect** icon in the toolbar to establish an RDP session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 2.  Within the RDP session to s03-di-0 VM, in Server Manager, select the **Local Server** entry, click the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and click **OK**.
 
@@ -2033,7 +2046,7 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
     ![Screenshot of the Completing the ODBC Driver page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image167.png)
 
-9.  Repeat steps from 3-7 on **s03-di-1**.
+9.  Connect via RDP to **s03-di-1** and run the steps 2 and 4-8.
 
 ### Task 2: Install the SAP Primary Application Server (PAS) layer
 
