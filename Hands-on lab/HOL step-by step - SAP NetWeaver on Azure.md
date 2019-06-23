@@ -38,7 +38,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 2: Deploy SAP NetWeaver application and database tier VMs](#task-2-deploy-sap-netweaver-application-and-database-tier-vms)
         - [Task 3: Deploy Windows Server 2019 jumpbox Azure VM](#task-3-deploy-windows-server-2019-jumpbox-azure-vm)
         - [Task 4: Implement Azure Active Directory Domain Services (Azure AD DS)](#task-4-implement-azure-active-directory-domain-services)
-        - [Task 5: Create Azure AD DS user accounts to facilitate implementation of SAP NetWeaver (#task-5-create-azure-ad-acounts-to-facilitate-implementation-of-sap-netweaver)
+        - [Task 5: Create Azure AD DS user accounts to facilitate implementation of SAP NetWeaver](#task-5-create-azure-ad-acounts-to-facilitate-implementation-of-sap-netweaver)
         - [Task 6: Join Windows Sever 2019 Azure VMs to the Azure AD DS domain](#task-6-join-windows-server-2019-azure-vms-to-the-azure-ad-ds-domain)
         - [Task 7: Install Remote Server Administration Tools on all Azure VMs](#task-7-install-remote-server-administration-tools-on-all-azure-vms)
         - [Task 8: Prepare the Azure AD DS for deployment of SAP NetWeaver application and database tier VMs](#task-8-prepare-the-azure-ad-ds-for-deployment-of-sap-netweaver-application-and-database-tier-vms)
