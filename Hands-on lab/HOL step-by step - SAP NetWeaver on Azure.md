@@ -479,7 +479,7 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
 -   Virtual network: **s03-RG-vnet**
 
--   Subnet: **Use existing** **adSubnet**
+-   Subnet: use existing **adSubnet**
 
 -   Administrator group: the default setting
 
@@ -1004,7 +1004,7 @@ In this task, you will create and configure the **sapmnt** share by using Azure 
 
     -   Performance: **Standard**
 
-    -   Account kind: **StorageV2 (general purpose v2)
+    -   Account kind: **StorageV2 (general purpose v2)**
 
     -   Replication: **Locally-redundant storage (LRS)**
 
@@ -1084,8 +1084,9 @@ In this task, you will disable User Account Control on the Windows Server 2019 A
 1.  Within the Remote Desktop session to s03-adm-0, from the Windows PowerShell ISE console, disable User Account Control on all Windows Server 2019 Azure VMs by running the following:
 
     ```
+    Clear-DnsClientCache
+    Clear-DnsServerCache -ComputerName "contoso.com" -Force
     $vmNames = @('s03-adm-0','s03-ascs-0','s03-ascs-1','s03-db-0','s03-db-1','s03-di-0','s03-di-1')
-
     Invoke-Command $vmNames {Set-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name EnableLUA -Value 0}
     ```
 
@@ -1093,9 +1094,7 @@ In this task, you will disable User Account Control on the Windows Server 2019 A
 
     ```
     $vmNames = @('s03-ascs-0','s03-ascs-1','s03-db-0','s03-db-1','s03-di-0','s03-di-1')
-
     Invoke-Command $vmNames {Restart-Computer -Force}
-
     Restart-Computer -Force
     ```
 
@@ -3069,7 +3068,7 @@ Account for the fact you are using the virtual names and configure the following
 
     ![Screenshot of the installation progress on the Execute Service page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image179.png)
 
-1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, click **OK**.
+1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, click **OK** (if during installation you encounter an error message referencing the DIR_PROFILE entry in DEFAULT.PFL, open \\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\SYS\\profile\\DEFAULT.PFL and comment out the DIR_PROFILE = \\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile entry by adding ## at the beginning of the line). 
 
     ![A message box displays with the message that the process has completed.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image180.png)
 
@@ -3113,9 +3112,9 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 1.  The installation will automatically launch Internet Explorer and display a notification regarding a problem with the website's security certificate. This is expected. Click the **Continue to this website (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account you created in the first exercise.
 
-1.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Primary Application Server Instance**, and click **Next**.
+1.  On the **Welcome to SAP Installation** page, navigate to **SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Application Server Instance**, and click **Next**.
 
-    ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Application Server Instance option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24.png)
+    ![The Software Provisioning Manager window displays the Welcome to SAP Installation page with the SAP NetWeaver 7.5-\>MS SQL Server-\>Installation-\>Application Server ABAP-\>High-Availability System-\>Additional Application Server Instance option.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image181.png)
 
 1.  When prompted, click **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, click **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, click again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
 
@@ -3177,11 +3176,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, click **OK**
 
-    ![A message box displays with the message that the process has completed.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image180.png)
-
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
-
-    ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
 1.  On s03-di-1, start **SAP Management Console**
 
