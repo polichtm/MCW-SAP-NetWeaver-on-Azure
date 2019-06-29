@@ -482,7 +482,7 @@ Quick Sizer offers two independent sizing approaches: user-based and throughput-
 
     -   Migration methodology
 
-    ![Requirements](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image21.png "Requirements")
+    ![Requirements](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image7.png "Requirements")
 
 
 ### Infographic for common scenarios
@@ -531,7 +531,7 @@ Make sure that your design covers the following items:
 
 -   Ensure that high-availability and disaster recovery requirements are satisfied.
 
-### Architecting network connectivity*
+### Architecting network connectivity
 
 **Task:** Design a hybrid network (at a high-level) that will allow you to meet all the customer requirements and support your design for moving Contoso SAP landscape to Azure.
 
@@ -711,9 +711,63 @@ Have the table attendees reconvene with the larger session group to hear a subje
 
 ![A requirements table lists sixteen steps to produce a design.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image7.png)
 
+*Architecting a multi-tier SAP solution*
+
+The solution illustrates the benefits of migration to Microsoft Cloud. In the current state:
+
+-   Contoso SAP is ECC on Windows/SQL 2008 R2 – EOS coming soon
+
+-   Hardware is of fixed size, underutilized and oversized
+
+-   Largest server is DB with 8-core, 32GB RAM and 2TB DB
+
+-   There is no virtualization nor BI/Analytics solution identified
+
+-   Customer is concerned about migration to cloud and to HANA
+
+Migration to Microsoft Cloud offers a range of benefits: 
+
+-   SAP application and platform that Contoso is running are fully certified for Azure
+
+-   SAP can scale up/down/out/in any time and any way in Azure 
+
+-   8-core Azure VM is just 80 cents per hour and largest VM is 32-core, 448GB RAM and 41k SAPS
+
+-   Customer can have full virtualization, automation, standardization and BI/Analytics solutions in Azure
+
+-   SAP standard SAP System Copy Tool can be used for migration to the cloud.
+
+![Benefits of migration to Azure. Six current state boxes point to six future state boxes, representing the benefits of Microsoft Cloud Platform.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image21.png)
+
+*Azure VM Design tips*
+
+Use the following tips and key considerations to design Azure VM to run the most mission critical SAP with extra large SAP database on Azure. 
+
+-   Use certified Azure VM types, especially for Production (M Series VM are certified for both Any DB and HANA). 
+
+-   Use Premium Storage instead of Standard for database and all I/O intensive VMs. 
+
+-   Do not forget about storage space required to store backup. That said, in addition to extra local storage space to keep short-term backup, make sure to add cool storage or Azure Backup Vault if long-term backup retention is the requirement. 
+
+-   Set up high availability and disaster recovery solutions. Note that database replication feature such as SQL Server Always On is more efficient and reliable than Azure Site Recovery for large database replication to provide nearly zero RPO. 
+
+-   ExpressRoute is always recommended for SAP environment. This way a customer in Australia for example is running their entire SAP Business Suite with 5TB ECC database fully in Azure. 
+
 *High-level architecture*
 
-The preferred solution for this design involves moving the SAP environment from on-premises to the Azure data center in East US 2 and extending it to West US 2 to provide disaster recovery capabilities.
+The preferred solution includes the Disaster Recovery environment, with US East 2 as the primary region and US West 2 as the secondary. The primary Azure region will host highly available ASCS components, implemented by using Windows Failover clustering. The highly available sapmnt share will leverage a Scale Out File Server (SOFS), hosted by two Azure VMs forming a Storage Spaces Direct (S2D) cluster (alternatively, you can use for this purpose a third party disk synchronization solution, such as SIOS DataKeeper). Access to ASCS components will be provided via an Azure  Internal Load Balancer. The database tier will consist of two highly available SQL Server instances implemented by using SQL Server AlwaysOn and exposed to the application tier via an Internal Load Balancer. We will also rely on SQL Server AlwaysOn to accommodate the disaster recovery requirement by replicating asynchronously content of the AlwaysOn Availability group to the other Azure region. To accomplish high availability on the application tier, we will deploy two Azure VMs hosting the Primary application server and an Additional Application Server. 
+The second Azure region will host the third node of the SQL Server AlwaysOn cluster that, during normal business operations, can serve quality assurance, development, and test purposes. Note that, in an event of a disaster, we would need to provision the ASCS and SAP application servers in this region. This is accomplished by using Azure Site Recovery, which handles replication of Azure VM disk files as well as orchestration of failover and failback. 
+The management subnet in both regions hosts infrastructure components, including Active Directory domain controllers and Azure Backup Server instances.
+Hybrid connectivity is implemented via an ExpressRoute, with ExpressRoute Gateway Standard or High (with the throughput of 1Gbs or 2Gbps, respectively). 
+
+![Screenshot of the complete solution diagram of Subnet business suite, NetWeaver with HA and DR has two Azure Datacenters - East US 2, and West US 2. East US 2 includes a GW Subnet, subnet #1 - AP Prod, and Subnet #2 - DB Prod. West US 2 has GW subnet, subnet #4  - AP DR, and subnet #5 - DB DR, and Subnet #6 management. An arrow points from East US 2 subnet 2 to West US 2 subnet 5. Both datacenters are connected via ExpressRoute to a building icon. Callouts listing copmponents of the solution point to GW subnet, Availability Set SAP ASCS on Subnet #1 - AP prod, Subnet #2 - DB prod, Subnet #3 Mgmt, Log Analytics and Backup, ExpressRoute, Subnet #4 - AP DR, Subnet #5 - DB DR, Subnet #6 Mgmt. GW subnet in both regions includes ExpresRoute Gateway. Subnet #1 - AP Prod subnet includes Availability Set SAP ASCS, Availability Set Scale Out File Server, and Availablity Set SAP AP. Subnet #2 - DB Prod includes two Microsoft SQL Server Azure VMs in the same availability set. Subnet #3 Mgmt includes Azure VMs hosting domain controller and Azure Backup Server (SCDPM). Subnet #4 - AP DR includes offline replicas of Availability Set SAP ASCS, Availability Set Scale Out File Server, and Availablity Set SAP AP. Subnet #5 - DB DR includes a single Azure VM hosting SQL Server AlwaysOn async replica. Subnet #6 Mgmt includes Azure VMs hosting domain controller and Azure Backup Server (SCDPM). Azure Datacenter East US 2 and Azure Datacenter West US 2 also include Storage, Automation, Backup, Log Analytics, Site Recovery, and Security Center. ](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image22.png)
+
+*Sizing Compute and Storage*
+
+To determine sizing of compute and storage of your solution, you start with the SAPS required for the application and database servers. According to customer’s requirements, the ASCS layer requires 30,000 SAPS. Considering that the application servers operate in the active/active configuration, you will need at minimum two E16sv3, which collectively provide 34,840 SAPS. For ASCS, which operates in the active/passive configuration, you can use a couple of smallest SAP certified Azure VM of Standard E2s_v3 size, each of which provides 2,178 SAPS. To account for the SAPS requirements for the database layer, the solution includes two Standard E16s_v3 Azure VMs. This is necessary since the database servers operate in the active/passive configuration, so we need to consider SAPS characteristics of individual servers (rather than looking at their aggregates) in order to provide the required 15,000 SAPS. 
+From the storage perspective, to accommodate the requirements of 10,000 IOPS and 2 TB for database files, the solution includes 2 x P30 disks, with 1TB and 5,000 IOPS per disk. For logs, a single P20 disks, providing 0.5 TB in size and 2,500 IOPS will suffice. 
+
+![Nine sizing for Azure columns include items such as Azure VM type, number of vms and whether they are active, SAPS provided, Database Files Premium Storage SKU and number of disks, IOPS for Database Files provided, Storage size allocated for DB files, Database Log Premium Storage SKU and number of disks, and Latency for Log. Unlike the previous table, solution information displays for some sizing for Azure cells.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image23.png)
 
 **Task:** Identifying the target Azure region(s) and the number of tiers:
 
@@ -723,27 +777,29 @@ The preferred solution for this design involves moving the SAP environment from 
 
 -   Ensure that high-availability and disaster recovery requirements are satisfied.
 
-**Answer:** By deploying Azure VMs in two regions (with US East 2 as the primary region and US West 2 as the secondary), we are able to address the Disaster Recovery needs of the customer. From the availability standpoint, one of the first decisions you will need to make is whether you will implement a two-tier or three-tier architecture. The 3-tier architecture consists of the presentation tier, the application tier, and the database tier. In the two-tier architecture, the application and database tiers are combined together, running on the same operating system instance.
-
-The three-tier architecture is required to provide high availability in Azure. Each tier should contain two or more VMs in the same availability set to provide 99.95% availability SLA.
-
-For best performance, we choose the alternate site in the same geo - different data centers at least 400 miles apart on the same continent.
-
-*Preferred solution diagram*
-
-![Screenshot of the complete solution diagram of Subnet business suite, NetWeaver with HA and DR has two Azure Datacenters - East US 2, and West US 2. East US 2 includes a GW Subnet, subnet #1 - AP Prod, and Subnet #2 - DB Prod. West US 2 has GW subnet, subnet #4  - AP DR, and subnet #5 - DB DR, and Subnet #6 management. An arrow points from East US 2 subnet 2 to West US 2 subnet 5. Both datacenters are connected via ExpressRoute to a building icon. Callouts listing copmponents of the solution point to GW subnet, Availability Set SAP ASCS on Subnet #1 - AP prod, Subnet #2 - DB prod, Subnet #3 Mgmt, Log Analytics and Backup, ExpressRoute, Subnet #4 - AP DR, Subnet #5 - DB DR, Subnet #6 Mgmt. GW subnet in both regions includes ExpresRoute Gateway. Subnet #1 - AP Prod subnet includes Availability Set SAP ASCS, Availability Set Scale Out File Server, and Availablity Set SAP AP. Subnet #2 - DB Prod includes two Microsoft SQL Server Azure VMs in the same availability set. Subnet #3 Mgmt includes Azure VMs hosting domain controller and Azure Backup Server (SCDPM). Subnet #4 - AP DR includes offline replicas of Availability Set SAP ASCS, Availability Set Scale Out File Server, and Availablity Set SAP AP. Subnet #5 - DB DR includes a single Azure VM hosting SQL Server AlwaysOn async replica. Subnet #6 Mgmt includes Azure VMs hosting domain controller and Azure Backup Server (SCDPM). Azure Datacenter East US 2 and Azure Datacenter West US 2 also include Storage, Automation, Backup, Log Analytics, Site Recovery, and Security Center. ](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image8.png)
-
-*Sizing Compute and Storage*
-
-![Nine sizing for Azure columns include items such as Azure VM type, number of vms and whether they are active, SAPS provided, Database Files Premium Storage SKU and number of disks, IOPS for Database Files provided, Storage size allocated for DB files, Database Log Premium Storage SKU and number of disks, and Latency for Log. Unlike the previous table, solution information displays for some sizing for Azure cells.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image9.png)
+**Answer:** By deploying Azure VMs in two regions (with US East 2 as the primary region and US West 2 as the secondary), we are able to address the Disaster Recovery needs of the customer. Within each region, the design is based on the 3-tier architecture consisting of the presentation tier, the application tier, and the database tier. In the two-tier architecture, the application and database tiers are combined together, running on the same operating system instance. Each tier contains two or more VMs in the same availability set to provide 99.95% availability SLA. It is worth noting that the choice of the disaster recovery site is not based on the region pairing (the East US 2 region is paired up with the Central US region) but rather takes into account the availability of Azure VM sizes that can be used to host SAP workloads (in particular, Mv2 and GS series VMs). 
 
 *Preferred solution cost*
 
+Cost estimate assumptions
+
 ![A list of cost estimate assumptions details both included and not included cost estimate assumptions.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image10.png)
 
-![Screenshot of a detailed Microsoft Azure Estimate table, with service type, custom name, region, description, and estimated cost.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image11.png)
+Azure VM pricing tips
 
-![Screenshot of a more detailed preferred solution cost table. At the bottom is a Microsoft Excel Worksheet icon.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image12.png)
+-   VM uptime is the critical component of compute cost. 
+
+-   Consider using Reserved Instances for VMs that need to be online 24 x 7
+
+-   When using Windows Server VMs, take advantage of the Azure Hybrid Use Benefits (if applicable)
+
+-   Make sure to account for SAP licenses, OS licenses, and Microsoft Support
+
+-   Start with Pay-As-You-Go licensing and switch to Reserved Instances once expected system utilization is determined
+
+Preferred solution cost
+
+![Screenshot of a detailed Microsoft Azure Estimate table, with service type, custom name, region, description, and estimated cost.](images/Whiteboarddesignsessiontrainerguide-SAPonAzureimages/media/image11.png)
 
 *Architecting network connectivity*
 
@@ -757,19 +813,17 @@ For best performance, we choose the alternate site in the same geo - different d
 
 **Task:** Design a scalable and highly available solution.
 
-**Answer:** By deploying Azure VMs in two regions, we are able to meet the needs of the customer. Scaling of the (A)SCS tier involves increasing or decreasing the size of Azure VMs. The SAP Central Services Instance is protected by leveraging Window Server Failover Cluster. Windows Server 2016 Scale Out File Server (SOFS) and the Storage Spaces Direct (S2D), enable the creation of a cluster on Azure VMs with the shared disk functionality. This ensures high availability of the messaging service and Enqueue Replication Service components. The SAP Central Service uses the Azure internal load balancer to facilitate failover capability.
+**Answer:** By deploying Azure VMs in two regions, we are able to meet the resiliency needs of the customer. Scaling of the (A)SCS tier involves increasing or decreasing the size of Azure VMs. The SAP Central Services instance is protected by leveraging Window Server Failover Cluster. This ensures high availability of the messaging service and Enqueue Replication Service components. The SAP Central Service uses the Azure internal load balancer to facilitate failover capability. Windows Server 2016 Storage Spaces Direct (S2D) cluster with its Scale Out File Server (SOFS) role host the highly available sapmnt share. 
 
-By deploying Azure VMs hosting the (A)SCS in two regions, we are able to meet the disaster recovery needs of the customer. We schedule a task to copy the primary instance of ASCS' \\sapmnt to a corresponding share on a DR Azure VM once per day. As part of failover, we change the IP of the ASCS virtual instance name to the IP of the Azure VM. We run sapinst.exe with the SAPINST\_USE\_HOSTNAME parameter set to the virtual instance name (stand-alone ASCS system in a distributed deployment).
+By deploying Azure VMs hosting the (A)SCS in two regions, we are able to meet the disaster recovery needs of the customer. We also schedule a task to copy the primary instance of sapmnt share to the corresponding share on the DR cluster serving the SOFS role. As part of failover, we change the IP of the global host DNS record to the IP of the SOFS. 
 
 *Architecting application components*
 
 **Task:** Design a scalable and highly available solution.
 
-**Answer:** Scaling of the application tier can be accomplished by deploying additional application servers (AAS) to supplement the Primary Application Server. The HTTP(S) load balancing is handled by the SAP Web Dispatcher hosted on an Azure VM. The SAP Logon load balancing is handled by the SCS message server.
+**Answer:** Scaling of the application tier can be accomplished by deploying additional application servers (AAS) to supplement the Primary Application Server. The HTTP(S) load balancing is handled by the SAP Web Dispatcher running on Azure VMs. The SAP Logon load balancing is handled by the SCS message server.
 
-The application server does not contain any business data and does not need to be replicated to the DR very often. The only content that changes periodically is the SAP kernel after a kernel upgrade.
-
-Consider using ASR for replication from on-premises to Azure and between Azure regions (note that failback between Azure regions is currently unsupported).
+The application server does not contain any business data and does not need to be replicated to the DR very often. The only content that changes periodically is the SAP kernel after a kernel upgrade. Consider using ASR for replication from on-premises to Azure and between Azure regions.
 
 *Architecting database components*
 
@@ -777,37 +831,27 @@ Consider using ASR for replication from on-premises to Azure and between Azure r
 
 **Answer:** Scaling of the database tier involves increasing or decreasing the size of Azure VMs. For Microsoft SQL Server, we use AlwaysOn Availability Group (AG) built on top of the Windows Server Failover Clustering and leveraging the Cloud Witness quorum, eliminating the dependency on a shared disk or a file share. Azure internal load balancer represents the listener of the SQL Server AlwaysOn Availability Group containing the SAP database.
 
-Failover between Azure SQL VMs in the same Azure region is automatic (synchronous replication).
-
-Failover between Azure SQL VMs from the primary to the secondary Azure region is manual (potential data loss due to asynchronous replication).
+Failover between Azure SQL VMs in the same Azure region is automatic (synchronous replication). Failover between Azure SQL VMs from the primary to the secondary Azure region is manual (since there is the possibility of data loss due to asynchronous replication).
 
 ## Checklist of preferred objection handling
 
-1.  If I have already paid for my hardware to run my dev/test environment, how am I getting any cost savings by moving it to Azure?
+1.  If I have already paid for my hardware to run my dev/test environment, how am I getting any cost savings by moving it to Azure? How much more is your cloud solution costing me?
 
-    **Potential Answer:** A Global audit, tax and consulting company reduced TCO by 40-75% by hosting SAP systems on Azure and turning off unused resources. A global snack food company reduced TCO by 40-75% by moving 126 legacy SAP systems on Azure; A medical supply company reduced TCO by 50% by moving SAP training environment to Azure. Use the TCO tool (http://aka.ms/azuretco) to uncover all categories of potential cost savings (e.g., hardware, software, maintenance, admin, power, facility). Because of the large scale of Microsoft datacenters, we realize the ongoing cost efficiencies that we have been passing to customers in the form of price cuts.
+    **Potential Answer:** A Global audit, tax and consulting company reduced TCO by 40-75% by hosting SAP systems on Azure and turning off unused resources. A global snack food company reduced TCO by 40-75% by moving 126 legacy SAP systems on Azure; A medical supply company reduced TCO by 50% by moving SAP training environment to Azure. Use the TCO tool (http://aka.ms/azuretco) to uncover all categories of potential cost savings (e.g., hardware, software, maintenance, admin, power, facility). Because of the large scale of Azure datacenters, Microsoft is able to optimize the cost efficiencies that are then passed to customers in the form of price cuts.
 
-    For very large customers, highlight other benefits (e.g., agility, focus) of using Azure.
+    Other benefits include enhanced agility and global presence.
 
 2.  What if I need my cloud resources to access on-premises resources?
 
-    **Potential Answer:** Microsoft supports a hybrid solution, with symmetry between on-premises applications and those on the public cloud. Windows Azure Virtual Network allows them to create a logically isolated section in Azure and securely connect it to their on-premises datacenter. If the customer needs dedicated connectivity, talk to them about ExpressRoute.
+    **Potential Answer:** Microsoft supports a hybrid solution, with symmetry between on-premises applications and those on the public cloud. Azure virtual networks allow creating logically isolated environments in Azure and securely connecting them to on-premises datacenter. If customers need private, dedicated connection to Azure, they can ues ExpressRoute.
 
 3.  Will Azure meet our security and compliance requirements?
 
-    **Potential Answer:** Microsoft policy is to be the most transparent about security and compliance policies, procedures, and certifications on the public facing Azure Trust Center.
-
-    Dev/Test workload usually has limited security/compliance requirements.
-
-    Encourage the customer to visit our Azure data centers.
+    **Potential Answer:** Microsoft policy is to be fully transparent about security and compliance policies, procedures, and certifications. Customers can access comprehensive documentation covering security and compliance in Microsoft Azrue in public facing Azure Trust Center.
 
 4.  Do I have to pay for resources when they are stopped?
 
-    **Potential Answer:** Yes, the VM must be deallocated before the charges cease. If the VM is stopped it will continue to incur charges.
-
-    Deallocating does not mean deleting the VM as it still exists in storage.
-
-    You will still incur storage charge even if the VM is deallocated.
+    **Potential Answer:** Yes, the VM must be deallocated before the charges cease. If the VM is stopped it will continue to incur charges. Deallocating does not mean deleting the VM as it still exists in storage. You will still incur storage charge even if the VM is deallocated.
 
 5.  Can I automate the shutdown at periodic times of day?
 
@@ -818,4 +862,3 @@ Failover between Azure SQL VMs from the primary to the secondary Azure region is
 "Azure has introduced new opportunities in regard to quickly provisioning development and user acceptance testing environments for our various SAP workloads. It also provided high availability and disaster recovery capabilities for our production environment at a very reasonable price."
 
 ---Andrew Cross, CIO, Contoso Group
-
