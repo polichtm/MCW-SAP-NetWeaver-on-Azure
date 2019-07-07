@@ -118,6 +118,7 @@ To facilitate high-availability on the platform level, each pair of Azure virtua
 
 The solution will also include a Windows Server 2019 Azure VM that will serve the role of a jumpbox server.
 
+![Solution architecture to setup SAP NetWeaver on Azure consisting of Authentication layer (with two Active Directory domain controllers), shared storage (two servers configured as a Storage Spaces Direct cluster), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2017 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabunguided-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
 
 ## Exercise 1: Deploy the SAP on Azure infrastructure components 
 
@@ -529,6 +530,9 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
 1.  Wait for the deployment to complete. This should take about 30 minutes.
 
+    ![Screenshot of the Azure AD DS blade in the Azure portal with the Deploying state.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image1a.png)
+
+
 ### Task 5: Create Azure AD DS user accounts to facilitate implementation of SAP NetWeaver
 
 In this task, you will create the following user accounts with non-expiring password set to **demo\@pass123** in the managed Azure AD DS instance to facilitate your SAP implementation:
@@ -697,7 +701,6 @@ In this task, you will create the following user accounts with non-expiring pass
     $user = New-AzureADUser -DisplayName $userName -userPrincipalName "$userName@$domainName" -PasswordProfile $passwordProfile -AccountEnabled $true -MailNickName $userName
     ``` 
 
-
 ### Task 6: Join Windows Sever 2019 Azure VMs to the Azure AD DS domain
 
 In this task, you will join all of the Windows Server 2019 Azure VMs you deployed earlier in this exercise to the Active Directory domain contoso.com.
@@ -708,9 +711,7 @@ In this task, you will join all of the Windows Server 2019 Azure VMs you deploye
 
 1.  In the Azure portal, navigate to the **Virtual machines** blade and restart all virtual machines you deployed earlier in this exercise.
 
-1.  From the lab computer, start a Windows PowerShell ISE window as an Administrator.
-
-1.  In the Script pane, type the following script, and press F5 to execute it. When prompted to sign in after typing the first command, type in the credentials you used to authenticate to your Azure subscription.
+1.  In the Azure portal, if necessary, open the PowerShell session within **Cloud Shell** and, in the PowerShell pane, run the following to join Azure VMs to the Azure AD DS domain: 
 
     ```
     $userName = 's03-su'
@@ -847,6 +848,8 @@ In this task, you will configure the managed Azure AD DS instance and its DNS se
 
 1.  Within the Remote Desktop session to s03-adm-0, start DNS Manager console and connect to **contoso.com**. 
 
+    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containg the contoso.com entry](images\Hands-onlabstep-bystep-SAPonAzureimages\media\image1b.png)
+
 1.  In the DNS Manager console, expand the **contoso.com** , **Forward Lookup Zones**, and **contoso.com** nodes, and, in the **contoso.com** zone, create Host (A) records with the following settings:
 
     -   Name: **s03-ascs-v0**
@@ -895,12 +898,13 @@ In this task, you will configure the managed Azure AD DS instance and its DNS se
 
 1.  In the Active Directory Administrative Center, create an organizational unit named **S03** directly in the root of the domain.
 
+    ![Screenshot of the Active Directory Administration Center, showing the menu option for creating a new organizational unit.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image7a.png)
+
     ![Screenshot of the Active Directory Administration Center, with the Create Organizational Unit S03 dialog box open.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image7.png)
 
 1.  In the Active Directory Administrative Center, navigate to the organizational unit **AADDC Computers**, and move the computer objects **s03-ascs-0**, **s03-ascs-1**, **s03-db-0**, **s03-db-1**, **s03-di-0**, and **s03-di-1** to the **S03** organizational unit.
 
     ![Screenshot of the Active Directory Administration Center, with the Move dialog box open.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image7b.png)
-
 
 ### Task 9: Configure IP addresses of Azure VMs and internal load balancers
 
@@ -3185,6 +3189,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 1.  In the SAP Management Console, verify the SAP deployment is operational.
 
     ![Screenshot of the SAP Management Console with S03 selected under SAP Systems.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image210.png)
+
 
 ### Task 4: Install the SAP Enhanced Monitoring Extension for SAP
 
