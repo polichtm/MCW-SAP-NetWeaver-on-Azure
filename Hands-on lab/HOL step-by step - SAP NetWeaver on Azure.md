@@ -1,4 +1,4 @@
-﻿![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Cloud Workshops icon](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 SAP NetWeaver on Azure
@@ -21,7 +21,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+� 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -1594,6 +1594,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     DIR_PROFILE = \\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile
     _PF = $(DIR_PROFILE)\S03_ASCS00_s03-ascs-v0
     service/check_ha_node = 1
+    enque/encni/set_so_keepalive = true
     ```
 
 1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0** by replacing the following entries:
@@ -1839,6 +1840,14 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     Write-Host "Changes are not activated."
     }
 
+    ```
+
+1.  Within the Remote Desktop session to s03-ascs-0 VM, and in the Windows PowerShell ISE session, adjust failover detection thresholds by running the following:
+
+    ```
+    (Get-Cluster).SameSubNetDelay = 2000
+    (Get-Cluster).SameSubNetThreshold = 15
+    (Get-Cluster).RoutingHistoryLength = 30
     ```
 
 ### Task 5: Install the Enqueue Repliation Server instance on both nodes of the cluster
