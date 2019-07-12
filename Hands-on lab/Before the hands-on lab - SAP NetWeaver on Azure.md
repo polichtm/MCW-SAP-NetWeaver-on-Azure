@@ -145,7 +145,7 @@ specify the following and click **Save and continue**:
 
    > **Note**: Quota increase requests are typically completed during the same business day.
 
-### Task 4: Download SAP binaries
+### Task 5: Download SAP binaries
 
 1.  From the lab computer, start a Web browser, and navigate to **SAP Software Downloads** at https://launchpad.support.sap.com/#/softwarecenter/ (requires an SAP Online Service System account).
 
