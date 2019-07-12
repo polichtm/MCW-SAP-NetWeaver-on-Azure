@@ -355,7 +355,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
     -   SAP application servers are usually deployed on Standard storage, but can be deployed on small Premium storage disks (P4, P6) if using a single server in order to benefit from single instance SLA.
 
-    -   For database servers, use Windows storage spaces or LINUX volume manaagers to stripe disks and aggregate IOPS, throughput and storage capacity
+    -   For database servers, use Windows storage spaces or LINUX volume managers to stripe disks and aggregate IOPS, throughput and storage capacity
 
     -   Next, use select a compute SKU based on SAPS required for database tier
 
