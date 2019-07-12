@@ -145,6 +145,31 @@ specify the following and click **Save and continue**:
 
    > **Note**: Quota increase requests are typically completed during the same business day.
 
+### Task 4: Download SAP binaries
 
+1.  From the lab computer, start a Web browser, and navigate to **SAP Software Downloads** at https://launchpad.support.sap.com/#/softwarecenter/ (requires an SAP Online Service System account).
+
+1.  From the **SAP Software Download**, download the following software packages to the lab computer:
+
+    -   Installation for SAP IGS integrated in SAP Kernel ; OS: Windows on x64 6 (igsexe_9-80003241.sar)
+    
+    -   Kernel Part I (753) ; OS: Windows on x64 64bit ; DB: Database independen (SAPEXE_401-80002612.SAR)
+
+    -   Kernel Part II (753) ; OS: Windows on x64 64bit ; DB: MS SQL SERVER (SAPEXEDB_401-80002611.SAR)
+
+    -   SAP HOST AGENT 7.21 SP42 ; OS: Windows on x64 64bit (SAPHOSTAGENT42_42-20009417.SAR)
+
+    -   SAP IGS Fonts and Textures (igshelper_17-10010245.sar)
+
+    -   Support Package SAPCAR 7.21 Windows on x64 64bit (SAPCAR_1211-80000938.EXE)
+
+    -   Support Package SOFTWARE PROVISIONING MGR 1.0 Windows on x64 64bit (SWPM10SP26_1-20009707.SAR)
+
+    -   SAP Kernel 7.45 Windows Server on x64 64bit - NW 7.5 (51050826_10.ZIP)
+
+    -   NW 7.5 Installation Export (51050829_3.ZIP)
+    
+    > **Note**: The packages names (listed above in parenthesis) might be superseded by newer versions. If so, ensure to adjust accordingly all references to the names of these packages in this task. To find appropriate packages, you can take advantage of the search functionality of the **SAP Software Downloads** portal.
+    
 You should follow all steps provided *before* performing the Hands-on lab.
 
