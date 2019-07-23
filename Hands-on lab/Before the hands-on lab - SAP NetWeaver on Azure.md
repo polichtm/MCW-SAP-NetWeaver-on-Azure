@@ -1,5 +1,4 @@
-﻿
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png "Microsoft Cloud Workshops")
 
 <div class="MCWHeader1">
 SAP NetWeaver on Azure
@@ -55,7 +54,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 -   Access to NTCLUST.SAR including the current SAP cluster resource DLL (requires an SAP Online Service System account)
 
--   Access to Internet from the lab VM
+-   Internet access from the lab VM
 
 ## Before the hands-on lab
 
@@ -93,7 +92,7 @@ Review the relevant Microsoft documentation.
 
 ### Task 4: Validate sufficient number of vCPU cores
 
-1.  In the Azure portal at <http://portal.azure.com>, 
+1.  In the Azure portal at <http://portal.azure.com>.
 
 1.  In the Azure Portal, start a PowerShell session in Cloud Shell. 
 
@@ -105,7 +104,7 @@ Review the relevant Microsoft documentation.
     Get-AzVMUsage -Location eastus | Where-Object {$_.Name.Value -eq 'StandardDSv3Family'}
     ``` 
 
-    > **Note**: To identify the names of Azure regions, in the **Cloud Shell**, at the Bash prompt, run `(Get-AzLocation).Location`
+    > **Note**: To identify the names of Azure regions, in the **Cloud Shell**, at the Bash prompt, run `(Get-AzLocation).Location`.
    
 1.  Review the output of the command executed in the previous step and ensure that you have at least 18 available vCPUs in the **Standard DSv3 Family** in the target Azure region.
 
@@ -117,31 +116,29 @@ Review the relevant Microsoft documentation.
 
     -   Issue type: **Service and subscription limits (quotas)**
 
-    -   Subscription: the name of the Azure subscription you will be using in this lab
+    -   Subscription: the name of the Azure subscription you will be using in this lab.
 
     -   Quota type: **Compute/VM (cores/vCPUs) subscription limit increases**
 
-    -   Support plan: the name of the support plan associated with the target subscription
+    -   Support plan: the name of the support plan associated with the target subscription.
 
 1.  On the **Details** blade, click the **Provide details** blade. 
 
-1.  On the **Quota details** blade, 
-
-specify the following and click **Save and continue**:
+1.  On the **Quota details** blade, specify the following and click **Save and continue**:
 
     -   Severity: **C - Minimal impact**
 
-    -   Preferred contact method: choose your preferred option
+    -   Preferred contact method: choose your preferred option.
 
     -   Deployment model: **Resource Manager**
 
-    -   Location: the target Azure region you intend to use in this lab
+    -   Location: the target Azure region you intend to use in this lab.
 
     -   SKU family: **DSv2 Series** and **ESv3 Series**
 
 1.  On the **Problem** blade, specify the following and click **Next**:
 
-1.  On the **Contact Information** blade, provide your contact details and click **Create**
+1.  On the **Contact Information** blade, provide your contact details and click **Create**.
 
    > **Note**: Quota increase requests are typically completed during the same business day.
 
@@ -153,7 +150,7 @@ specify the following and click **Save and continue**:
 
     -   Installation for SAP IGS integrated in SAP Kernel ; OS: Windows on x64 6 (igsexe_9-80003241.sar)
     
-    -   Kernel Part I (753) ; OS: Windows on x64 64bit ; DB: Database independen (SAPEXE_401-80002612.SAR)
+    -   Kernel Part I (753) ; OS: Windows on x64 64bit ; DB: Database independent (SAPEXE_401-80002612.SAR)
 
     -   Kernel Part II (753) ; OS: Windows on x64 64bit ; DB: MS SQL SERVER (SAPEXEDB_401-80002611.SAR)
 
