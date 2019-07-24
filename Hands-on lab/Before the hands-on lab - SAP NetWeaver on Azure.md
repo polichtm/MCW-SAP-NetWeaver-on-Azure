@@ -112,7 +112,7 @@ Review the relevant Microsoft documentation.
 
 1.  On the subscription's **Usage + quotas** blade, click **Request Increase**.
 
-1.  On the **Basic** blade, specify the following and click **Next**:
+1.  On the **Basic** blade, specify the following and click **Next: Solutions >>**:
 
     -   Issue type: **Service and subscription limits (quotas)**
 
@@ -122,23 +122,23 @@ Review the relevant Microsoft documentation.
 
     -   Support plan: the name of the support plan associated with the target subscription.
 
-1.  On the **Details** blade, click the **Provide details** blade. 
+1.  On the **Details** blade, click the **Provide details** link.
 
 1.  On the **Quota details** blade, specify the following and click **Save and continue**:
-
-    -   Severity: **C - Minimal impact**
-
-    -   Preferred contact method: choose your preferred option.
 
     -   Deployment model: **Resource Manager**
 
     -   Location: the target Azure region you intend to use in this lab.
 
-    -   SKU family: **DSv2 Series** and **ESv3 Series**
+    -   SKU family: **DSv2 Series** and **ESv3 Series** (for each SKU series, provide the new limit)
 
-1.  On the **Problem** blade, specify the following and click **Next**:
+1.  Back on the **Details** blade, specify the following and click **Next: Review + create >>**:
 
-1.  On the **Contact Information** blade, provide your contact details and click **Create**.
+    -   Severity: **C - Minimal impact**
+
+    -   Preferred contact method: choose your preferred option and provide your contact details
+    
+1.  On the **Review + create** blade, click **Create**.
 
    > **Note**: Quota increase requests are typically completed during the same business day.
 
