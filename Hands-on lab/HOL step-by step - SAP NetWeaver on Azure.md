@@ -21,7 +21,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+Â© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -52,7 +52,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 2: Install the SAP ASCS components on s03-ascs-0](#task-2-install-the-sap-ascs-components-on-s03-ascs-0)
         - [Task 3: Install the SAP ASCS components on s03-ascs-1](#task-3-install-the-sap-ascs-components-on-s03-ascs-1)
         - [Task 4: Configure SAP ASCS cluster components on s03-ascs-0 and s03-ascs-1](#task-4-configure-sap-ascs-cluster-components-on-s03-ascs-0-and-s03-ascs-1)
-        - [Task 5: Install the Enqueue Repliation Server instance on both nodes of the cluster](#task-5-install-the-enqueue-replication-server-instance-on-both-nodes-of-the-cluster)
+        - [Task 5: Install the Enqueue Replication Server instance on both nodes of the cluster](#task-5-install-the-enqueue-replication-server-instance-on-both-nodes-of-the-cluster)
         - [Summary](#summary-1)
     - [Exercise 3: Configure SAP NetWeaver database servers](#exercise-3-configure-sap-netweaver-database-servers)
         - [Overview](#overview-2)
@@ -86,7 +86,7 @@ As you step through the hands-on-lab, you will learn how to optimize deployment 
 
 ## Overview
 
-Contoso has asked you to develop a process of provisioning a highly available, Windows Server 2019-based SAP NetWeaver deployment on Azure, with SAP Advanced Business Application Programming (ABAP) stack and SQL Server 2017 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you will implement an instance of a failover cluster. The ASCS component will leverage Azue Files to host highly-available sapmnt share. To provide high-availability of the database tier, you will implement an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum, introduced in Windows Server 2016 Failover Clustering. All Azure VMs will be using managed disks. To streamline deployment, you will take advantage of Azure Resource Manager templates and PowerShell scripts.
+Contoso has asked you to develop a process of provisioning a highly available, Windows Server 2019-based SAP NetWeaver deployment on Azure, with SAP Advanced Business Application Programming (ABAP) stack and SQL Server 2017 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you will implement an instance of a failover cluster. The ASCS component will leverage Azure Files to host highly-available sapmnt share. To provide high-availability of the database tier, you will implement an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum, introduced in Windows Server 2016 Failover Clustering. All Azure VMs will be using managed disks. To streamline deployment, you will take advantage of Azure Resource Manager templates and PowerShell scripts.
 
 ## Solution architecture
 
@@ -176,7 +176,7 @@ In this task, you will create an Azure virtual network which will host the SAP i
 
     -   Resource group: the name of a new resource group **s03-RG**
 
-    -   Location: the name of the Azure region where you can provision Azure VMs and where you have sufficent number of vCPU quotas to complete this lab
+    -   Location: the name of the Azure region where you can provision Azure VMs and where you have sufficient number of vCPU quotas to complete this lab
 
     -   Subnet: **sapSubnet**
 
@@ -502,7 +502,7 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
 1.  On the **New** blade, in the **Search the Marketplace** text box, type **Azure AD Domain Services** and, in the list of results, click **Azure AD Domain Services**.
 
-1.  On the **Azure AD Domain Services** blade, click **Create**. This will automatically open the **Enable Azure AD Domain Servies** blade and its **Basics** blade.
+1.  On the **Azure AD Domain Services** blade, click **Create**. This will automatically open the **Enable Azure AD Domain Services** blade and its **Basics** blade.
 
 1.  On the **Basics** blade, specify the following settings and click **OK**:
 
@@ -1850,9 +1850,9 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     (Get-Cluster).RoutingHistoryLength = 30
     ```
 
-### Task 5: Install the Enqueue Repliation Server instance on both nodes of the cluster
+### Task 5: Install the Enqueue Replication Server instance on both nodes of the cluster
 
-In this task, you will install the Enqueue Repliation Server (ERS) instance on both nodes of the cluster
+In this task, you will install the Enqueue Replication Server (ERS) instance on both nodes of the cluster
 
 1.  Within the Remote Desktop session to s03-ascs-0, start SAP Software Provisioning Manager by executing **sapinst.exe**.
 
