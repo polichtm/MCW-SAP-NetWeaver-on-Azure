@@ -848,7 +848,7 @@ In this task, you will configure the managed Azure AD DS instance and its DNS se
 
 1.  Within the Remote Desktop session to s03-adm-0, start DNS Manager console and connect to **contoso.com**. 
 
-    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containg the contoso.com entry](images\Hands-onlabstep-bystep-SAPonAzureimages\media\image1b.png)
+    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containing the contoso.com entry](images\Hands-onlabstep-bystep-SAPonAzureimages\media\image1b.png)
 
 1.  In the DNS Manager console, expand the **contoso.com** , **Forward Lookup Zones**, and **contoso.com** nodes, and, in the **contoso.com** zone, create Host (A) records with the following settings:
 
@@ -1066,13 +1066,13 @@ In this task, you will create and configure the **sapmnt** share by using Azure 
 
 1.  When prompted, sign into the Azure subscription you are using in this lab.
 
-1.  In the Azure portal, navigte to the **sapmnt** file share blade and click **Connect**.
+1.  In the Azure portal, navigate to the **sapmnt** file share blade and click **Connect**.
 
 1.  On the **Connect** blade, copy to Clipboard the Windows commands (**cmdkey** and **net use**) that create a Z: drive mapping to the target share.
 
 1.  Within the Remote Desktop session to s03-adm-0, start **Command Prompt** and paste both commands to create a Z: drive mapping. 
 
-1.  From the Command Prompt, grant Full Control permissions to the **CONTOSO\AAD DC Administrators** and **CONTOSO\SAP_S03_GlobalAdmin** Azure AD groups by runnning the following:
+1.  From the Command Prompt, grant Full Control permissions to the **CONTOSO\AAD DC Administrators** and **CONTOSO\SAP_S03_GlobalAdmin** Azure AD groups by running the following:
 
     ```
     icacls Z: /grant "CONTOSO\AAD DC Administrators":(f)
@@ -1155,7 +1155,7 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Install-Module -Name Az -Force
     ```
 
-1.  In the same Windows PowerShell ISE session, sign in to the Azure subscription you are using in this lab by running the following (when prompted, authentiate by using the same Azure AD credentials you have been using earlier in this exercise):
+1.  In the same Windows PowerShell ISE session, sign in to the Azure subscription you are using in this lab by running the following (when prompted, authenticate by using the same Azure AD credentials you have been using earlier in this exercise):
 
     ```
     Add-AzAccount
@@ -1371,7 +1371,7 @@ Account for the fact you will be using the virtual names, and configure the foll
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-    ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
+    ![The Execution of Service has been completed successfully. The page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
 
 ### Task 3: Install the SAP ASCS components on s03-ascs-1
@@ -1496,7 +1496,7 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-    ![The Execution of Service has been completed succesfully page displays the message stating that the process execution is finished successfully.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
+    ![The Execution of Service has been completed successfully page displays the message stating that the process execution is finished successfully.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
 
 ### Task 4: Configure SAP ASCS cluster components on s03-ascs-0 and s03-ascs-1
@@ -1784,7 +1784,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     Set-ClusterResourceDependency -Resource $sapASCSServiceClusterResource -Dependency "[$sapServiceClusterResourceName]" -Verbose
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0 VM, and in the Windows PowerShell ISE session, set the probe port to **62000** (the probe port must mutch the port of the **probeascs** of the **s03-lb-ascs** load balancer you deployed in the first exercise of this lab) by running the following (when prompted, type **yes** and press Enter):
+1.  Within the Remote Desktop session to s03-ascs-0 VM, and in the Windows PowerShell ISE session, set the probe port to **62000** (the probe port must match the port of the **probeascs** of the **s03-lb-ascs** load balancer you deployed in the first exercise of this lab) by running the following (when prompted, type **yes** and press Enter):
 
     ```
     $SAPSID = "S03"
@@ -1874,7 +1874,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Enqueue Replication Server Instance** page, accept default settings and click **Next**.
 
-    ![The Enqueue Replication Server Intance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
+    ![The Enqueue Replication Server Instance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
 
 1.  On the **Upgrade SAP Host Agent** page, accept the default settings, and click **Next**.
 
@@ -1890,7 +1890,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Activate Server Instance** page, accept default settings and click **Next**.
 
-    ![The Activate Server Intance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image57.png)
+    ![The Activate Server Instance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image57.png)
 
 1.  On the **Parameter Summary** page, click **Next**.
 
@@ -1906,7 +1906,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-    ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
+    ![The Execution of Service has been completed successfully page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
 
 1.  Within the Remote Desktop session to s03-ascs-1, start SAP Software Provisioning Manager by executing **sapinst.exe**.
 
@@ -1928,7 +1928,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Enqueue Replication Server Instance** page, accept default settings and click **Next**.
 
-    ![The Enqueue Replication Server Intance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
+    ![The Enqueue Replication Server Instance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image53.png)
 
 1.  On the **Upgrade SAP Host Agent** page, accept the default settings, and click **Next**.
 
@@ -1944,7 +1944,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Activate Server Instance** page, accept default settings and click **Next**.
 
-    ![The Activate Server Intance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image57.png)
+    ![The Activate Server Instance page displays the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image57.png)
 
 1.  On the **Parameter Summary** page, click **Next**.
 
@@ -1960,7 +1960,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-    ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
+    ![The Execution of Service has been completed successfully page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
 
 1.  To verify the installation, start **SAP Management Console** by clicking its icon on the desktop and verify that all SAP components are operational.
 
@@ -2355,7 +2355,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-    ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
+    ![The Execution of Service has been completed successfully page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
 
 
 ### Task 5: Implement Always-On Availability Group
@@ -3087,7 +3087,7 @@ Account for the fact you are using the virtual names and configure the following
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-    ![The Execution of Service has been completed succesfully page displays the The process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
+    ![The Execution of Service has been completed successfully page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image49.png)
 
 1.  On s03-di-0, start **SAP Management Console**.
 
