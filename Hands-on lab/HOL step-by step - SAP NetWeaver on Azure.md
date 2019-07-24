@@ -38,8 +38,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Task 2: Deploy SAP NetWeaver application and database tier VMs](#task-2-deploy-sap-netweaver-application-and-database-tier-vms)
         - [Task 3: Deploy Windows Server 2019 jumpbox Azure VM](#task-3-deploy-windows-server-2019-jumpbox-azure-vm)
         - [Task 4: Implement Azure Active Directory Domain Services (Azure AD DS)](#task-4-implement-azure-active-directory-domain-services)
-        - [Task 5: Create Azure AD DS user accounts to facilitate implementation of SAP NetWeaver](#task-5-create-azure-ad-acounts-to-facilitate-implementation-of-sap-netweaver)
-        - [Task 6: Join Windows Sever 2019 Azure VMs to the Azure AD DS domain](#task-6-join-windows-server-2019-azure-vms-to-the-azure-ad-ds-domain)
+        - [Task 5: Create Azure AD DS user accounts to facilitate implementation of SAP NetWeaver](#task-5-create-azure-ad-ds-user-acounts-to-facilitate-implementation-of-sap-netweaver)
+        - [Task 6: Join Windows Server 2019 Azure VMs to the Azure AD DS domain](#task-6-join-windows-server-2019-azure-vms-to-the-azure-ad-ds-domain)
         - [Task 7: Install Remote Server Administration Tools on all Azure VMs](#task-7-install-remote-server-administration-tools-on-all-azure-vms)
         - [Task 8: Prepare the Azure AD DS for deployment of SAP NetWeaver application and database tier VMs](#task-8-prepare-the-azure-ad-ds-for-deployment-of-sap-netweaver-application-and-database-tier-vms)
         - [Task 9: Configure IP addresses of Azure VMs and internal load balancers](#task-9-configure-ip-addresses-of-azure-vms-and-internal-load-balancers)
@@ -464,7 +464,7 @@ In this task, you will deploy Azure VMs that will serve as a jumpbox server for 
 
 1.  Wait for the deployment to complete. This should take no more than 10 minutes.
 
-### Task 4: Implement Azure Active Directory Domain Services (Azure AD DS)
+### Task 4: Implement Azure Active Directory Domain Services
 
 In this task, you will implement Azure AD DS domain that will be hosting managed Active Directory domain controller providing authentication and authorization services for your SAP implementation. You will use the following settings during deployment:
 
@@ -701,7 +701,7 @@ In this task, you will create the following user accounts with non-expiring pass
     $user = New-AzureADUser -DisplayName $userName -userPrincipalName "$userName@$domainName" -PasswordProfile $passwordProfile -AccountEnabled $true -MailNickName $userName
     ``` 
 
-### Task 6: Join Windows Sever 2019 Azure VMs to the Azure AD DS domain
+### Task 6: Join Windows Server 2019 Azure VMs to the Azure AD DS domain
 
 In this task, you will join all of the Windows Server 2019 Azure VMs you deployed earlier in this exercise to the Active Directory domain contoso.com.
 
