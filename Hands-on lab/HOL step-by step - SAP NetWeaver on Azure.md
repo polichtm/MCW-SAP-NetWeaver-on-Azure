@@ -160,7 +160,7 @@ In this task, you will create an Azure virtual network which will host the SAP i
 
 1.  When prompted, sign into the Azure subscription you will be using in this lab.
 
-1.  On the lab computer, in the Azure portal, click **+ Create a resource**
+1.  On the lab computer, in the Azure portal, click **+ Create a resource**.
 
 1.  On the **New** blade, in the **Search the Marketplace** text box, type **Virtual Network** and, in the list of results, click **Virtual Network**.
 
@@ -172,9 +172,9 @@ In this task, you will create an Azure virtual network which will host the SAP i
 
     -   Address space: **10.0.0.0/22**
 
-    -   Subscription: the name of the Azure subscription you are using for this lab
+    -   Subscription: the name of the Azure subscription you are using for this lab.
 
-    -   Resource group: the name of a new resource group **s03-RG**
+    -   Resource group: the name of a new resource group **s03-RG**.
 
     -   Location: the name of the Azure region where you can provision Azure VMs and where you have sufficient number of vCPU quotas to complete this lab
 
@@ -252,7 +252,7 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
 
 -   New Or Existing Subnet: **existing**
 
--   Subnet Id: **Id of the sapSubnet***
+-   Subnet Id: **Id of the sapSubnet**
 
 1.  From the lab computer, start another instance of the Web browser, and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md>.
 
@@ -288,11 +288,11 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
 
 1.  Back on the **SAP NetWeaver 3-tier compatible Marketplace image** blade, specify the following settings:
 
-    -   Subscription: the name of the Azure subscription you are using for this lab
+    -   Subscription: the name of the Azure subscription you are using for this lab.
 
     -   Resource group: **s03-RG**
 
-    -   Location: accept the default value 
+    -   Location: accept the default value. 
 
     -   Sap System Id: **s03**
 
@@ -328,11 +328,11 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
 
     -   Location: the default value
 
-    -   _artifacts Location: the default value
+    -   Artifacts Location: the default value
 
-    -   _artifacts Location Sas Token: the default value
+    -   Artifacts Location Sas Token: the default value
 
-1.  Enable the checkbox labeled **I agree to the terms and conditions stated above**, and click **Purchase**.
+1.  Enable the checkbox labeled **I agree to the terms and conditions stated above** and click **Purchase**.
 
     ![Screenshot of the Terms and Conditions page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
 
@@ -346,13 +346,13 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
 
 In this task, you will deploy Azure VMs that will serve as a jumpbox server for your SAP implementation by using the Azure portal. You will use the following settings during deployment:
 
--   Subscription: the name of the Azure subscription you are using for this lab
+-   Subscription: the name of the Azure subscription you are using for this lab.
 
 -   Resource group: **s03-RG**
 
 -   Virtual machine name: **s03-adm-0**
 
--   Region: the name of the same Azure region which you used earlier in this exercise
+-   Region: the name of the same Azure region which you used earlier in this exercise.
 
 -   Availability options: **No infrastructure redundancy required**
 
@@ -396,19 +396,19 @@ In this task, you will deploy Azure VMs that will serve as a jumpbox server for 
 
 -   Enable auto-shutdown: **Off**
 
-1.  On the lab computer, in the Azure portal, click **+ Create a resource**
+1.  On the lab computer, in the Azure portal, click **+ Create a resource**.
 
 1.  On the **New** blade, in the **Search the Marketplace** text box, type **Windows Server**, in the list of results, select **Windows Server 2019 Datacenter**, and click **Create**.
 
 1.  On the **Basics** tab of the **Create a virtual machine** blade, specify the following settings and click **Next: Disks >**:
 
-    -   Subscription: the name of the Azure subscription you are using for this lab
+    -   Subscription: the name of the Azure subscription you are using for this lab.
 
     -   Resource group: **s03-RG**
 
     -   Virtual machine name: **s03-adm-0**
 
-    -   Region: the name of the same Azure region which you used earlier in this exercise
+    -   Region: the name of the same Azure region which you used earlier in this exercise.
 
     -   Availability options: **No infrastructure redundancy required**
 
@@ -460,7 +460,7 @@ In this task, you will deploy Azure VMs that will serve as a jumpbox server for 
 
     -   Enable auto-shutdown: **Off**
 
-1.  On the **Review + create** tab of the **Create a virtual machine** blade, click **Create**
+1.  On the **Review + create** tab of the **Create a virtual machine** blade, click **Create**.
 
 1.  Wait for the deployment to complete. This should take no more than 10 minutes.
 
@@ -472,11 +472,11 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
 -   DNS domain name: **contoso.com**
 
--   Subscription: the name of the Azure subscription you are using for this lab
+-   Subscription: the name of the Azure subscription you are using for this lab.
 
--   Resource group: the name of a new resource group **s03-ad-RG**
+-   Resource group: the name of a new resource group **s03-ad-RG**.
 
--   Region: the name of the same Azure region which you used earlier in this exercise
+-   Region: the name of the same Azure region which you used earlier in this exercise.
 
 -   Virtual network: **s03-RG-vnet**
 
@@ -490,15 +490,15 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
 1.  On the **Create a resource group** blade, specify the following settings and click **Review + Create**
 
-    -   Subscription: the name of the Azure subscription you are using for this lab
+    -   Subscription: the name of the Azure subscription you are using for this lab.
 
     -   Resource group: **s03-ad-RG**
 
-    -   Region: the name of the same Azure region which you used earlier in this exercise
+    -   Region: the name of the same Azure region which you used earlier in this exercise.
 
 1.  On the **Review + Create** blade, click **Create**.
 
-1.  In the Azure portal, click **+ Create a resource**
+1.  In the Azure portal, click **+ Create a resource**.
 
 1.  On the **New** blade, in the **Search the Marketplace** text box, type **Azure AD Domain Services** and, in the list of results, click **Azure AD Domain Services**.
 
@@ -510,11 +510,11 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
     -   DNS domain name: **contoso.com**
 
-    -   Subscription: the name of the Azure subscription you are using for this lab
+    -   Subscription: the name of the Azure subscription you are using for this lab.
 
     -   Resource group: **s03-ad-RG**
 
-    -   Region: the name of the same Azure region which you used earlier in this exercise
+    -   Region: the name of the same Azure region which you used earlier in this exercise.
 
 1.  On the **Network** blade, specify the following settings and click **OK**:
 
@@ -537,7 +537,7 @@ In this task, you will implement Azure AD DS domain that will be hosting managed
 
 In this task, you will create the following user accounts with non-expiring password set to **demo\@pass123** in the managed Azure AD DS instance to facilitate your SAP implementation:
 
--   the account to perform all operating system level configuration tasks, including installation of all SAP components)
+-   The account to perform all operating system level configuration tasks, including installation of all SAP components):
 
     -   Name: **s03-su** 
 
@@ -545,7 +545,7 @@ In this task, you will create the following user accounts with non-expiring pass
 
         -   **AAD DC Administrators**
 
--   the SAP service accounts:
+-   The SAP service accounts:
 
     -   Name: **s03adm** 
 
@@ -553,7 +553,7 @@ In this task, you will create the following user accounts with non-expiring pass
 
         -   **AAD DC Administrators**
 
--   the SAP service accounts:
+-   The SAP service accounts:
 
     -   Name: **SAPService03** 
 
@@ -561,11 +561,11 @@ In this task, you will create the following user accounts with non-expiring pass
 
         -   **AAD DC Administrators**
 
--   the account to configure SQL Server 2017 services on the first SQL Server VM.
+-   The account to configure SQL Server 2017 services on the first SQL Server VM.
 
     -   Name: **s03-db-0-sqlsvc**
 
--   the account to configure SQL Server 2017 services on the second SQL Server VM.
+-   The account to configure SQL Server 2017 services on the second SQL Server VM.
 
     -   Name: **s03-db-1-sqlsvc**
 
@@ -703,7 +703,7 @@ In this task, you will create the following user accounts with non-expiring pass
 
 ### Task 6: Join Windows Server 2019 Azure VMs to the Azure AD DS domain
 
-In this task, you will join all of the Windows Server 2019 Azure VMs you deployed earlier in this exercise to the Active Directory domain contoso.com.
+In this task, you will join all the Windows Server 2019 Azure VMs you deployed earlier in this exercise to the Active Directory domain contoso.com.
 
 1.  In the Azure portal, navigate to the **Azure AD Domain Services** blade and click **contoso.com**.
 
@@ -848,7 +848,7 @@ In this task, you will configure the managed Azure AD DS instance and its DNS se
 
 1.  Within the Remote Desktop session to s03-adm-0, start DNS Manager console and connect to **contoso.com**. 
 
-    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containing the contoso.com entry](images\Hands-onlabstep-bystep-SAPonAzureimages\media\image1b.png)
+    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containing the contoso.com entry.](images\Hands-onlabstep-bystep-SAPonAzureimages\media\image1b.png)
 
 1.  In the DNS Manager console, expand the **contoso.com** , **Forward Lookup Zones**, and **contoso.com** nodes, and, in the **contoso.com** zone, create Host (A) records with the following settings:
 
@@ -988,9 +988,9 @@ Configure the private IP addresses of Azure VMs and frontend IP configuration of
 
 ### Task 10: Create and configure the sapmnt share
 
-In this task, you will create and configure the **sapmnt** share by using Azure Files
+In this task, you will create and configure the **sapmnt** share by using Azure Files.
 
-1.  On the lab computer, in the Azure portal, click **+ Create a resource**
+1.  On the lab computer, in the Azure portal, click **+ Create a resource**.
 
 1.  On the **New** blade, in the **Search the Marketplace** text box, type **Storage account** and, in the list of results, click **Storage account**.
 
@@ -998,13 +998,13 @@ In this task, you will create and configure the **sapmnt** share by using Azure 
 
 1.  On the **Basics** tab of the **Create storage account** blade, specify the following settings and click **Next: Advanced >**:
 
-    -   Subscription: the name of the Azure subscription you are using for this lab
+    -   Subscription: the name of the Azure subscription you are using for this lab.
 
     -   Resource group: **s03-RG**
 
-    -   Storage account name: any valid storage account name
+    -   Storage account name: any valid storage account name.
 
-    -   Location: the name of the same Azure region which you used earlier in this exercise
+    -   Location: the name of the same Azure region which you used earlier in this exercise.
 
     -   Performance: **Standard**
 
@@ -1046,9 +1046,9 @@ In this task, you will create and configure the **sapmnt** share by using Azure 
 
 1.  On the files blade, click **sapmnt**.
 
-1.  On the **sapmnt** blade, click **Access Control (IAM)**
+1.  On the **sapmnt** blade, click **Access Control (IAM)**.
 
-1.  On the **sapmnt - Access Control (IAM)** blade, click **+ Add** and then click **Add role assignment**
+1.  On the **sapmnt - Access Control (IAM)** blade, click **+ Add** and then click **Add role assignment**.
 
 1.  On the **Add role assignment** blade, specify the following settings and click **Save**: 
 
@@ -1187,7 +1187,7 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
     ![The Advanced Security Settings for S03 window Permissions tab displays Permissions entries.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image118.png)
 
-1.  In the **Permission Entry for S03** window, click **Select Principal**. In the **Select User, Service Account or Group** dialog box, click **Object Types**, enable the checkbox next to the **Computers** entry, and click **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select**, and click **OK**.
+1.  In the **Permission Entry for S03** window, click **Select Principal**. In the **Select User, Service Account or Group** dialog box, click **Object Types**, enable the checkbox next to the **Computers** entry, and click **OK**. Back in the **Select User, Computer, Service Account or Group** dialog box, type **s03-ascs-cl0** in the **Enter the object name to select** and click **OK**.
 
     ![Superimposed over the Permission Entry for S03 window Select User, Service Account or Group dialog box, the previously mentioned settings display.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image119a.png)
 
@@ -1575,7 +1575,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     robocopy U:\usr\sap\S03 \\<storage_account_name>.file.core.windows.net\sapmnt\S03 /e /r:1 /w:1
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, rename **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-0** to **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0**
+1.  Within the Remote Desktop session to s03-ascs-0, rename **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-0** to **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0**.
 
 1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0** by replacing the following entries:
 
@@ -1852,7 +1852,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
 
 ### Task 5: Install the Enqueue Replication Server instance on both nodes of the cluster
 
-In this task, you will install the Enqueue Replication Server (ERS) instance on both nodes of the cluster
+In this task, you will install the Enqueue Replication Server (ERS) instance on both nodes of the cluster.
 
 1.  Within the Remote Desktop session to s03-ascs-0, start SAP Software Provisioning Manager by executing **sapinst.exe**.
 
@@ -2037,7 +2037,7 @@ In a production deployment, you should consider using domain-based Group Policy 
 
 ### Task 3: Install SQL Server 2017 with the SQL\_Latin1\_General\_CP850\_BIN2 collation
 
-In this task, you will configure operating system on s03-db-0 and s03-db-1, and install SQL Server 2017 on s03-db-0 and s03-db-1 Azure VMs. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. Start by disabling the Windows firewall for the domain profile and mounting the 128 GB data disk as ReFS-formatted L: drive with the disk label **Logs Disk** and the 512 GB data disk as ReFS-formatted M: drive with the disk label **Data Disk**. Perform the installation of SQL Server 2017 on both s03-db-0 and s03-db-1 with the following settings:
+In this task, you will configure operating system on s03-db-0 and s03-db-1 and install SQL Server 2017 on s03-db-0 and s03-db-1 Azure VMs. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. Start by disabling the Windows firewall for the domain profile and mounting the 128 GB data disk as ReFS-formatted L: drive with the disk label **Logs Disk** and the 512 GB data disk as ReFS-formatted M: drive with the disk label **Data Disk**. Perform the installation of SQL Server 2017 on both s03-db-0 and s03-db-1 with the following settings:
 
 -   Use Microsoft Update to check for updates (recommended): **disabled**
 
@@ -2089,9 +2089,9 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
     -   **Log directory: L:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Data**
 
-    -   **On both s03-db-0 and s03-db-1, download and install SQL Server Management Studio with the default settings**
+    -   **On both s03-db-0 and s03-db-1, download and install SQL Server Management Studio with the default settings**.
 
-    -   **Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings, including the default database and the server role**
+    -   **Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings, including the default database and the server role**.
 
 1.  Within the Remote Desktop session to s03-adm-0, establish an RDP session to **s03-db-0**. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
@@ -2120,7 +2120,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
     -   Client Tools Connectivity
 
-        Leave all other settings at their defaults, and click **Next**.
+        Leave all other settings at their defaults and click **Next**.
 
     ![Screenshot of the Feature Selection page with the previously mentioned check boxes selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image85.png)
 
@@ -2130,7 +2130,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1, and 
 
 1.  In the **Service Accounts** tab on the **Server Configuration** page, set the account for the SQL Server and SQL Server Agent services to **contoso\\s03-db-0-sqlsvc** with **demo\@pass123** password and click **Next**.
 
-1.  Switch to the **Collation** tab, and click **Customize**. In the **Customize the SQL Server 2017 Database Engine Collation** window, in the **SQL collation, used for backward compatibility**, click **SQL\_Latin1\_General\_CP850\_BIN2**, and click **OK**. Back on the **Server Configuration** page, click **Next**.
+1.  Switch to the **Collation** tab and click **Customize**. In the **Customize the SQL Server 2017 Database Engine Collation** window, in the **SQL collation, used for backward compatibility**, click **SQL\_Latin1\_General\_CP850\_BIN2**, and click **OK**. Back on the **Server Configuration** page, click **Next**.
 
     ![The Customize the SQL Server 2017 Databases Engine Collation window displays with the SQL collation radio button selected, and the previously mentioned path selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image87.png)
 
@@ -3101,7 +3101,7 @@ Account for the fact you are using the virtual names and configure the following
 
 In this task, you will install the SAP AAS of HA deployment of MS SQL Server-based SAP NetWeaver 7.5 HA deployment on s03-di-1 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites and specify the following parameters:
 
--   Profile Directory: **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account you created earlier in this lab)
+-   Profile Directory: **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (Where **<storage_account_name>** designates the name of the storage account you created earlier in this lab.)
 
 -   Drive for Local Instances: **U:**
 
@@ -3133,7 +3133,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account you created earlier in this lab), in the **Destination Drive** drop down list, select **U:**, and click **Next**
+1.  Once you log back on, the **Software Provisioning** wizard will automatically restart. On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account you created earlier in this lab), in the **Destination Drive** drop down list, select **U:** and click **Next**.
 
     ![On Step 2, Define Parameters, General SAP System Parameters page, SAP System fields are set to the previously mentioned settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image65.png)
 
@@ -3187,11 +3187,11 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
     ![Screenshot of the installation progress on the Execute Service page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image179.png)
 
-1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, click **OK**
+1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, click **OK**.
 
 1.  On the **Execution of Service has been completed successfully** page, click **Exit**.
 
-1.  On s03-di-1, start **SAP Management Console**
+1.  On s03-di-1, start **SAP Management Console**.
 
     ![In the SAP Management Console, under SAP Systems, S03 is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image66.png)
 
@@ -3254,6 +3254,6 @@ Duration: 20 Minutes
 
 ### Task 1: Delete resources
 
-1.  Now that the HOL is complete, go ahead and delete all of the Resource Groups created for this HOL. You will no longer need those resources, and it will be beneficial to clean up your Azure Subscription.
+1.  Now that the HOL is complete, go ahead and delete all the Resource Groups created for this HOL. You will no longer need those resources, and it will be beneficial to clean up your Azure Subscription.
 
 You should follow all steps provided *after* attending the Hands-on lab.
