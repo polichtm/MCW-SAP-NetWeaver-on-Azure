@@ -848,7 +848,7 @@ In this task, you will configure the managed Azure AD DS instance and its DNS se
 
 1.  Within the Remote Desktop session to s03-adm-0, start DNS Manager console and connect to **contoso.com**. 
 
-    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containing the contoso.com entry.](images\Hands-onlabstep-bystep-SAPonAzureimages\media\image1b.png)
+    ![Screenshot of the Administrative Tools folder with the Connect to DNS Server dialog box containing the contoso.com entry.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image1b.png)
 
 1.  In the DNS Manager console, expand the **contoso.com** , **Forward Lookup Zones**, and **contoso.com** nodes, and, in the **contoso.com** zone, create Host (A) records with the following settings:
 
