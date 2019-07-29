@@ -76,7 +76,7 @@ Review the relevant Microsoft documentation.
 
 1.  On the subscription blade, click **Access control (IAM)**.
 
-1.  Review the list of user accounts, and verify that your user account has the Owner role assigned to it.
+1.  Review the list of user accounts and verify that your user account has the Owner role assigned to it.
 
 ### Task 3: Validate the Global Administrator role in the Azure AD tenant associated with the Azure subscription
 
