@@ -19,7 +19,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2018 Microsoft Corporation. All rights reserved.
+© 2019 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -210,8 +210,7 @@ As the result, agility of the organization is hampered by capital expenditures a
 
 Contoso Leadership and Planning Groups introduced a mandate to drastically reduce server and storage hardware in their own datacenters to minimize IT related costs. Contoso has already a number of their non-SAP systems migrated to Azure. The leadership asked Contoso IT to look into the possibility to migrate its existing SAP Business Suite to cloud. 
 
-Contoso IT decided to leverage its knowledge of the Microsoft cloud platform and existing ExpressRoute connectivity to host its SAP landscape in Azure. 
-Considering that Contoso finance and supply chain teams strongly rely on SAP Business Suite, the systems should be highly available and their performance must be predictable and consistent.  In addition, the management team wants to leverage disaster recovery capabilities offered by Azure in order to ensure resiliency in case the primary region hosting the new deployment becomes unavailable. 
+Contoso IT decided to leverage its knowledge of the Microsoft cloud platform and existing ExpressRoute connectivity to host its SAP landscape in Azure. Considering that Contoso finance and supply chain teams strongly rely on SAP Business Suite, the systems should be highly available, and their performance must be predictable and consistent.  In addition, the management team wants to leverage disaster recovery capabilities offered by Azure in order to ensure resiliency in case the primary region hosting the new deployment becomes unavailable. 
 
 Before migrating the production environment, Contoso wants to test its new deployment approach by provisioning development, and UAT environments in Azure.
 
@@ -299,7 +298,7 @@ Contoso CIO and the company CFO, along with Business Development Manager (BDM), 
 
         -   ASCS layer hosted by a Windows cluster contains an active VM instance residing in Availability Zone 1 and a standby VM instance residing in Availability Zone 2. 
 
-        -   SAP file share layer on Windows cluster contains an one VM node residing in Availability Zone 1 and another VM node residing in Availability Zone 2. 
+        -   SAP file share layer on Windows cluster contains a one VM node residing in Availability Zone 1 and another VM node residing in Availability Zone 2. 
 
         -   SAP Application Server layer consists of a PAS server VM in Availability Zone 1 and AAS in Availability Zone 2. Clustering is not used in this case since high availability is built-into the PAS and AAS functionality.  
 
@@ -843,11 +842,11 @@ Failover between Azure SQL VMs in the same Azure region is automatic (synchronou
 
 2.  What if I need my cloud resources to access on-premises resources?
 
-    **Potential Answer:** Microsoft supports a hybrid solution, with symmetry between on-premises applications and those on the public cloud. Azure virtual networks allow creating logically isolated environments in Azure and securely connecting them to on-premises datacenter. If customers need private, dedicated connection to Azure, they can ues ExpressRoute.
+    **Potential Answer:** Microsoft supports a hybrid solution, with symmetry between on-premises applications and those on the public cloud. Azure virtual networks allow creating logically isolated environments in Azure and securely connecting them to on-premises datacenter. If customers need private, dedicated connection to Azure, they can use ExpressRoute.
 
 3.  Will Azure meet our security and compliance requirements?
 
-    **Potential Answer:** Microsoft policy is to be fully transparent about security and compliance policies, procedures, and certifications. Customers can access comprehensive documentation covering security and compliance in Microsoft Azrue in public facing Azure Trust Center.
+    **Potential Answer:** Microsoft policy is to be fully transparent about security and compliance policies, procedures, and certifications. Customers can access comprehensive documentation covering security and compliance in Microsoft Azure in public facing Azure Trust Center.
 
 4.  Do I have to pay for resources when they are stopped?
 
