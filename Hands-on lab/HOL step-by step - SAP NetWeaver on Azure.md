@@ -766,7 +766,7 @@ In this task, you will create a new Azure AD user named **aadcadmin** with non-e
 
 1.  On the **Contoso - Overview** blade, select **Users** in the **Manage** section.
 
-1.  On the **Users - All users** blade, select **aadcadmin**.
+1.  On the **Users | All users** blade, select **aadcadmin**.
 
     >**Note**: On the **aadcadmin | Profile** blade, identify the name of the user, including the UPN suffix. You will need it later in this task.
 
@@ -1009,12 +1009,12 @@ Duration: 90 minutes
 
 ### Overview
 
-In this exercise, you will configure the Azure VMs that constitute the SAP ASCS layer. This will include installing Failover Clustering on s03-ascs-0 and s03-ascs-1. You will also use SAP Software Provisioning Manager to perform highly available installation of the ASCS components on the s03-ascs-0 and s03-ascs-1 VMs. 
+In this exercise, you will configure the Azure VMs that constitute the SAP ASCS layer. This will include installing Failover Clustering on s03-ascs-0 and s03-ascs-1. You will also use SAP Software Provisioning Manager to perform distributed installation of the ASCS components on the s03-ascs-0 and s03-ascs-1 VMs. 
 
 
 ### Task 1: Set up Failover Clustering on the ASCS VMs
 
-In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, mount the 128 GB data disk as NTFS-formatted U: drive. On both VMs, disable Windows Defender Firewall with Advanced Security for the domain profile. Next, implement a Windows Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.11** consisting of **s03-ascs-0** and **s03-ascs-1** Azure VMs. Set up the cluster with a Cloud Witness quorum by using the storage account that was provisioned in the previous exercise when you implemented Azure Files. Finally, grant permissions to the **s03-ascs-cl0** cluster computer account to create computer objects in the **S03** organizational unit.
+In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, you will mount the 128 GB data disk as NTFS-formatted U: drive. On both VMs, you will also disable Windows Defender Firewall with Advanced Security for the domain profile. Next, you will implement a Windows Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.11** consisting of s03-ascs-0 and s03-ascs-1 Azure VMs. Afterwards, you will set up the cluster with a Cloud Witness quorum by using the storage account that was provisioned in the previous exercise when you implemented Azure Files. Finally, you will grant permissions to the **s03-ascs-cl0** cluster computer account to create computer objects in the **S03** organizational unit.
 
 1.  Within the Remote Desktop session to the **adPDC** Azure VM, in the Azure portal, navigate to the blade of the **s03-ascs-0** VM and use the **Connect** icon in the toolbar to establish an Remote Desktop session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
@@ -1059,7 +1059,7 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Add-AzAccount
     ```
 
-> **Note**: When prompted, authenticate by using your Azure AD credentials.
+    >**Note:** When prompted, authenticate by using your Azure AD credentials.
 
 1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to identify these subscriptions:
 
@@ -1112,7 +1112,7 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
 
 ### Task 2: Install the SAP ASCS components on s03-ascs-0
 
-In this task, you will use SAP Software Provisioning Manager to perform distributed installation of ASCS components on the first node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
+In this task, you will use SAP Software Provisioning Manager to perform distributed installation of ASCS components on the first node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. You will run the installation by using the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, you will address all necessary prerequisites and specify the following parameters:
 
 -   Destination Drive for Local Instances: **U:**
 
@@ -1140,7 +1140,7 @@ In this task, you will use SAP Software Provisioning Manager to perform distribu
 
 -   Set all passwords to **demo\@pass123**
 
-Account for the fact you will be using the virtual names, and configure the following registry entries on both VMs:
+You will also account for the fact you will be using the virtual names and configure the following registry entries on both VMs:
 
 -   HKLM\\SYSTEM\\CurrentControlSet\\Control\\LSA
 
@@ -1178,7 +1178,7 @@ Account for the fact you will be using the virtual names, and configure the foll
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Within the Remote Desktop session to adPDC, initiate a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials  as previously (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, set **SAP System ID (SAPSID)** to **S03**, select the **U:** drive as the **Destination Drive**, and select **Next**.
 
@@ -1204,7 +1204,7 @@ Account for the fact you will be using the virtual names, and configure the foll
 
     ![The Software Package Browser page has the Search Location field set to location of the packages. The detected package table lists SAPEXE.SAR with the Available status. The Individual Package Location column contains the package location.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image34.png)
 
-1.  On the **Prerequisites Checker Results** page, identify the missing prerequisites.
+1.  On the **Prerequisites Checker Results** page, review the missing prerequisites.
 
     ![The Prerequisite checker page has Detailed results listed in a table.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image35.png)
 
@@ -1250,7 +1250,7 @@ Account for the fact you will be using the virtual names, and configure the foll
 
 1.  On the **Prerequisites Checker Results** page, select **Next**. 
 
-1.  On the **Question** page, When prompted whether to repeat the checks, select **Yes**.
+1.  On the **Question** page, when prompted whether to repeat the checks, select **Yes**.
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, select **Next**, and, once the package is found, select **Next** again.
 
@@ -1303,7 +1303,7 @@ Account for the fact you will be using the virtual names, and configure the foll
 
 ### Task 3: Install the SAP ASCS components on s03-ascs-1
 
-In this task, you will use SAP Software Provisioning Manager to carry out the distributed installation of ASCS components on the second node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
+In this task, you will use SAP Software Provisioning Manager to carry out the distributed installation of ASCS components on the second node of ASCS cluster of MS SQL Server-based SAP NetWeaver 7.5 deployment. You will run the installation using the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, you will address all necessary prerequisites and specify the following parameters:
 
 -   Destination Drive for Local Instances: **U:**
 
@@ -1355,11 +1355,11 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
     ![The Software Provisioning Manager window displays the Parameter Settings page with the Custom option selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image24c.png)
 
-1.  On the **Warning** page, select **OK**. You will be automatically logged off. Log back on by using the same user credentials (**CONTOSO\\s03-su**), if prompted, in the **Open File - Security Warning** dialog box, select **Run**, and, when prompted, sign-in again with the **CONTOSO\\s03-su** account. Once the Software Provisioning Manager starts automatically, select again the **Continue to this website (not recommended)** link, and then, when prompted, sign-in again with the **CONTOSO\\s03-su**.
+1.  On the **Warning** page, select **OK**. You will be automatically logged off. 
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Within the Remote Desktop session to adPDC, initiate a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials  as previously (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, set **SAP System ID (SAPSID)** to **S03**, select the **U:** drive for the **Destination Drive**, and select **Next**.
 
