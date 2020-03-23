@@ -345,7 +345,7 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
 
 ### Task 4: Prepare the Azure virtual network and Contoso Active Directory for deployment of SAP NetWeaver
 
-In this task, you will prepare Azure virtual network and Contoso Active Directory for deployment of SAP Netweaver. In particular, in the contoso.com Active Directory, you will:
+In this task, you will prepare Azure virtual network and Contoso Active Directory for deployment of SAP Netweaver. In particular, you will:
 
 -   Create an organizational unit in the root of the contoso.com domain named **S03** that will host SAP-specific computer, users, and group objects.
 
@@ -433,25 +433,23 @@ In this task, you will prepare Azure virtual network and Contoso Active Director
 
                 -   Password never expires
 
--   In the contoso.com DNS zone:
+-   Create the following DNS Host (A) records in the contoso.com DNS zone:
 
-    -   Create the following DNS Host (A) records:
+    -   **s03-ascs-v0 10.0.1.16** (this IP address must match the IP address that will be assigned to the **frontendascs** front end IP configuration of the ASCS-layer internal load balancer)
 
-        -   **s03-ascs-v0 10.0.1.16** (this IP address must match the IP address that will be assigned to the **frontendascs** front end IP configuration of the ASCS-layer internal load balancer)
+    -   **s03-ascs-ers-v0 10.0.1.17** (this IP address must match the IP address that will be assigned to the **frontendaers** front end IP configuration of the ASCS-layer internal load balancer)
 
-        -   **s03-ascs-ers-v0 10.0.1.17** (this IP address must match the IP address that will be assigned to the **frontendaers** front end IP configuration of the ASCS-layer internal load balancer)
+    -   **s03-ascs-ers0 10.0.1.18** (this IP address must match the IP address that will be assigned to the **s03-ascs-0**)
 
-        -   **s03-ascs-ers0 10.0.1.18** (this IP address must match the IP address that will be assigned to the **s03-ascs-0**)
+    -   **s03-ascs-ers1 10.0.1.19** (this IP address must match the IP address that will be assigned to the **s03-ascs-1**)
 
-        -   **s03-ascs-ers1 10.0.1.19** (this IP address must match the IP address that will be assigned to the **s03-ascs-1**)
+    -   **s03-di-v0 10.0.1.38** (this IP address must match the IP address that will be assigned to the SAP Primary Application Server s0-di-0)
 
-        -   **s03-di-v0 10.0.1.38** (this IP address must match the IP address that will be assigned to the SAP Primary Application Server s0-di-0)
+    -   **s03-di-v1 10.0.1.39** (this IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-1)
 
-        -   **s03-di-v1 10.0.1.39** (this IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-1)
+1.  On the lab computer, in the Azure portal, navigate to the blade of the **adPDC** Azure virtual machine, select **Connect**, and, in the drop-down menu, select **RDP**. 
 
-1.  In the Azure portal, navigate to the blade of the **adPDC** Azure virtual machine, select **Connect**, and, in the drop-down menu, select **RDP**. 
-
-1.  On the **adPDC | Connect** blade, in the **IP address** drop-down list, select the **Load balancer public IP address** entry, and select **Download RDP File**. Follow the propmts to initiate a Remote Desktop session and authenticate by using the following credentials:
+1.  On the **adPDC | Connect** blade, in the **IP address** drop-down list, select the **Load balancer public IP address** entry, and select **Download RDP File**. Follow the prompts to initiate a Remote Desktop session and authenticate by using the following credentials:
 
     -   Username: **contoso\\demouser**
 
@@ -463,7 +461,7 @@ In this task, you will prepare Azure virtual network and Contoso Active Director
 
     ![Screenshot of the Active Directory Administration Center, showing the menu option for creating a new organizational unit.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image7a.png)
 
-1.  In the Active Directory Administrative Center, in the newly created organizational unit **S03**, create the following group accounts:
+1.  In the Active Directory Administrative Center, in the newly created organizational unit **S03**, create the following group account:
 
     -   Group name: **SAP_S03_GlobalAdmin**
 
@@ -549,7 +547,7 @@ In this task, you will prepare Azure virtual network and Contoso Active Director
 
             -   Password never expires
 
-1.  Within the Remote Desktop session to adPDC, from the **Start** menu, navigate to **Administrative Tools**, select **DNS** to start DNS Manager console. 
+1.  Within the Remote Desktop session to adPDC, from the **Start** menu, navigate to **Administrative Tools**, select **DNS** to start the DNS Manager console. 
 
 1.  In the DNS Manager console, expand the **adPDC**, **Forward Lookup Zones**, and **contoso.com** nodes, and, in the **contoso.com** zone, create Host (A) records with the following settings:
 
@@ -585,7 +583,7 @@ In this task, you will prepare Azure virtual network and Contoso Active Director
 
     -   Name: **s03-di-v1**
 
-        -   Data: **10.0.1.39** - this IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-
+        -   Data: **10.0.1.39** - this IP address must match the IP address that will be assigned to the SAP Additional Application Server s0-di-1.
 
             ![Screenshot of the Host A record and its IP address.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image6.png)
 
