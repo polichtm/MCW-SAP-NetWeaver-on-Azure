@@ -31,6 +31,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Requirements](#requirements)
     - [Before the hands-on lab](#before-the-hands-on-lab)
         - [Task 1: Review the relevant Microsoft documentation](#task-1-review-the-relevant-microsoft-documentation)
+        - [Task 2: Validate the owner role assignment in the Azure subscription](#task-2-Validate-the-owner-role-assignment-in-the-Azure-subscription)
+        - [Task 3: Validate the Global Administrator role in the Azure AD tenant associated with the Azure subscription](#task-3-Validate-the-Global-Administrator-role-in-the-Azure-AD-tenant-associated-with-the-Azure-subscription)
+        - [Task 4: Validate sufficient number of vCPU cores](#task-4-Validate-sufficient-number-of-vCPU-cores)
+        - [Task 5: Identify SAP binaries](#task-5-Identify-SAP-binaries)
 
 <!-- /TOC -->
 
@@ -38,7 +42,9 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Requirements
 
--   A Microsoft Azure subscription with at least 34 vCPU available in the Azure region where the Azure VMs deployed in this lab will reside.
+-   A Microsoft Azure subscription with at least 40 vCPU available in the Azure region where the Azure VMs deployed in this lab will reside.
+
+    -   AD VMs -- 2 x D4s\_v3: 2 x 4 vCPUs = 8 vCPUs
 
     -   ASCS VMs -- 2 x D4s\_v3: 2 x 4 vCPUs = 8 vCPUs
 
@@ -46,9 +52,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     -   APP VMs -- 2 x D4s\_v3: 2 x 4 vCPUs = 8 vCPUs
 
-    -   Jumpbox VMs -- 1 x D2s\_v3: 1 x 2 vCPUs = 2 vCPUs
-
-   > **Note**: The lab VM does not require locally installed software. Az PowerShell tasks are performed by using Cloud Shell in the Azure portal. If you decide to run these tasks from the lab computer, install Az PowerShell (module version 2.1.0 or newer).
+   > **Note**: The lab VM does not require locally installed software. Az PowerShell tasks are run in Cloud Shell in the Azure portal and directly from Azure VMs deployed throughout the course of the lab. If you decide to run some of these tasks from the lab computer, install Az PowerShell (module version 2.1.0 or newer).
 
 -   Access to SAP binaries described in task 5 of this document
 
@@ -66,25 +70,25 @@ Review the relevant Microsoft documentation.
 
 1.  Review to the documentation regarding Az PowerShell at <https://docs.microsoft.com/en-us/powershell/azure/new-azureps-module-az?view=azps-3.6.1>.
 
-### Task 2: Validate the owner role membership in the Azure subscription
+### Task 2: Validate the owner role assignment in the Azure subscription
 
-1.  Login to the Azure portal at <http://portal.azure.com>, use the **Search resources, services, and docs** text box to search for **Subscriptions** and, in the list of results, click **Subscriptions**.
+1.  Login to the Azure portal at <http://portal.azure.com>, use the **Search resources, services, and docs** text box to search for **Subscriptions** and, in the list of results, select **Subscriptions**.
 
-1.  On the **Subscriptions** blade, click the name of the subscription you intend to use for this lab.
+1.  On the **Subscriptions** blade, select the name of the subscription you intend to use for this lab.
 
-1.  On the subscription blade, click **Access control (IAM)**.
+1.  On the subscription blade, select **Access control (IAM)**.
 
 1.  Switch to the **Role assignments** tab, review the list of role assignments, and verify that your user account has the Owner role assigned to it.
 
 ### Task 3: Validate the Global Administrator role in the Azure AD tenant associated with the Azure subscription
 
-1.  In the Azure portal at <http://portal.azure.com>, use the **Search resources, services, and docs** text box to search for **Azure Active Directory** and, in the list of results, click  **Azure Active Directory**.
+1.  In the Azure portal at <http://portal.azure.com>, use the **Search resources, services, and docs** text box to search for **Azure Active Directory** and, in the list of results, select  **Azure Active Directory**.
 
-1.  On the Azure Active Directory blade, click **Users**.
+1.  On the Azure Active Directory blade, select **Users**.
 
-1.  On the **Users | All Users** blade, click the entry representing your user account. 
+1.  On the **Users | All Users** blade, select the entry representing your user account. 
 
-1.  On the blade displaying properties of your user account, click **Assigned roles**.
+1.  On the blade displaying properties of your user account, select **Assigned roles**.
 
 1.  Verify that the list of the directory roles assigned to your user account includes the **Global administrator** entry. 
 
@@ -94,7 +98,7 @@ Review the relevant Microsoft documentation.
 
 1.  In the Azure Portal, start a PowerShell session in Cloud Shell. 
 
-    > **Note**: If this is the first time you are launching Cloud Shell in the current Azure subscription, you will be asked to create an Azure file share to persist Cloud Shell files. If so, accept the defaults, which will result in creation of a storage account in an automatically generated resource group.
+    > **Note**: If this is the first time you are launching Cloud Shell in the current Azure subscription, you will be asked to create an Azure file share to persist content of your Cloud Shell home directory. If so, accept the defaults, which will result in creation of a storage account in an automatically generated resource group.
 
 1.  In the Azure portal, in the **Cloud Shell**, at the PowerShell prompt, run the following: where `<Azure_region>` designates the target Azure region that you intend to use for this lab (e.g. `eastus`):
 
@@ -104,13 +108,13 @@ Review the relevant Microsoft documentation.
 
     > **Note**: To identify the names of Azure regions, in the **Cloud Shell**, at the PowerShell prompt, run `(Get-AzLocation).Location`.
    
-1.  Review the output of the command executed in the previous step and ensure that you have at least 18 available vCPUs in the **Standard DSv3 Family** in the target Azure region.
+1.  Review the output of the command executed in the previous step and ensure that you have at least 40 available vCPUs in the **Standard DSv3 Family** in the target Azure region.
 
-1.  If the number of vCPUs is not sufficient, in the Azure portal, navigate back to the subscription blade, and click **Usage + quotas**. 
+1.  If the number of vCPUs is not sufficient, in the Azure portal, navigate back to the subscription blade, and select **Usage + quotas**. 
 
-1.  On the subscription's **Usage + quotas** blade, click **Request Increase**.
+1.  On the subscription's **Usage + quotas** blade, select **Request Increase**.
 
-1.  On the **Basic** blade, specify the following and click **Next: Solutions >>**:
+1.  On the **Basic** blade, specify the following and select **Next: Solutions >**:
 
     -   Issue type: **Service and subscription limits (quotas)**
 
@@ -120,9 +124,9 @@ Review the relevant Microsoft documentation.
 
     -   Support plan: the name of the support plan associated with the target subscription.
 
-1.  On the **Details** blade, click the **Provide details** link.
+1.  On the **Details** blade, select the **Provide details** link.
 
-1.  On the **Quota details** blade, specify the following and click **Save and continue**:
+1.  On the **Quota details** blade, specify the following and select **Save and continue**:
 
     -   Deployment model: **Resource Manager**
 
@@ -134,13 +138,13 @@ Review the relevant Microsoft documentation.
     
     -   New vCPU Limit: the new limit
 
-1.  Back on the **Details** blade, specify the following and click **Next: Review + create >>**:
+1.  Back on the **Details** blade, specify the following and select **Next: Review + create >**:
 
     -   Severity: **C - Minimal impact**
 
     -   Preferred contact method: choose your preferred option and provide your contact details
     
-1.  On the **Review + create** blade, click **Create**.
+1.  On the **Review + create** blade, select **Create**.
 
    > **Note**: Quota increase requests are commonly completed during the same business day.
 
@@ -170,6 +174,6 @@ Review the relevant Microsoft documentation.
 
     -   NW 7.5 Installation Export (51050829_3.ZIP)
     
-    > **Note**: The packages names (listed above in parenthesis) might be superseded by newer versions. If so, ensure to adjust accordingly all references to the names of these packages in this task. To find appropriate packages, you can take advantage of the search functionality of the **SAP Software Downloads** portal.
+    > **Note**: Keep in mind that the packages names might change if their versions referenced in this lab are superseded by newer ones. If so, ensure to adjust accordingly all references to the names of these packages throughout the lab. To find appropriate packages, you can take advantage of the search functionality of the **SAP Software Downloads** portal.
     
 You should follow all steps provided *before* performing the Hands-on lab.
