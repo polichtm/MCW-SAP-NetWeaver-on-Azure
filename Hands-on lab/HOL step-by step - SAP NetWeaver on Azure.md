@@ -13,8 +13,6 @@ March 2020
 </div>
 
 
-
-
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
 
 Microsoft may have patents, patent applications, trademarks, copyrights, or other intellectual property rights covering subject matter in this document. Except as expressly provided in any written license agreement from Microsoft, the furnishing of this document does not give you any license to these patents, trademarks, copyrights, or other intellectual property.
@@ -79,7 +77,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 ## Abstract and learning objectives 
 
-In this hands-on lab you will setup and configure SAP NetWeaver by using a combination of Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) components. You will setup identity management by using Active Directory Domain Services (AD DS) integrated with Azure Active Directory (Azure AD), file sharing by using Azure Files service, NetWeaver application and database tiers by using Azure virtual machines (VMs) and integrate them with Active Directory. You will then setup high-availability for SAP ASCS components hosted on Azure VMs by configuring failover clustering. Finally, you will implement the database tier by using Always On Availability Groups and configure the NetWeaver application servers for redundancy.
+In this hands-on lab you will setup and configure SAP NetWeaver by using a combination of Azure Infrastructure as a Service (IaaS) and Platform as a Service (PaaS) components. You will setup identity management by using Active Directory Domain Services (AD DS) integrated with Azure Active Directory (Azure AD), file sharing by using Azure Files service, as well as deploy NetWeaver application and database tiers by using Azure virtual machines (VMs). You will then setup highly available SAP ASCS components hosted on Azure VMs by configuring failover clustering, implement the database tier by using SQL Server 2019 Always On Availability Group, and provision NetWeaver Primary and Secondary Application Servers in a redundant configuration.
 
 As you step through the hands-on-lab, you will learn how to optimize deployment of SAP on Azure, including configuration of SAP NetWeaver ASCS servers, SAP NetWeaver database servers, and SAP NetWeaver Application servers.
 
@@ -107,7 +105,7 @@ From the architectural standpoint, the deployment will consist of the following 
 
     -   Additional Application Server (AAS)
 
--   SAP Database layer -- two servers hosting separate instances of SQL Server 2017 configured as nodes of a SQL Server Always-On Availability Group cluster
+-   SAP Database layer -- two servers hosting separate instances of SQL Server 2019 configured as nodes of a SQL Server Always-On Availability Group cluster
 
     -   Failover Clustering will rely on Cloud Witness-based quorum
 
@@ -115,20 +113,18 @@ From the architectural standpoint, the deployment will consist of the following 
 
 To facilitate high-availability on the platform level, each pair of Azure virtual machines (VMs) in each layer will belong to the same managed availability set.
 
-The solution will also include a Windows Server 2019 Azure VM that will serve the role of a jumpbox server.
-
-![Solution architecture to setup SAP NetWeaver on Azure consisting of Authentication layer (with two Active Directory domain controllers), shared storage (two servers configured as a Storage Spaces Direct cluster), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2017 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabunguided-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
+![Solution architecture to setup SAP NetWeaver on Azure consisting of the authentication layer (with two Active Directory domain controllers), highly available sapmnt share (hosted by using Azure Files service), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2019 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabunguided-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
 
 ## Exercise 1: Deploy the SAP on Azure infrastructure components 
 
 Duration: 175 minutes
 
-In this exercise, you will deploy Azure infrastructure prerequisites for implementing SAP NetWeaver on Azure Virtual Machines (VMs). This will include creating such resources as an Azure Virtual Network, Azure VMs and Azure load balancers. In addition, you will implement Azure AD DS, and subsequently, join all Azure VMs to the same Active Directory domain.
+In this exercise, you will deploy Azure infrastructure prerequisites for implementing SAP NetWeaver on Azure Virtual Machines (VMs). This will include creating such resources as an Azure Virtual Network, Azure VMs and Azure load balancers. In addition, you will create an Active Directory (AD) environment, integrate it with Azure Active Directory (Azure AD), and configure AD-based authentication of an Azure Storage acocunt that will host the sapmnt file share.
 
 
 ### Task 1: Deploy Active Directory domain controller VMs
 
-In this task, you will deploy two Azure VMs hosting Active Directory domain controllers of the domain contoso.com by using an Azure Resource Manager QuickStart template from GitHub available at <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>. You will use the following settings during deployment:
+In this task, you will deploy two Azure VMs hosting Active Directory domain controllers in the single-domain forest contoso.com by using an Azure Resource Manager QuickStart template from GitHub available at <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>. You will use the following settings during deployment:
 
 -   Resource group name: **s03-RG**
 
@@ -138,19 +134,19 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
 -   Domain Name: **contoso.com**
 
-1.  From the lab computer, start a Web browser, and navigate to the Azure portal at <https://portal.azure.com>
+1.  From the lab computer, start a web browser, and navigate to the Azure portal at <https://portal.azure.com>
 
-1.  When prompted, sign in to the Azure subscription you will be using in this lab
+1.  When prompted, sign in to the Azure subscription you will be using in this lab.
 
-1.  From the lab computer, open another the in the web browser window and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>
+1.  From the lab computer, open another web browser window and navigate to <https://github.com/Azure/azure-quickstart-templates/tree/master/active-directory-new-domain-ha-2-dc>
 
-1.  On the **Create 2 new Windows VMs, create a new AD Forest, Domain and 2 DCs in an availability set** page, and select **Deploy to Azure**
+1.  On the **Create 2 new Windows VMs, create a new AD Forest, Domain and 2 DCs in an availability set** page, select **Deploy to Azure**
 
-1.  The Web browser window should automatically be redirected to the Azure portal, and display the **Create a new AD Domain with 2 Domain Controllers** blade.
+1.  The Web browser will automatically open the Azure portal and display the **Create a new AD Domain with 2 Domain Controllers** blade.
 
 1.  On the **Create a new AD Domain with 2 Domain Controllers** blade, select **Edit template**.
 
-1.  On the **Edit template**, scroll down to the variables section and modify the values of the following variables and select **Save**:
+1.  On the **Edit template**, scroll down to the variables section, modify the values of the following variables, and select **Save**:
 
     -   adVMSize: **Standard\_D4s\_v3**
 
@@ -174,7 +170,7 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
     -   Resource group: **(New) s03-RG**
 
-    -   Location: the name of the Azure subscription you are using for this lab
+    -   Location: the name of the Azure region you are using for this lab
 
     -   Admin Username: **demouser**
 
@@ -188,11 +184,11 @@ In this task, you will deploy two Azure VMs hosting Active Directory domain cont
 
     -   Bdc RDP Port: **13389**
 
-    -   \_artifacts Location: **https:////raw.githubusercontent.com//Azure//azure-quickstart-templates//master//active-directory-new-domain-ha-2-dc//**
+    -   \_artifacts Location: **https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/active-directory-new-domain-ha-2-dc/**
 
     -   \_artifacts Location Sas Token: the default value
 
-    > **Note**: Ensure that the value of the **\_artifacts Location** variable includes the trailing forward slash **//**.
+    > **Note**: Ensure that the value of the **\_artifacts Location** variable includes the trailing forward slash **/**.
 
 1.  Select the checkbox labeled **I agree to the terms and conditions stated above**, and select **Purchase**
 
@@ -209,7 +205,7 @@ In this task, you will add a subnet to the Azure virtual network, which will hos
 
 -   Virtual network IP address space: **10.0.0.0/22**
 
--   Subnets: 
+-   Subnet: 
 
     -   Subnet name: **sapSubnet**
 
@@ -274,15 +270,15 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
 
     ![Screenshot of the Edit template blade. Under Variables, sizes is selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image14.png)
 
-1.  In the editor window, navigate to the **Demo** section, scroll down to the **SQL** section, and modify the values of the **dbvmSize** key per the following screenshot:
+1.  In the editor window, navigate to the **Demo** section, scroll down to the **SQL** section, and modify the values of the **dbvmSize** key as per the following screenshot:
 
     ![Screenshot of the editor windows with the previously mentioned keys displaying.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15.png)
 
-1.  In the editor window, navigate to the **osType** parameter subsection of the **Parameters** section. Add an entry for **Windows Server 2019** and configure it as the default value of the parameter, as per the following screenshot:
+1.  In the editor window, navigate to the **osType** parameter subsection of the **Parameters** section. Add an entry for **Windows Server 2019** and configure it as the default value of the parameter as per the following screenshot:
 
     ![Screenshot of the editor windows with the Windows Server 2019 value of the osType parameter.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15b.png)
 
-1.  In the editor window, navigate to the **images** variable of the **Variables** section. Add an entry for **Windows Server 2019**, as per the following screenshot:
+1.  In the editor window, navigate to the **images** variable of the **Variables** section. Add an entry for **Windows Server 2019** as per the following screenshot:
 
     ![Screenshot of the editor windows with the Windows Server 2019 variable.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image15c.png)
 
@@ -341,8 +337,6 @@ In this task, you will deploy Azure VMs that will be hosting your SAP implementa
     ![Screenshot of the Terms and Conditions page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image9.png)
 
 1.  Wait for the deployment to complete. This should take no more than 10 minutes. You can verify the deployment completed successfully by viewing the **Deployments** entry of the s03-RG resource group blade in the Azure portal.
-
-    > **Note**: Disregard any custom script extension errors generated during the template deployment.
 
     ![The s03-RG resource group blade displays in the Azure Portal.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image18.png)
 

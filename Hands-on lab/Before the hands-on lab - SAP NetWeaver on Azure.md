@@ -52,6 +52,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
     -   APP VMs -- 2 x D4s\_v3: 2 x 4 vCPUs = 8 vCPUs
 
+   > **Note**: The Azure region you select must support Active Directory authentication for Azure File shares. For the listing of regions supporting this functionality, refer to <https://docs.microsoft.com/en-us/azure/storage/files/storage-files-identity-auth-active-directory-enable>.
+
    > **Note**: The lab VM does not require locally installed software. Az PowerShell tasks are run in Cloud Shell in the Azure portal and directly from Azure VMs deployed throughout the course of the lab. If you decide to run some of these tasks from the lab computer, install Az PowerShell (module version 2.1.0 or newer).
 
 -   Access to SAP binaries described in task 5 of this document
