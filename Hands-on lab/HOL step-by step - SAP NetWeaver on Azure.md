@@ -942,10 +942,10 @@ In this task, you will configure the Azure Storage account File service to use A
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `<subscriptionId>` with the value of the target subscription you identified in the previous step):
 
     ```powershell
-    Set-AzContext -SubscriptionId [subscriptionId]
+    Set-AzContext -SubscriptionId <subscriptionId>
     ```
 
 1.  From the Windows PowerShell ISE console, run the following to enable Active Directory authentication for all the shares of the Azure Storage account you created in the previous task:
@@ -1067,10 +1067,10 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `<subscriptionId>` with the value of the target subscription you identified in the previous step):
 
     ```powershell
-    Set-AzContext -SubscriptionId [subscriptionId]
+    Set-AzContext -SubscriptionId <subscriptionId>
     ```
 
 1.  Within the Remote Desktop session to adPDC, from the Windows PowerShell ISE console, configure a Cloud Witness quorum by running the following:
@@ -1510,13 +1510,13 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     net use S: \\<storage_account_name>.file.core.windows.net\sapmnt
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, from the Command Propmt, copy files from the local ASCS instances to the Azure Files-based sapmnt share by running the following (where `<storage_account_name>` designates the name of the storage account you created in the previous exercise):
+1.  Within the Remote Desktop session to s03-ascs-0, from the Command Propmt, copy files from the local ASCS instances to the Azure Files-based sapmnt share by running the following:
 
     ```
     robocopy U:\usr\sap\S03 S:\S03 /e /r:1 /w:1
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, run the following to rename **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-0** to **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0**
+1.  Within the Remote Desktop session to s03-ascs-0, run the following to rename **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-0** to **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0**
 
     ```
     ren S:\S03\SYS\profile\S03_ASCS00_s03-ascs-0 S03_ASCS00_s03-ascs-v0
@@ -1544,7 +1544,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     enque/encni/set_so_keepalive = true
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0** by replacing the following entries:
+1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0** by replacing the following entries:
 
     ```
     #-----------------------------------------------------------------------
@@ -1576,7 +1576,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     wdisp/system_0 = SID=S03, MSHOST=s03-ascs-v0, MSPORT=8100, SSL_ENCRYPT=0
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **\\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\DEFAULT.PFL** by replacing the following entries:
+1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\DEFAULT.PFL** by replacing the following entries:
 
     ```
     rdisp/mshost = s03-ascs-0
@@ -1627,7 +1627,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     SAPLOCALHOST=s03-ascs-v0
     ```
 
-1.  Log off from s03-ascs-1 and re-logon by using the following credentials:
+1.  Switch to the Remote Desktop session to s03-ascs-1, log off, and re-logon by using the following credentials:
 
     -   Username: **contoso\\s03adm**
 
@@ -2190,7 +2190,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
 In this task, you will install the SAP database instance on s03-db-0 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
 
--   Profile Directory: **\\\\<storage_account_name>\\sapmnt\\S03\\SYS\\profile**
+-   Profile Directory: **_\_\<storage_account_name>\\sapmnt\\S03\\SYS\\profile**
 
 -   SAP System User Domain: **Domain of Current User**
 
@@ -2485,10 +2485,10 @@ Bring the Always-On Availability Group clustered role online.
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `<subscriptionId>` with the value of the target subscription you identified in the previous step):
 
     ```powershell
-    Set-AzContext -SubscriptionId [subscriptionId]
+    Set-AzContext -SubscriptionId <subscriptionId>
     ```
 1.  From the same Windows PowerShell ISE session, create a Cloud Witness quorum by running the following (when prompted, sign in with the Service Administrator account of your Azure subscription):
 
@@ -3302,10 +3302,10 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `<subscriptionId>` with the value of the target subscription you identified in the previous step):
 
     ```powershell
-    Set-AzContext -SubscriptionId [subscriptionId]
+    Set-AzContext -SubscriptionId <subscriptionId>
     ```
 
 1.  From the Windows PowerShell ISE console, run the following to install SAP Enhanced Monitoring Extension for SAP on Azure VMs included in your SAP deployment:
