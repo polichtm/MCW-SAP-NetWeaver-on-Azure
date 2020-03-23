@@ -1516,7 +1516,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     robocopy U:\usr\sap\S03 S:\S03 /e /r:1 /w:1
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, run the following to rename **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-0** to **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0**
+1.  Within the Remote Desktop session to s03-ascs-0, run the following to rename **/\/\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-0** to **/\/\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0**
 
     ```
     ren S:\S03\SYS\profile\S03_ASCS00_s03-ascs-0 S03_ASCS00_s03-ascs-v0
@@ -1544,7 +1544,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     enque/encni/set_so_keepalive = true
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0** by replacing the following entries:
+1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **/\/\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\S03_ASCS00_s03-ascs-v0** by replacing the following entries:
 
     ```
     #-----------------------------------------------------------------------
@@ -1576,7 +1576,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     wdisp/system_0 = SID=S03, MSHOST=s03-ascs-v0, MSPORT=8100, SSL_ENCRYPT=0
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **_\_\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\DEFAULT.PFL** by replacing the following entries:
+1.  Within the Remote Desktop session to s03-ascs-0, modify the content of **/\/\<storage_account_name>.file.core.windows.net\sapmnt\S03\SYS\profile\DEFAULT.PFL** by replacing the following entries:
 
     ```
     rdisp/mshost = s03-ascs-0
@@ -2190,7 +2190,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
 In this task, you will install the SAP database instance on s03-db-0 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
 
--   Profile Directory: **_\_\<storage_account_name>\\sapmnt\\S03\\SYS\\profile**
+-   Profile Directory: **/\/\<storage_account_name>\\sapmnt\\S03\\SYS\\profile**
 
 -   SAP System User Domain: **Domain of Current User**
 
