@@ -113,7 +113,7 @@ From the architectural standpoint, the deployment will consist of the following 
 
 To facilitate high-availability on the platform level, each pair of Azure virtual machines (VMs) in each layer will belong to the same managed availability set.
 
-![Solution architecture to setup SAP NetWeaver on Azure consisting of the authentication layer (with two Active Directory domain controllers), highly available sapmnt share (hosted by using Azure Files service), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2019 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabunguided-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
+![Solution architecture to setup SAP NetWeaver on Azure consisting of the authentication layer (with two Active Directory domain controllers), highly available sapmnt share (hosted by using Azure Files service), SAP ASCS layer (with two servers configured as members of a two-node Windows Failover Clustering cluster), SAP Application instances layer (with two SAP application servers), SAP Database layer (two servers hosting separate instances of SQL Server 2019 configured as nodes of a SQL Server Always-On Availability Group cluster).](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image1.png  "Solution architecture diagram")
 
 ## Exercise 1: Deploy the SAP on Azure infrastructure components 
 
