@@ -592,7 +592,7 @@ In this task, you will prepare Azure virtual network and Contoso Active Director
 
 In this task, you will configure private IP addresses assigned to the Azure VMs and front end IP configuration of load balancers deployed in the previous task by using an Azure Resource Manager template. 
 
->**Note:** At this point, each of the Azure VMs we have deployed in the previous task has a dynamically assigned Private IP address.
+>**Note:** At this point, each of the Azure VMs you have deployed in the previous task has a dynamically assigned Private IP address.
 
 Configure the private IP addresses of Azure VMs and frontend IP configuration of load balancers in the following manner:
 
@@ -671,7 +671,7 @@ Configure the private IP addresses of Azure VMs and frontend IP configuration of
 
 ### Task 6: Join SAP NetWeaver application and database VMs to the domain
 
-In this task, you will join all of the Windows Server 2016 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
+In this task, you will join all of the Windows Server 2019 Azure VMs that will be hosting your SAP implementation to the Active Directory domain contoso.com.
 
 1.  From the lab computer, in the Azure portal, in the **Cloud Shell**, at the PowerShell prompt, run the following to join Azure VMs that will host SAP NetWeaver deployment to the contoso.com Active Directory domain.
 
@@ -732,7 +732,9 @@ In this task, you will install Remote Server Administration Tools on all of the 
 
 ### Task 8: Install and configure Azure AD Connect
 
-In this task, you will create a new Azure AD user named **aadcadmin** with non-expiring password **demo/@pass123**, assign to it the Global Administrator role, and leverage it to install Azure AD Connect.
+In this task, you will create a new Azure AD user named **aadcadmin** with non-expiring password **demo/@pass123** and the Global Administrator role. Next, you will use this account during installation of Azure AD Connect.
+
+> **Note**: Integrating AD with Azure AD is required in order to implement AD-based authentication of Azure File shares, which you will use to implement highly available sapmnt file share.
 
 1.  Within the Remote Desktop session to adPDC, in Server Manager, select **Local Server**, select the **On** link to the right of the **IE Enhanced Security Configuration** label, set the **Administrators** settings to **Off**, and select **OK**.
 
@@ -762,7 +764,7 @@ In this task, you will create a new Azure AD user named **aadcadmin** with non-e
 
 1.  In the Azure portal, search for and select **Azure Active Directory** to navigate to the blade of the Azure Active Directory tenant associated with your subscription.
 
-1.  On the **Contoso - Overview** blade, select **Users** under **Manage** in the left navigation.
+1.  On the **Contoso - Overview** blade, select **Users** in the **Manage** section.
 
 1.  On the **Users - All users** blade, select **aadcadmin**.
 
@@ -861,7 +863,7 @@ In this task, you will create an Azure Storage account and the sapmnt file share
 
     -   Access tier: **Hot**
 
-    > **Note**: Take a note of the name of the storage account you are creating. You will need it later in this lab.
+    > **Note**: Record the name of the storage account you are creating. You will need it later in this lab.
 
 1.  On the **Networking** tab of the **Create storage account** blade, accept the default **Connectivity method** of **Public endpoint (all networks)** and select **Next: Advanced >**:
 
@@ -888,11 +890,11 @@ In this task, you will create an Azure Storage account and the sapmnt file share
 
 ### Task 10: Configure Active Directory authentication for Azure file shares
 
-In this task, you will configure the Azure Storage account file shares to use Active Directory authentication.
+In this task, you will configure the Azure Storage account File service to use Active Directory authentication.
 
 > **Note**: This functionality is in public preview at the time of authoring this content.
 
-1.  Within the Remote Desktop session to adPDC, start a web browser, navigate to the Github Azure Files samples repository at <https://github.com/Azure-Samples/azure-files-samples/releases> and download the latest version of AzFilesHybrid.zip file and extract its content into the Downloads folder.
+1.  Within the Remote Desktop session to adPDC, start a web browser, navigate to the Github Azure Files samples repository at <https://github.com/Azure-Samples/azure-files-samples/releases>, download the latest version of AzFilesHybrid.zip file, and extract its content into the Downloads folder.
 
 1.  Within the Remote Desktop session to adPDC, from the Windows PowerShell ISE console, run the following to import the downloaded PowerShell module:
 
@@ -924,7 +926,7 @@ In this task, you will configure the Azure Storage account file shares to use Ac
     Install-Module -Name Az -Force
     ```
 
-> **Note**: When prompted whether to install NuGet provider, select **Yes**
+    >**Note:** When prompted whether to install NuGet provider, select **Yes**
 
 1.  From the Windows PowerShell ISE console, run the following to authenticate to your Azure AD tenant:
 
@@ -932,7 +934,7 @@ In this task, you will configure the Azure Storage account file shares to use Ac
     Connect-AzAccount
     ```
 
-> **Note**: When prompted, authenticate by using your Azure AD credentials.
+    >**Note:** When prompted, authenticate by using your Azure AD credentials.
 
 1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to identify these subscriptions:
 
@@ -940,7 +942,7 @@ In this task, you will configure the Azure Storage account file shares to use Ac
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the `[subscriptionId]` placeholder with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
 
     ```powershell
     Set-AzContext -SubscriptionId [subscriptionId]
@@ -990,9 +992,9 @@ In this task, you will configure the Azure Storage account file shares to use Ac
 
 1.  On the **Connect** blade, copy to Clipboard the PowerShell script that creates a peristent Z: drive mapping to the target share.
 
-1.  Paste the content of Clipboard into the script pane of the Administrator: Windows PowerShell ISE window and run the resulting script.
+1.  Paste the content of Clipboard into the script pane of the Administrator: Windows PowerShell ISE window and execute it.
 
-1.  Within the Remote Desktop session to adPDC, start **File Explorer**, browse to the **Z:** drive, display its **Properties** window, within the **Properties window, switch to the **Security** tab, select **Edit**, in the **Permissions for sapmnt** window, select **Add**, in the **Enter the object names to select** text box of the **Select Users, Computers, Service Accounts, and Groups dialog box, type **s03-su;s03adm;SAPServiceS03;SAP_S03_GlobalAdmin;Domain Admins" and select **OK**.
+1.  Within the Remote Desktop session to adPDC, start **File Explorer**, browse to the **Z:** drive, display its **Properties** window, within the **Properties** window, switch to the **Security** tab, select **Edit**, in the **Permissions for sapmnt** window, select **Add**, in the **Enter the object names to select** text box of the **Select Users, Computers, Service Accounts, and Groups** dialog box, type **s03-su;s03adm;SAPServiceS03;SAP_S03_GlobalAdmin;Domain Admins** and select **OK**.
 
 1.  Back in the **Permissions for sapmnt** window, select each of the accounts you specified in the previous step, select the **Full Control** checkbox in the **Allow** column for each, select **OK**, and back in the **sapmnt** properties window, select **OK** again.
 
@@ -1065,7 +1067,7 @@ In this task, you will start by configuring operating system on s03-ascs-0 and s
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the `[subscriptionId]` placeholder with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
 
     ```powershell
     Set-AzContext -SubscriptionId [subscriptionId]
@@ -2483,7 +2485,7 @@ Bring the Always-On Availability Group clustered role online.
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the `[subscriptionId]` placeholder with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
 
     ```powershell
     Set-AzContext -SubscriptionId [subscriptionId]
@@ -3300,7 +3302,7 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
     Get-AzContext -ListAvailable | Select-Object Name, Subscription
     ```
 
-1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the `[subscriptionId]` placeholder with the value of the target subscription you identified in the previous step):
+1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to select the Azure subscription that you are using for this lab (replace the placeholder `[subscriptionId]` with the value of the target subscription you identified in the previous step):
 
     ```powershell
     Set-AzContext -SubscriptionId [subscriptionId]
