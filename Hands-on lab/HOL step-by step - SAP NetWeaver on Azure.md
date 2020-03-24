@@ -1966,7 +1966,7 @@ Duration: 120 minutes
 
 ### Overview
 
-In this exercise, you will configure the SAP NetWeaver database servers. You will start by installing a separate, stand-alone instance of SQL Server 2019 on each VM. Next, you will run SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you will implement high-availability by configuring both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you will use Cloud Witness to provide the quorum for the Failover Cluster. You will also copy SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you will update the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2017 instance.
+In this exercise, you will configure the SAP NetWeaver database servers. You will start by installing a separate, stand-alone instance of SQL Server 2019 on each VM. Next, you will run SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you will implement high-availability by configuring both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you will use Cloud Witness to provide the quorum for the Failover Cluster. You will also copy SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you will update the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2019 instance.
 
 ### Task 1: Configure storage of the SAP database layer
 
@@ -2914,17 +2914,17 @@ Duration: 50 minutes
 
 ### Overview
 
-In this exercise, you will configure the SAP NetWeaver application servers. You will start by installing Microsoft ODBC Driver for SQL Server on s03-di-0 and s03-di-1 Azure VMs. Next, you will use SAP Software Provisioning Manager to install the Primary Application Server (PAS) instance on s03-di-0 and follow with the installation of an Additional Application Server (AAS) instance on s03-di-1. In addition, you will install SAP Enhanced Monitoring Extension for SAP on Azure VMs included in your SAP deployment. Optionally, you might want to also consider disabling Internet Explorer by following these instructions: <https://support.microsoft.com/en-us/help/4013567/how-to-disable-internet-explorer-on-windows>.
+In this exercise, you will configure the SAP NetWeaver application servers. You will start by installing Microsoft ODBC Driver for SQL Server on s03-di-0 and s03-di-1 Azure VMs. Next, you will use SAP Software Provisioning Manager to install the Primary Application Server (PAS) instance on s03-di-0 and follow with the installation of an Additional Application Server (AAS) instance on s03-di-1. In addition, you will install SAP Enhanced Monitoring Extension for SAP on Azure VMs included in your SAP deployment. Optionally, you might want to also consider disabling Internet Explorer by following instructions available at <https://support.microsoft.com/en-us/help/4013567/how-to-disable-internet-explorer-on-windows>.
 
 ### Task 1: Configure storage and software prerequisites of the SAP Application layer
 
-In this task, you will configure the Azure VMs in the Application layer by mounting the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, disable Windows firewall for the domain profile. You will also install on both Visual Studio C++ 2017 Redistributable (available from <https://aka.ms/vs/15/release/vc_redist.x64.exe>) and Microsoft ODBC Driver for SQL Server (available from <https://go.microsoft.com/fwlink/?linkid=2120137> ) to facilitate connectivity to the database tier.
+In this task, you will configure the Azure VMs in the Application layer by mounting the 128 GB data disk as ReFS-formatted U: drive with the disk label **SAP Local FS**. On both VMs, you will disable Windows Defender Firewall for the domain profile. You will also install on both Visual Studio C++ 2017 Redistributable (available from <https://aka.ms/vs/15/release/vc_redist.x64.exe> ) and Microsoft ODBC Driver for SQL Server (available from <https://go.microsoft.com/fwlink/?linkid=2120137> ) to facilitate connectivity to the database tier.
 
 1.  From the Remote Desktop session to adPDC Azure VM, start a Remote Desktop session to s03-di-0. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 1.  Within the Remote Desktop session to s03-di-0, in Server Manager, select the **Local Server** entry, select the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and select **OK**.
 
-1.  Within the Remote Desktop session to s03-di-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following to disable the Windows Defender Firewall and configure local disk on s03-di-0 and s03-di-1 VMs:
+1.  Within the Remote Desktop session to s03-di-0 VM, start a Windows PowerShell ISE session as Administrator, and run the following to disable the Windows Defender Firewall and configure the local disk on s03-di-0 and s03-di-1 VMs:
 
     ```powershell
     $nodes = @('s03-di-0','s03-di-1')
@@ -2957,7 +2957,7 @@ In this task, you will configure the Azure VMs in the Application layer by mount
 
 ### Task 2: Install the SAP Primary Application Server (PAS) layer
 
-In this task, you will install the SAP PAS of HA deployment of MS SQL Server-based SAP NetWeaver 7.5 HA deployment on s03-di-0 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
+In this task, you will install the SAP Primary Application Server of a MS SQL Server-based SAP NetWeaver 7.5 highly available deployment on s03-di-0 Azure VM by using the SAP Software Provisioning Manager. You will run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
 
 -   Profile Directory: **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account you created earlier in this lab)
 
@@ -2985,7 +2985,7 @@ In this task, you will install the SAP PAS of HA deployment of MS SQL Server-bas
 
 -   Set all passwords to **demo\@pass123**
 
-Account for the fact you are using the virtual names and configure the following registry entries on both VMs:
+You will account for the fact you are using the virtual names and configure the following registry entries on both VMs:
 
 -   HKLM\\SYSTEM\\CurrentControlSet\\Control\\LSA
 
@@ -3147,9 +3147,11 @@ Account for the fact you are using the virtual names and configure the following
 
     ![Screenshot of the installation progress on the Execute Service page.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image179.png)
 
-    >**Note:** If you receive an error message during creation of DDL views, select **OK** to continue. For details regarding this issue, refer to the SAP Note 2562635.
+    >**Note:** If during installation you encounter an error message referencing the DIR_PROFILE entry in DEFAULT.PFL, open \\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\SYS\\profile\\DEFAULT.PFL and comment out the DIR_PROFILE = \\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile entry by adding ## at the beginning of the line. 
 
-1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, select **OK** (if during installation you encounter an error message referencing the DIR_PROFILE entry in DEFAULT.PFL, open \\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\SYS\\profile\\DEFAULT.PFL and comment out the DIR_PROFILE = \\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile entry by adding ## at the beginning of the line). 
+    >**Note:** If during installation you receive an error message during creation of DDL views, select **OK** to continue. For details regarding this issue, refer to the SAP Note 2562635.
+
+1.  Wait until the installation completes (this might take about 30 minutes). Once the installation completes, select **OK** 
 
     ![A message box displays with the message that the process has completed.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image180.png)
 
@@ -3165,9 +3167,10 @@ Account for the fact you are using the virtual names and configure the following
 
     ![Screenshot of the SAP Management Console with S03 selected under SAP Systems.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image192.png)
 
+
 ### Task 3: Install the SAP Additional Application Server (AAS) layer
 
-In this task, you will install the SAP AAS of HA deployment of MS SQL Server-based SAP NetWeaver 7.5 HA deployment on s03-di-1 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites and specify the following parameters:
+In this task, you will install the SAP Additional Application Server of a MS SQL Server-based SAP NetWeaver 7.5 highly available deployment on s03-di-1 Azure VM by using the SAP Software Provisioning Manager. You will run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, you will specify the following parameters:
 
 -   Profile Directory: **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (Where **<storage_account_name>** designates the name of the storage account you created earlier in this lab.)
 
@@ -3237,7 +3240,7 @@ In this task, you will install the SAP AAS of HA deployment of MS SQL Server-bas
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, and select **Next**.
 
-    ![The Software Package Browser page has the Search Location field empty. The detected package table lists SAPHOSTAGENT.SAR with the Available status. The Individual Package Location column contains the package location.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image76.png)
+    ![The Software Package Browser page has the Search Location field empty. The detected package table lists SAPHOSTAGENT.SAR with the Available status. The Individual Package Location column contains the package location.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
 
 1.  Select **Next** again once the location of the software packages has been identified.
 
@@ -3288,7 +3291,7 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
     Connect-AzAccount
     ```
 
-> **Note**: When prompted, authenticate by using your Azure AD credentials.
+    >**Note:** When prompted, authenticate by using your Azure AD credentials.
 
 1.  If your account has access to multiple subscriptions, from the Windows PowerShell ISE console, run the following to identify these subscriptions:
 
@@ -3320,11 +3323,11 @@ In this task, you will install SAP Enhanced Monitoring Extension for SAP on Azur
 
 ### Summary
 
-In this exercise, you configured the SAP NetWeaver application servers. You started by installing Microsoft ODBC Driver for SQL Server on the s03-di-0 and s03-di-1 Azure VMs. Next, you used SAP Software Provisioning Manager to install the Primary Application Server (PAS) instance on s03-di-0 and followed with the installation of an Additional Application Server (AAS) instance on s03-di-1.
+In this exercise, you configured the SAP NetWeaver application servers. You started by installing Visual Studio C++ 2017 Redistributable and Microsoft ODBC Driver for SQL Server on the s03-di-0 and s03-di-1 Azure VMs. Next, you used SAP Software Provisioning Manager to install the Primary Application Server (PAS) instance on s03-di-0 and followed with the installation of an Additional Application Server (AAS) instance on s03-di-1.
 
 ## Lab summary
 
-In this lab, you stepped through a process of provisioning a highly available, Windows Server 2017-based SAP NetWeaver deployment on Azure, with SAP ABAP stack and SQL Server 2017 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you implemented an instance of a Failover Cluster that leveraged a Storage Spaces Direct (S2D) cluster, hosting highly-available shared storage hosting the sapmnt share. To provide high-availability of the database tier, you implemented an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum introduced in Windows Server 2017 Failover Clustering. To provide resiliency of the SAP application server instances, you deployed the Primary Application Server (PAS) and an Additional Application Server (AAS) in the same availability set.
+In this lab, you stepped through a process of provisioning a highly available, Windows Server 2019-based SAP NetWeaver deployment on Azure, with SAP ABAP stack and SQL Server 2019 as the database tier. To provide high-availability of the ABAP SAP Central Services (ASCS) components, you implemented an instance of a Failover Cluster that leveraged a highly available Azure File Service-based sapmnt share. To provide high-availability of the database tier, you implemented an instance of SQL Server Always-On Availability Group. In both cases, you will use a Cloud Witness quorum introduced in Windows Server 2019 Failover Clustering. To provide resiliency of the SAP application server instances, you deployed the Primary Application Server (PAS) and an Additional Application Server (AAS) in the same availability set.
 
 
 ## After the hands-on lab
