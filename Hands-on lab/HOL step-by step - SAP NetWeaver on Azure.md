@@ -455,7 +455,7 @@ In this task, you will prepare Azure virtual network and Contoso Active Director
 
     -   Password: **demo\@pass123**
 
-1.  Witin the Remote Desktop session to adPDC, from the **Start** menu, navigate to **Administrative Tools** and start **Active Directory Administrative Center**.
+1.  Within the Remote Desktop session to adPDC, from the **Start** menu, navigate to **Administrative Tools** and start **Active Directory Administrative Center**.
 
 1.  In the Active Directory Administrative Center, create an organizational unit named **S03** directly in the root of the domain.
 
@@ -990,7 +990,7 @@ In this task, you will configure the Azure Storage account File service to use A
 
 1.  Within the Remote Desktop session to adPDC, in the web browser displaying the Azure portal, navigate to the **sapmnt** file share blade and select **Connect**.
 
-1.  On the **Connect** blade, copy to Clipboard the PowerShell script that creates a peristent Z: drive mapping to the target share.
+1.  On the **Connect** blade, copy to Clipboard the PowerShell script that creates a persistent Z: drive mapping to the target share.
 
 1.  Paste the content of Clipboard into the script pane of the Administrator: Windows PowerShell ISE window and execute it.
 
@@ -1016,7 +1016,7 @@ In this exercise, you will configure the Azure VMs that constitute the SAP ASCS 
 
 In this task, you will start by configuring operating system on s03-ascs-0 and s03-ascs-1. On both VMs, you will mount the 128 GB data disk as NTFS-formatted U: drive. On both VMs, you will also disable Windows Defender Firewall with Advanced Security for the domain profile. Next, you will implement a Windows Failover Clustering-based cluster named **s03-ascs-cl0** with the IP address of **10.0.1.11** consisting of s03-ascs-0 and s03-ascs-1 Azure VMs. Afterwards, you will set up the cluster with a Cloud Witness quorum by using the storage account that was provisioned in the previous exercise when you implemented Azure Files. Finally, you will grant permissions to the **s03-ascs-cl0** cluster computer account to create computer objects in the **S03** organizational unit.
 
-1.  Within the Remote Desktop session to the **adPDC** Azure VM, in the Azure portal, navigate to the blade of the **s03-ascs-0** VM and use the **Connect** icon in the toolbar to establish an Remote Desktop session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  Within the Remote Desktop session to the **adPDC** Azure VM, in the Azure portal, navigate to the blade of the **s03-ascs-0** VM and use the **Connect** icon in the toolbar to start a Remote Desktop session to that VM. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 1.  Within the Remote Desktop session to s03-ascs-0 VM, in Server Manager, select the **Local Server** entry, select the **On** link to the right of the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and select **OK**.
 
@@ -1178,7 +1178,7 @@ You will also account for the fact you will be using the virtual names and confi
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Within the Remote Desktop session to adPDC, initiate a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials  as previously (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Within the Remote Desktop session to adPDC, initiate a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials  as previously (**CONTOSO\\s03-su**). The Software Provisioning Manager will start automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, set **SAP System ID (SAPSID)** to **S03**, select the **U:** drive as the **Destination Drive**, and select **Next**.
 
@@ -1359,7 +1359,7 @@ In this task, you will use SAP Software Provisioning Manager to carry out the di
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Within the Remote Desktop session to adPDC, initiate a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials  as previously (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Within the Remote Desktop session to adPDC, initiate a Remote Desktop session to s03-ascs-0 and log back on by using the same user credentials  as previously (**CONTOSO\\s03-su**). The Software Provisioning Manager will start automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, set **SAP System ID (SAPSID)** to **S03**, select the **U:** drive for the **Destination Drive**, and select **Next**.
 
@@ -1510,7 +1510,7 @@ In this task, you will configure SAP ASCS cluster components, including Azure Fi
     net use S: \\<storage_account_name>.file.core.windows.net\sapmnt
     ```
 
-1.  Within the Remote Desktop session to s03-ascs-0, from the Command Propmt, copy files from the local ASCS instances to the Azure Files-based sapmnt share by running the following:
+1.  Within the Remote Desktop session to s03-ascs-0, from the Command Prompt, copy files from the local ASCS instances to the Azure Files-based sapmnt share by running the following:
 
     ```
     robocopy U:\usr\sap\S03 S:\S03 /e /r:1 /w:1
@@ -1891,7 +1891,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
     ![The Execution of Service has been completed successfully page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
 
-    >**Note:** If you receive a error at the end of the installation process regarding shutdown of instance **S03/ASCS00**, start **SAP Management Console** by selecting its icon on the desktop and, in the SAP Management Console, restart the local instance of SAP ASCS service. Then switch back to the web browser page displaying the Software Provisioning Manager interface and click **Retry**.
+    >**Note:** If you receive an error at the end of the installation process regarding shutdown of instance **S03/ASCS00**, start **SAP Management Console** by selecting its icon on the desktop and, in the SAP Management Console, restart the local instance of SAP ASCS service. Then switch back to the web browser page displaying the Software Provisioning Manager interface and click **Retry**.
 
 1.  Switch back to the Remote Desktop session to the **adPDC** Azure VM and start a Remote Desktop session to **s03-ascs-1**. When prompted to authenticate, sign again in with the **CONTOSO\\s03-su** user account.
 
@@ -1949,7 +1949,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
     ![The Execution of Service has been completed successfully page displays the process execution is finished successfully message.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image61.png)
 
-    >**Note:** If you receive a error at the end of the installation process regarding shutdown of instance **S03/ASCS00**, start **SAP Management Console** by selecting its icon on the desktop and, in the SAP Management Console, restart the local instance of SAP ASCS service. Then switch back to the web browser page displaying the Software Provisioning Manager interface and click **Retry**.
+    >**Note:** If you receive an error at the end of the installation process regarding shutdown of instance **S03/ASCS00**, start **SAP Management Console** by selecting its icon on the desktop and, in the SAP Management Console, restart the local instance of SAP ASCS service. Then switch back to the web browser page displaying the Software Provisioning Manager interface and click **Retry**.
 
 1.  To verify the installation, start **SAP Management Console** by selecting its icon on the desktop and verify that all SAP components are operational.
 
@@ -2242,7 +2242,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Back within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-db-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Back within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-db-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will start automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, in the **Profile Directory** text box type **\\\\<storage_account_name>\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account hosting the sapmnt share you created in earlier in this lab) and select **Next**.
 
@@ -2359,7 +2359,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     ![The SQL Server Memory Configuration page displays with the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image93.png)
 
-1.  On the **SQL Server MAXDOP configuiration** page, accept the default setting, and select **Next**.
+1.  On the **SQL Server MAXDOP configuration** page, accept the default setting, and select **Next**.
 
     ![The SQL Server MAXDOP configuration page displays with the default settings.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image93a.png)
 
@@ -3019,7 +3019,7 @@ You will account for the fact you are using the virtual names and configure the 
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-di-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-di-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will start automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account you created earlier in this lab), ensure that **U:** appears in the **Destination Drive** drop down list, and select **Next**.
 
@@ -3212,7 +3212,7 @@ In this task, you will install the SAP Additional Application Server of a MS SQL
 
     ![The Software Provisioning Manager window prompts to log off.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image25.png)
 
-1.  Within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-di-1 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
+1.  Within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-di-1 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will start automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
 1.  On the **General SAP System Parameters** page, in the **Profile Directory** textbox, type **\\\\<storage_account_name>.file.core.windows.net\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account you created earlier in this lab), in the **Destination Drive** drop down list, select **U:** and select **Next**.
 
