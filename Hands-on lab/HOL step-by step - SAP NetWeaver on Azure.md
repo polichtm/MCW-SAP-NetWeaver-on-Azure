@@ -55,7 +55,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
         - [Overview](#overview-2)
         - [Task 1: Configure storage of the SAP database layer](#task-1-configure-storage-of-the-sap-database-layer)
         - [Task 2: Grant elevated user rights to the SQL Server service account](#task-2-grant-elevated-user-rights-to-the-sql-server-service-account)
-        - [Task 3: Install SQL Server 2017 with the SQL\_Latin1\_General\_CP850\_BIN2 collation](#task-3-install-sql-server-2017-with-the-sql\_latin1\_general\_cp850\_bin2-collation)
+        - [Task 3: Install SQL Server 2019 with the SQL\_Latin1\_General\_CP850\_BIN2 collation](#task-3-install-sql-server-2019-with-the-sql\_latin1\_general\_cp850\_bin2-collation)
         - [Task 4: Install the SAP database layer](#task-4-install-the-sap-database-layer)
         - [Task 5: Implement Always-On Availability Group](#task-5-implement-always-on-availability-group)
         - [Task 6: Modify the SAP Default Profile](#task-6-modify-the-sap-default-profile)
@@ -1248,7 +1248,7 @@ You will also account for the fact you will be using the virtual names and confi
     }
     ```
 
-1.  On the **Prerequisites Checker Results** page, select **Next**. 
+1.  Back on the **Prerequisites Checker Results** page, select **Next**. 
 
 1.  On the **Question** page, when prompted whether to repeat the checks, select **Yes**.
 
@@ -2018,7 +2018,7 @@ In this task, you will configure the Azure VMs in the database layer by attachin
 
 ### Task 2: Grant elevated user rights to the SQL Server service account
 
-In this task, you will use Group Policy to grant the following user rights to the SQL Server service account (**s03-db-0-sqlsvc** and **s03-db-1-sqlsvc**) on the Window Server 2016 computers hosting their respective SQL Server instances.
+In this task, you will use local Group Policy to grant the following user rights to the SQL Server service account (**s03-db-0-sqlsvc** and **s03-db-1-sqlsvc**) on the Window Server 2019 computers hosting their respective SQL Server instances.
 
 -   Perform volume maintenance tasks
 
@@ -2046,12 +2046,12 @@ In a production deployment, you should consider using domain-based Group Policy 
 
 1.  Restart s03-db-0.
 
-1.  Repeat steps 1-10 on s03-db-1, but this time assign both user rights to **CONTOSO\\s03-db-1-sqlsvc**.
+1.  Repeat steps 1-9 on s03-db-1, but this time assign both user rights to **CONTOSO\\s03-db-1-sqlsvc**.
 
 
-### Task 3: Install SQL Server 2017 with the SQL\_Latin1\_General\_CP850\_BIN2 collation
+### Task 3: Install SQL Server 2019 with the SQL\_Latin1\_General\_CP850\_BIN2 collation
 
-In this task, you will configure operating system on s03-db-0 and s03-db-1 and install SQL Server 2017 on s03-db-0 and s03-db-1 Azure VMs. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. Start by disabling the Windows firewall for the domain profile. Perform the installation of SQL Server 2017 on both s03-db-0 and s03-db-1 with the following settings:
+In this task, you will configure operating system on s03-db-0 and s03-db-1 and install SQL Server 2019 on s03-db-0 and s03-db-1 Azure VMs. You will run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. You will also disable the Windows Defender Firewall for the domain profile. You will perform the installation of SQL Server 2019 on both s03-db-0 and s03-db-1 with the following settings:
 
 -   Use Microsoft Update to check for updates (recommended): **disabled**
 
@@ -2103,15 +2103,13 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
     -   **Log directory: L:\\Program Files\\Microsoft SQL Server\\MSSQL13.MSSQLSERVER\\MSSQL\\Data**
 
-    -   **On both s03-db-0 and s03-db-1, download and install SQL Server Management Studio with the default settings**.
+On both s03-db-0 and s03-db-1, You will also download and install SQL Server Management Studio with the default settings. Finally, you will copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings, including the default database and the server role
 
-    -   **Copy SAP specific logins from s03-db-0 to s03-db-1 with their existing settings, including the default database and the server role**.
-
-1.  Within the Remote Desktop session to adPDC, establish an Remote Desktop session to **s03-db-0**. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  From the Remote Desktop session to adPDC, start a Remote Desktop session to **s03-db-0**. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 1.  Within the Remote Desktop session to s03-db-0 VM, in Server Manager, select the **Local Server** entry, select the **On** link next to the **IE Enhanced Security Configuration** label, in the **Internet Explorer Enhanced Security Configuration** dialog box, select both **Off** options, and select **OK**.
 
-1.  Within the Remote Desktop session to s03-db-0, start a Windows PowerShell ISE session as Administrator, and run the following to disable Windows Defender Firewall:
+1.  Within the Remote Desktop session to s03-db-0, start a Windows PowerShell ISE session as Administrator, and run the following to disable Windows Defender Firewall for the domain profile:
 
     ```powershell
     Set-NetFirewallProfile -Profile Domain -Enabled False
@@ -2121,9 +2119,9 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
     ![Screenshot of the SQL Server Installation Center with the previously mentioned Installation option selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image84.png)
 
-1.  On the Product Key page, accept the default, and select **Next**.
+1.  On the Product Key page, accept the default settings and select **Next**.
 
-1.  On the **License Terms**, enable the **I accept the license terms** checkbox, and select **Next**.
+1.  On the **License Terms**, enable the **I accept the license terms** checkbox and select **Next**.
 
 1.  On the **Microsoft Update** page, leave the **Use Microsoft Update to check for updates (recommended)** checkbox unchecked and select **Next**.
 
@@ -2133,7 +2131,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
     -   Client Tools Connectivity
 
-        Leave all other settings at their defaults and select **Next**.
+1.  Leave all other settings at their defaults and select **Next**.
 
     ![Screenshot of the Feature Selection page with the previously mentioned check boxes selected.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image85.png)
 
@@ -2188,7 +2186,7 @@ In this task, you will configure operating system on s03-db-0 and s03-db-1 and i
 
 ### Task 4: Install the SAP database layer
 
-In this task, you will install the SAP database instance on s03-db-0 Azure VM by using the SAP Software Provisioning Manager. Run the installation as the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, address all necessary prerequisites, and specify the following parameters:
+In this task, you will install the SAP database instance on s03-db-0 Azure VM by using the SAP Software Provisioning Manager. You will run the installation by using the **CONTOSO\\s03-su** account you created in the first exercise. During the installation, you will address all necessary prerequisites and specify the following parameters:
 
 -   Profile Directory: **\\\\<storage_account_name>\\sapmnt\\S03\\SYS\\profile**
 
@@ -2218,9 +2216,9 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     -   **Number of Parallel Jobs: 3**
 
--   Set all passwords to **demo\@pass123**
+-   All passwords set to **demo\@pass123**
 
-1.  From within the Remote Desktop session to adPDC, establish an Remote Desktop session to **s03-db-0**. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
+1.  From within the Remote Desktop session to adPDC, start a Remote Desktop session to **s03-db-0**. When prompted to authenticate, sign in with the **CONTOSO\\s03-su** user account you created in the first exercise.
 
 1.  Within the Remote Desktop session to s03-db-0, run the following to copy the content of the **C:\Media** folder from s03-ascs-0 to the local **C:\Media** folder:
 
@@ -2246,7 +2244,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 1.  Back within the Remote Desktop session to adPDC, start a Remote Desktop session to s03-db-0 and log back on by using the same user credentials (**CONTOSO\\s03-su**). The Software Provisioning Manager will starts automatically. In the Internet Explorer window, on the **This site is not secure** page, select **More information**, select the **Go on to the webpage (not recommended)** link and, when prompted, sign-in with the **CONTOSO\\s03-su** account.
 
-1.  On the **General SAP System Parameters** page, in the **Profile Directory** text box type **\\<storage_account_name>\\\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account hosting the sapmnt share you created in earlier in this lab) and select **Next**.
+1.  On the **General SAP System Parameters** page, in the **Profile Directory** text box type **\\\\<storage_account_name>\\sapmnt\\S03\\SYS\\profile** (where **<storage_account_name>** designates the name of the storage account hosting the sapmnt share you created in earlier in this lab) and select **Next**.
 
     ![The Software Provisioning Manager window displays the Profile Directory text box set to \\<storage_account_name>\sapmnt\S03\SYS\profile.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image65.png)
 
@@ -2262,7 +2260,7 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
     ![The Windows Domain page displays the Windows Domain fields.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image69.png)
 
-1.  On the **Organizational Units for Windows Domain** page, select the checkbox **Use Organizational Units**, accept the default settings, and select **Next**.
+1.  On the **Organizational Units for Windows Domain** page, select the checkbox **Use Organizational Units**, set the **OU Path** to **S03**, and select **Next**.
 
     ![The Windows Domain > Organizational Units page displays the Account Creation fields.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image70.png)
 
@@ -2280,13 +2278,13 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the kernel, select **Next**, and once the package is located, select **Next** again.
 
-    ![The Software Package Browser page has the Search Location field set to location of the packages. ](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image74.png)
+    ![The Software Package Browser page has the Search Location field set to location of the packages. ](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image34.png)
 
-1.  On the **Prerequisites Checker Results** page, identify the missing prerequisites.
+1.  On the **Prerequisites Checker Results** page, review the missing prerequisites.
 
     ![The Prerequisite checker page has Detailed results listed in a table.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image75.png)
 
-1.  In order to satisfy the prerequisites and allow for the use of virtual names in the ASCS layer, you will run a Windows PowerShell script that creates several Windows registry entries. On s03-db-0 VM, start a Windows PowerShell ISE session as Administrator and run the following:
+1.  In order to satisfy the prerequisites and allow for the use of virtual names in the database layer, you will run a Windows PowerShell script that creates several Windows registry entries. On s03-db-0 VM, start a Windows PowerShell ISE session as Administrator and run the following:
 
     ```powershell
     $nodes = ('s03-db-0','s03-db-1')
@@ -2313,13 +2311,13 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
     }
     ```
 
-1.  On the **Prerequisites Checker Results** page, select **Next**. 
+1.  Back on the **Prerequisites Checker Results** page, select **Next**. 
 
-1.  On the **Question** page, When prompted whether to repeat the checks, select **Yes**.
+1.  On the **Question** page, when prompted whether to repeat the checks, select **Yes**.
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, and select **Next**.
 
-    ![The Software Package Browser page has the Search Location field empty. The detected package table lists SAPHOSTAGENT.SAR with the Available status. The Individual Package Location column contains the package location.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image76.png)
+    ![The Software Package Browser page has the Search Location field empty. The detected package table lists SAPHOSTAGENT.SAR with the Available status. The Individual Package Location column contains the package location.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
 
 1.  On the **Windows Domain for SAP Host Agent** page, accept the default settings, and select **Next**.
 
@@ -2398,11 +2396,11 @@ In this task, you will install the SAP database instance on s03-db-0 Azure VM by
 
 ### Task 5: Implement Always-On Availability Group
 
-In this task, you will implement a Failover Clustering-based cluster named **s03-db-cl0** with the IP address of **10.0.1.17** on s03-db0 and s03-db-1 Azure VMs with Always-On Availability Group hosting the SAP database. Set up the cluster with a Cloud Witness quorum by using the storage account you created in the second exercise. To prepare for setting up Always-On Availability Group for the SAP database you installed in the previous task, grant the **Create Computer Objects** permissions on the **S03** organizational unit in the contoso.com Active Directory to the newly created **contoso\\s03-db-cl0** account. In addition, create a directory structure on s03-db-1 that matches the directory structure on the M: and L: drives of s03-db-0.
+In this task, you will implement a Failover Clustering-based cluster named **s03-db-cl0** with the IP address of **10.0.1.17** on s03-db0 and s03-db-1 Azure VMs with Always-On Availability Group hosting the SAP database. You will set up the cluster with a Cloud Witness quorum by using the storage account you created earlier in this lab. To prepare for setting up Always-On Availability Group for the SAP database you installed in the previous task, you will grant the **Create Computer Objects** permissions on the **S03** organizational unit in the contoso.com Active Directory to the newly created **contoso\\s03-db-cl0** account. In addition, you will create a directory structure on s03-db-1 that matches the directory structure on the M: and L: drives of s03-db-0.
 
-Next, from SQL Server Configuration Manager, enable Always-On Availability Groups, and restart the SQL Server (MSSQLSERVER) service on both s03-db-0 and s03-db-01. On s03-db-0, create a new share **C:\\Backup** named **Backup**. On the share level and on the ReFS level, grant **Read/Write** permissions to **CONTOSO\\s03-db-0-sqlsvc** account and **Read** permissions to the **CONTOSO\\s03-db-1-sqlsvc** account.
+Next, from SQL Server Configuration Manager, you will enable Always-On Availability Groups, and restart the SQL Server (MSSQLSERVER) service on both s03-db-0 and s03-db-01. On s03-db-0, you will create a new share **C:\\Backup** named **Backup**. On the share level and on the file system level, you will grant **Read/Write** and **Modify** (respectively) permissions to **CONTOSO\\s03-db-0-sqlsvc** account and **Read** permissions to the **CONTOSO\\s03-db-1-sqlsvc** account.
 
-From SQL Server Management Studio on s03-db-0, use the New Availability Group Wizard to create a new Availability Group with the following settings:
+From SQL Server Management Studio on s03-db-0, you will use the New Availability Group Wizard to create a new Availability Group with the following settings:
 
 -   Name: **s03-db-ag0**
 
@@ -2422,15 +2420,13 @@ From SQL Server Management Studio on s03-db-0, use the New Availability Group Wi
 
 >**Note:** The majority of customers choose to use Transparent Data Encryption (TDE) when deploying SQL Server databases to Azure. If you use TDE, then you cannot use the Always-On Availability Group wizard. Instead, you have to follow the instructions described in <https://blogs.msdn.microsoft.com/saponsqlserver/2017/04/04/more-questions-from-customers-about-sql-server-transparent-data-encryption-tde-azure-key-vault/> . Alternatively, you can enable TDE after establishing the Always On Availability Group, however this is a tedious and slow process. For the purpose of this lab, you will not enable TDE and use the Always-On Availability Group wizard when setting up the Always-On Availability Group.
 
-In the Failover Cluster Manager, create a new Client Access Point with the following settings:
+In the Failover Cluster Manager, you will create a new Client Access Point with the following settings:
 
 -   Name: **s03-db-agl0**
 
--   IP address: **10.0.1.16 (static) --** *make sure it matches the IP address assigned to the s03-lb-db load balancer*
+-   IP address: **10.0.1.16 (static)** *make sure it matches the IP address assigned to the s03-lb-db load balancer*
 
-Set the dependency of **s03-db-ag0** on **s03-db-agl0**.
-
-Use Windows PowerShell to set the properties of the IP address resource of the newly created Client Access Point as follows:
+You will set the dependency of **s03-db-ag0** on **s03-db-agl0* and use Windows PowerShell to set the properties of the IP address resource of the newly created Client Access Point as follows:
 
 -   Address: **10.0.1.16**
 
@@ -2442,9 +2438,7 @@ Use Windows PowerShell to set the properties of the IP address resource of the n
 
 -   EnableDhcp: **0**
 
-In the SQL Server Management Studio, set the port of the **s03-db-agl0** listener to **1433**.
-
-Bring the Always-On Availability Group clustered role online.
+In the SQL Server Management Studio, you will set the port of the **s03-db-agl0** listener to **1433**. Finally, you will bring the Always-On Availability Group clustered role online.
 
 1.  Within the Remote Desktop session to s03-db-0 VM, in the Windows PowerShell ISE session, run the following to install the Windows Failover Clustering feature and its subfeatures on s03-db-0 and s03-db-1 VMs:
 
@@ -2912,7 +2906,7 @@ In this task, you will modify the SAP default profile in order to ensure the app
 
 ### Summary
 
-In this exercise, you have configured the SAP NetWeaver database servers. You started by first installing a separate, stand-alone instance of SQL Server 2017 on each VM. Next, you ran SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you implemented high-availability by setting both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you used Cloud Witness to provide the quorum for the Failover Cluster. You also copied SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you updated the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2017 instance.
+In this exercise, you have configured the SAP NetWeaver database servers. You started by first installing a separate, stand-alone instance of SQL Server 2019 on each VM. Next, you ran SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you implemented high-availability by configuring both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you used Cloud Witness to provide the quorum for the Failover Cluster. You also copied SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you updated the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2019 instance.
 
 ## Exercise 4: Configure SAP NetWeaver Application servers
 
@@ -3057,7 +3051,7 @@ Account for the fact you are using the virtual names and configure the following
 
 1.  Select **Next** again once the location of the software packages has been identified.
 
-1.  On the **Prerequisites Checker Results** page, identify the missing prerequisites.
+1.  On the **Prerequisites Checker Results** page, review the missing prerequisites.
 
     ![The Prerequisites Checker results page explains that your system does not meet requirements or requirements were not met.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image170.png)
 
@@ -3101,9 +3095,9 @@ Account for the fact you are using the virtual names and configure the following
     }
     ```
 
-1.  On the **Prerequisites Checker Results** page, select **Next**. 
+1.  Back on the **Prerequisites Checker Results** page, select **Next**. 
 
-1.  On the **Question** page, When prompted whether to repeat the checks, select **Yes**.
+1.  On the **Question** page, when prompted whether to repeat the checks, select **Yes**.
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, select **Next**, and, once the package is found, select **Next** again.
 
