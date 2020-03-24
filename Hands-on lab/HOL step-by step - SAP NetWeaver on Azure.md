@@ -1865,7 +1865,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, select **Next**, and, once the package is found, select **Next** again.
 
-    ![The Software Package Browser page has the Search Location field.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image55.png)
+    ![The Software Package Browser page has the Search Location field.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
 
 1.  On the **Enqueue Replication Server Instance** page, change the name of the **ERS Instance Host** to **s03-ascs-ers0** and select **Next**.
 
@@ -1893,7 +1893,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
     >**Note:** If you receive a error at the end of the installation process regarding shutdown of instance **S03/ASCS00**, start **SAP Management Console** by selecting its icon on the desktop and, in the SAP Management Console, restart the local instance of SAP ASCS service. Then switch back to the web browser page displaying the Software Provisioning Manager interface and click **Retry**.
 
-1.  Switch back to the Remote Desktop session to the **adPDC** Azure VM and start a Remote Desktop session to **s03-ascs-0**. When prompted to authenticate, sign again in with the **CONTOSO\\s03-su** user account.
+1.  Switch back to the Remote Desktop session to the **adPDC** Azure VM and start a Remote Desktop session to **s03-ascs-1**. When prompted to authenticate, sign again in with the **CONTOSO\\s03-su** user account.
 
 1.  Switch to the Remote Desktop session to s03-ascs-1 and start SAP Software Provisioning Manager by executing **sapinst.exe**.
 
@@ -1923,7 +1923,7 @@ In this task, you will install the Enqueue Replication Server (ERS) instance on 
 
 1.  On the **Software Package Browser** page, point to the location of the software packages including the **SAPHOSTAGENT.SAR**, select **Next**, and, once the package is found, select **Next** again.
 
-    ![The Software Package Browser page has the Search Location field.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image55.png)
+    ![The Software Package Browser page has the Search Location field.](images/Hands-onlabstep-bystep-SAPonAzureimages/media/image37.png)
 
 1.  On the **Enqueue Replication Server Instance** page, change the name of the **ERS Instance Host** to **s03-ascs-ers1** and select **Next**.
 
@@ -1966,11 +1966,11 @@ Duration: 120 minutes
 
 ### Overview
 
-In this exercise, you will configure the SAP NetWeaver database servers. You will start by installing a separate, stand-alone instance of SQL Server 2017 on each VM. Next, you will run SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you will implement high-availability by setting both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you will use Cloud Witness to provide the quorum for the Failover Cluster. You will also copy SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you will update the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2017 instance.
+In this exercise, you will configure the SAP NetWeaver database servers. You will start by installing a separate, stand-alone instance of SQL Server 2019 on each VM. Next, you will run SAP Software Provisioning Manager to install HA DB component on the s03-db-0 VM. Afterwards, you will implement high-availability by configuring both SQL Server instances as members of the same Always-On Availability Group. Just as in the previous exercise, you will use Cloud Witness to provide the quorum for the Failover Cluster. You will also copy SQL Server logins from the instance hosted on s03-db-0 to the instance hosted on s03-db-1. Finally, you will update the SAP default profile to point to the Always-On Availability Group listener, rather than to an individual SQL Server 2017 instance.
 
 ### Task 1: Configure storage of the SAP database layer
 
-In this task, you will configure the Azure VMs for the database layer by attaching an extra Premium 512 GB data disk to each of them (the template-based deployment resulted in one disk of 128 GB in size already attached to every Azure VM within that deployment). Set the host caching on the 128 GB disk to **None** (since this disk will be used to host logs) and on the 512 GB disk to **Read-only** (since this disk will be used to host data files). Next, you will configure the 128 GB data disk as ReFS formatted L: drive to host log files and the 512 GB data disk as ReFS formatted M: drive to host database files.
+In this task, you will configure the Azure VMs in the database layer by attaching an extra Premium 512 GB data disk to each of them (the template-based deployment resulted in one disk of 128 GB in size already attached to every Azure VM within that deployment). You will set the host caching on the 128 GB disk to **None** (since this disk will be used to host logs) and on the 512 GB disk to **Read-only** (since this disk will be used to host data files). Next, you will configure the 128 GB data disk as ReFS formatted L: drive to host log files and the 512 GB data disk as ReFS formatted M: drive to host database files.
 
 1.  On the lab computer, in the web browser displaying the Azure portal, navigate to the **s03-db-0** VM blade, and select **Disks**.
 
