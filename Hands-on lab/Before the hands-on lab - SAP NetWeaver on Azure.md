@@ -148,7 +148,7 @@ Review the relevant Microsoft documentation.
     
 1.  On the **Review + create** blade, select **Create**.
 
-   > **Note**: Quota increase requests are commonly completed during the same business day.
+   > **Note**: It might take a few days for quota increase requests to be completed.
 
 ### Task 5: Identify SAP binaries
 
