@@ -176,6 +176,6 @@ Review the relevant Microsoft documentation.
 
     -   NW 7.5 Installation Export (51050829_3.ZIP)
     
-    > **Note**: Keep in mind that the packages names might change if their versions referenced in this lab are superseded by newer ones. If so, ensure to adjust accordingly all references to the names of these packages throughout the lab. To find appropriate packages, you can take advantage of the search functionality of the **SAP Software Downloads** portal.
-    
+    > **Note**: The packages listed above might be superseded by newer versions. If so, ensure to adjust accordingly all references to the names of these packages in this task. To find appropriate packages, you can take advantage of the search functionality of the **SAP Software Downloads** portal. Use the first part of each package (up to the first hyphen) as the search criterion and, in the search results, identify the type that matches the intended platform (either Linux x86_64 or Windows 64-bit).
+  
 You should follow all steps provided *before* performing the Hands-on lab.
